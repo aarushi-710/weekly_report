@@ -1,288 +1,1270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPEX Weekly Update - May 2026 WK22</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
-            margin: 0;
-            padding: 20px;
-            color: #1e2937;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #0f766e, #14b8a6);
-            color: white;
-            padding: 45px 50px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 2.65rem;
-            font-weight: 700;
-        }
-        
-        .header p {
-            margin: 12px 0 0;
-            font-size: 1.18rem;
-            opacity: 0.95;
-        }
-        
-        .content {
-            padding: 50px;
-        }
-        
-        .summary-item {
-            display: flex;
-            gap: 55px;
-            margin-bottom: 80px;
-            align-items: flex-start;
-        }
-        
-        .summary-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        
-        .text-content {
-            flex: 1;
-            padding-top: 10px;
-        }
-        
-        .text-content h2 {
-            color: #0f766e;
-            font-size: 1.55rem;
-            margin-bottom: 14px;
-        }
-        
-        .text-content p, .text-content li {
-            font-size: 0.99rem;
-            line-height: 1.72;
-            color: #475569;
-        }
-        
-        .text-content ul {
-            padding-left: 22px;
-        }
-        
-        .screenshots {
-            flex: 1.35;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .screenshot {
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-            border: 12px solid #f1f5f9;
-        }
-        
-        .screenshot img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .multi-screenshots {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-        
-        .badge {
-            display: inline-block;
-            background: #14b8a6;
-            color: white;
-            padding: 8px 22px;
-            border-radius: 9999px;
-            font-size: 1.02rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .footer {
-            background: #f8fafc;
-            padding: 40px 50px;
-            text-align: center;
-            color: #64748b;
-            font-size: 1.05rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPEX Weekly Update — Week 23</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-dark: #0d6e6e;
+    --teal-mid: #1a8f8f;
+    --teal-light: #2db5b5;
+    --teal-pale: #a8e6e6;
+    --mint: #b2f0e8;
+    --white: #ffffff;
+    --off-white: #f0fafa;
+    --text-dark: #0a3d3d;
+    --text-mid: #1c5f5f;
+    --card-bg: rgba(255,255,255,0.92);
+    --shadow: 0 4px 24px rgba(13,110,110,0.13);
+    --accent: #00d4aa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(135deg, #0d6e6e 0%, #1a8f8f 40%, #0f7a7a 70%, #0a5c5c 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 70%, rgba(0,212,170,0.06) 0%, transparent 50%),
+                      radial-gradient(circle at 50% 10%, rgba(178,240,232,0.04) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LOGO TRIGGER (top-right, hidden archive access) ── */
+  .logo-trigger {
+    position: fixed;
+    top: 18px;
+    right: 26px;
+    z-index: 1000;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .logo-trigger:hover { opacity: 0.75; transform: scale(1.05); }
+  .logo-trigger img {
+    height: 48px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+  }
+  .logo-text-fallback {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 2px;
+  }
+
+  /* ── MAIN REPORT ── */
+  #main-report {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 24px 90px;
+  }
+
+  .report-header {
+    text-align: center;
+    margin-bottom: 52px;
+    animation: fadeDown 0.7s ease both;
+    padding-top: 10px;
+  }
+  .report-header .week-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .report-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .report-header .sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  /* ── SECTION CARDS ── */
+  .section-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+    animation: fadeUp 0.6s ease both;
+    border-left: 5px solid var(--teal-mid);
+    transition: box-shadow 0.2s;
+  }
+  .section-card:hover { box-shadow: 0 8px 36px rgba(13,110,110,0.2); }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--teal-dark);
+    letter-spacing: 0.5px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--teal-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Update item row */
+  .update-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(13,110,110,0.08);
+  }
+  .update-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .update-item:first-child { padding-top: 0; }
+
+  .item-content { flex: 1; min-width: 0; }
+  .item-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal-dark);
+    margin-bottom: 7px;
+  }
+  .item-desc {
+    font-size: 13.5px;
+    color: #2a5a5a;
+    line-height: 1.68;
+  }
+  .item-tag {
+    display: inline-block;
+    background: #e0f7f5;
+    color: var(--teal-dark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+  .item-tag.orange { background: #fff3e0; color: #b55a00; }
+  .item-tag.green  { background: #e0f7ee; color: #0a6640; }
+  .item-tag.red    { background: #fde8e8; color: #9b1c1c; }
+
+  /* ── IMAGE beside item — PROPER SIZE ── */
+  .item-img {
+    flex-shrink: 0;
+    width: 260px;           /* ~50% of content column */
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+    background: #dff0f0;
+    border: 3px solid #e0f4f4;
+  }
+  .item-img img {
+    width: 100%;
+    height: auto;           /* preserve natural ratio — no cropping */
+    display: block;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: opacity 0.15s;
+  }
+  .item-img img:hover { opacity: 0.88; }
+  .img-label {
+    font-size: 10px;
+    text-align: center;
+    padding: 4px 6px;
+    color: #888;
+    background: #f5fafa;
+    border-top: 1px solid #e4f0f0;
+  }
+
+  /* Loyalty table */
+  .loyalty-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .loyalty-table th {
+    background: var(--teal-dark);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .loyalty-table th:first-child { border-radius: 8px 0 0 0; }
+  .loyalty-table th:last-child  { border-radius: 0 8px 0 0; }
+  .loyalty-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #e0f0f0;
+    color: var(--text-dark);
+    vertical-align: middle;
+  }
+  .loyalty-table tr:last-child td { border-bottom: none; }
+  .loyalty-table tr:nth-child(even) td { background: #f4fbfb; }
+  .pts-badge {
+    display: inline-block;
+    background: var(--teal-light);
+    color: white;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
+
+  /* TV request */
+  .tv-request {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #e8f7f7, #f0fcfc);
+    border-radius: 10px;
+    border-left: 3px solid var(--teal-light);
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+  .tv-request strong { color: var(--teal-dark); }
+
+  /* Loyalty item layout: text full-width top, image below table */
+  .loyalty-layout { display: flex; flex-direction: column; gap: 14px; }
+  .loyalty-img-row { display: flex; gap: 24px; align-items: flex-start; margin-top: 4px; }
+  .loyalty-img-row .item-img { width: 300px; }
+
+  /* Deck grid */
+  .deck-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 4px;
+  }
+  .deck-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f4fbfb;
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid #d4eeee;
+  }
+  .deck-item .item-img {
+    width: 100%;
+    height: auto;
+  }
+  .deck-item .item-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Next week section */
+  .next-week-card {
+    background: linear-gradient(135deg, var(--teal-dark), #0a5555);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 28px rgba(13,110,110,0.35);
+    animation: fadeUp 0.6s ease both;
+  }
+  .next-week-card .section-title { color: white; }
+  .next-week-card .section-title::before { background: var(--mint); }
+  .plan-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plan-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: rgba(255,255,255,0.88);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .plan-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    margin-top: 1px;
+  }
+
+  /* ── ARCHIVE OVERLAY ── */
+  #archive-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: linear-gradient(135deg, #0d6e6e 0%, #1a8f8f 50%, #0a5c5c 100%);
+    overflow-y: auto;
+  }
+  #archive-overlay.visible { display: block; }
+
+  .archive-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px 90px;
+    text-align: center;
+  }
+  .archive-logo { margin-bottom: 36px; }
+  .archive-logo img {
+    height: 60px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    object-fit: contain;
+  }
+  .archive-logo .logo-fallback {
+    font-family: 'Syne', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 3px;
+  }
+  .archive-logo p {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-top: 6px;
+  }
+  .archive-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .archive-sub {
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 48px;
+    font-size: 15px;
+  }
+  .week-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .week-btn {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 16px;
+    padding: 28px 54px;
+    cursor: pointer;
+    transition: all 0.25s;
+    color: white;
+    text-align: center;
+    min-width: 200px;
+    backdrop-filter: blur(4px);
+  }
+  .week-btn:hover {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-3px);
+  }
+  .week-btn h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+  }
+  .week-btn small {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-top: 5px;
+  }
+  .back-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    padding: 13px 32px;
+    border-radius: 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── WEEK 22 content inside archive ── */
+  #week22-content {
+    display: none;
+    text-align: left;
+    margin-top: 32px;
+  }
+  #week22-content.visible { display: block; }
+
+  /* Week 22 uses the same card/item styles, but on the teal overlay */
+  .w22-section {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 22px;
+    border-left: 4px solid rgba(255,255,255,0.35);
+  }
+  .w22-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 18px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .w22-title::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--teal-pale);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* W22 update item — same flex row pattern */
+  .w22-update-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .w22-update-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .w22-update-item:first-child { padding-top: 0; }
+
+  .w22-item-content { flex: 1; min-width: 0; }
+  .w22-item-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 5px;
+  }
+  .w22-item-desc {
+    color: rgba(255,255,255,0.78);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .w22-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 10px;
+    margin-top: 7px;
+  }
+  .w22-tag.orange { background: rgba(255,180,80,0.25); color: #ffd080; }
+  .w22-tag.green  { background: rgba(80,220,160,0.2);  color: #80ffcc; }
+
+  /* Images in Week 22 archive */
+  .w22-img {
+    flex-shrink: 0;
+    width: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .w22-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .w22-img .img-label {
+    font-size: 9px;
+    text-align: center;
+    padding: 3px 5px;
+    color: rgba(255,255,255,0.5);
+    background: rgba(0,0,0,0.15);
+  }
+
+  /* W22 multi-image grid */
+  .w22-multi-img {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .w22-multi-img .w22-img { width: 100%; }
+
+  /* W22 loyalty table */
+  .w22-loyalty-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 12.5px;
+  }
+  .w22-loyalty-table th {
+    background: rgba(255,255,255,0.18);
+    color: white;
+    padding: 9px 12px;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .w22-loyalty-table th:first-child { border-radius: 7px 0 0 0; }
+  .w22-loyalty-table th:last-child  { border-radius: 0 7px 0 0; }
+  .w22-loyalty-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.82);
+    vertical-align: middle;
+  }
+  .w22-loyalty-table tr:last-child td { border-bottom: none; }
+  .w22-loyalty-table tr:nth-child(even) td { background: rgba(255,255,255,0.05); }
+  .w22-pts {
+    display: inline-block;
+    background: var(--teal-light);
+    color: white;
+    font-weight: 700;
+    font-size: 10.5px;
+    padding: 2px 7px;
+    border-radius: 7px;
+  }
+  .w22-tv-request {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 9px;
+    border-left: 3px solid rgba(255,255,255,0.3);
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.78);
+  }
+  .w22-tv-request strong { color: white; }
+
+  /* W22 deck grid */
+  .w22-deck-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .w22-deck-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .w22-deck-item .w22-img { width: 100%; }
+
+  /* W22 next week */
+  .w22-next-week {
+    background: rgba(0,0,0,0.15);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .w22-next-week .w22-title { margin-bottom: 14px; }
+  .w22-plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .w22-plan-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255,255,255,0.82);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .w22-plan-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity:0; transform: translateY(-20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .section-card { padding: 20px 16px; }
+    .update-item { flex-direction: column; }
+    .item-img { width: 100% !important; }
+    .deck-grid { grid-template-columns: 1fr; }
+    .w22-update-item { flex-direction: column; }
+    .w22-img { width: 100% !important; }
+    .w22-multi-img { grid-template-columns: 1fr 1fr; }
+    .w22-deck-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="badge">May 2026 WK22</div>
-            <h1>OPEX Weekly Update </h1>
-            <p>Key Improvements & Operational Excellence Initiatives</p>
+
+<!-- ══ LOGO — top-right, opens archive (visible only when clicked) ══ -->
+<div class="logo-trigger" onclick="openArchive()" title="Archive">
+  <img src="IMG-20260605-WA0033.jpg" alt="OPEX"
+       onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+  <span class="logo-text-fallback" style="display:none">OPEX</span>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN REPORT — WEEK 23
+═══════════════════════════════════════════ -->
+<div id="main-report">
+
+  <div class="report-header">
+    <div class="week-badge">Week 23 · June 2026 · Current</div>
+    <h1>OPEX Weekly Update</h1>
+    <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
+  </div>
+
+  <!-- ── 1. Manpower Attendance Look-up System ── -->
+  <div class="section-card" style="animation-delay:0.05s">
+    <div class="section-title">Manpower Attendance Look-up System</div>
+
+    <!-- 1a: Tablet Deployment -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Face-Based Login — 3 Tablets Deployed in Canteen Area</div>
+        <div class="item-desc">
+          Facial recognition-based login has been fully developed and is now live in production. Three tablets have been physically installed in the canteen area, enabling operators to check their own attendance records hands-free using just their face.
+          <br><br>
+          The system leverages a real-time face detection and matching pipeline, configured for speed and accuracy on low-end hardware. All three devices are currently under active monitoring to ensure stability, uptime, and recognition accuracy across varied lighting conditions in the canteen environment.
         </div>
-
-        <div class="content">
-
-            <!-- 1. Enhanced Manpower Visibility Dashboard -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>1. Enhanced Manpower Visibility Dashboard</h2>
-                    <p><strong>Project:</strong> Enhanced Manpower Visibility Dashboard</p>
-                    <p>Updated Manpower Visibility Dashboard with improved UI, date-range analysis, absenteeism & attrition tracking.</p>
-                    <p>This central dashboard now provides managers with clearer and more actionable insights into workforce health.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="3.jpeg" alt="Enhanced Manpower Visibility Dashboard">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Workforce Attendance Look-up -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>2. Workforce Attendance Look-up System</h2>
-                    <p><strong>Project:</strong> Workforce Attendance Look-up</p>
-                    <p>Improved previous application by adding a highly scalable and robust <strong>Face Recognition System</strong> for Face Detection, Loyalty Point suggestion and Workforce encouragement linked to Attendance Award recognition.</p>
-                    <ul>
-                        <li>Data Collection: <strong>100%</strong></li>
-                        <li>Data Validation and pre-processing: <strong>100%</strong></li>
-                        <li>Performance Optimization: <strong>100%</strong></li>
-                        <li>Kiosk Execution by First week of June at Canteen Area</li>
-                    </ul>
-                    <p><strong>Key Features Added:</strong></p>
-                    <ul>
-                        <li>Fully dynamic admin panel – all system parameters (shift timings, recognition thresholds, reward rules, holiday calendars) are database-driven and editable via UI</li>
-                        <li>Built operator management console: search, view, edit, deactivate, or re-enrol operators; view per-operator attendance history and reward balance</li>
-                        <li>Kiosk management: remotely configure and monitor all deployed attendance kiosk devices from the admin panel</li>
-                        <li>Developed guided multi-angle face capture workflow for HR to enrol new operators into the recognition system on-the-fly</li>
-                    </ul>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="11.jpeg" alt="Workforce Attendance System - Admin Dashboard">
-                    </div>
-                    <div class="screenshot">
-                        <img src="12.jpeg" alt="Workforce Attendance System - Additional Screens">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. Project-wise HC Dashboard -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>3. Project-wise HC Present Dashboard</h2>
-                    <p><strong>Newly Developed Application:</strong> Built new HC Present Dashboard for Planning team — project-wise present vs required headcount with color-coded status.</p>
-                    <p>Provides clear visibility with Green = On target, Blue = Short, Red = Excess.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="2.jpeg" alt="Project-wise HC Dashboard">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Production & HR Reconciliation Tool -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>4. Production & HR Reconciliation Tool</h2>
-                    <p><strong>Newly Developed Application:</strong> Delivered PyQt6 desktop tool for Production (duplicate/discrepancy tracking) and HR (GS vs HR data comparison & mismatch analysis).</p>
-                    <p>Helps both teams quickly identify and resolve data mismatches.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="1.jpeg" alt="Reconciliation Tool">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. In-house Repair & Maintenance -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>5. In-house Repair & Maintenance of Reliability Lab Assets</h2>
-                    <p><strong></strong></p>
-                    <ul>
-                        <li>4 actual projects completed with savings of almost ₹8 Lakhs</li>
-                        <li>Continuous initiative for sustainability and more cost saving</li>
-                    </ul>
-                    <p><strong>Cost-Saving Strategy | Supplier Independence | Team Capability Building</strong></p>
-                    <p>Together, we build a Reliability Lab that is skilled, self-sufficient, and cost-effective.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="4.jpeg" alt="Reliability Lab In-house Repair">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Deferral of HROne KPI Integration -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>6. Deferral of HROne KPI Integration</h2>
-                    <p><strong></strong></p>
-                    <p><strong>Strategic Pivot:</strong> Focusing on Culture Change and Company Health KPIs automation.</p>
-                    <p>This strategic shift will help create more meaningful metrics that support employee engagement and overall organizational wellness. It brings more practical and impactful insights for leadership decision-making.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="5.jpeg" alt="KPI Strategic Shift - Main View">
-                    </div>
-                    <div class="multi-screenshots">
-                        <div class="screenshot">
-                            <img src="6.jpeg" alt="KPI Strategy View 2">
-                        </div>
-                        <div class="screenshot">
-                            <img src="7.jpeg" alt="KPI Strategy View 3">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 7. Suggestion for Rewards and Recognition -->
-            <div class="summary-item">
-                <div class="text-content">
-                    <h2>7. Suggestion for Rewards and Recognition</h2>
-                    <p><strong></strong></p>
-                    <p>Proposed a comprehensive Rewards and Recognition framework to boost employee motivation, attendance, and engagement across the organization.</p>
-                    <p>The detailed suggestion includes program overview, benefits, two-tier structure, and 7-day implementation timeline.</p>
-                </div>
-                <div class="screenshots">
-                    <div class="screenshot">
-                        <img src="8.jpeg" alt="Rewards and Recognition - Program Overview">
-                    </div>
-                    <div class="multi-screenshots">
-                        <div class="screenshot">
-                            <img src="9.jpeg" alt="Rewards Framework 2">
-                        </div>
-                        <div class="screenshot">
-                            <img src="10.jpeg" alt="Rewards Framework 3">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p><strong>All major deliverables are now live or scheduled for early June rollout.</strong></p>
-            <p>These initiatives are driving better manpower visibility, significant cost savings, and stronger employee engagement across the organization.</p>
-            <p style="margin-top: 35px; font-size: 1.15rem; color: #0f766e;"><strong>Thank You!</strong></p>
-            <p style="margin-top: 25px; font-size: 1rem;">Prepared by OPEX Team • May 2026 WK22</p>
-        </div>
+        <span class="item-tag orange">Under Monitoring</span>
+      </div>
+      <div class="item-img">
+        <img src="13.jpeg" alt="Tablet Deployment"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Canteen Tablet Deployment</div>
+      </div>
     </div>
+
+    <!-- 1b: HR Registration App -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">HR Registration App for New Operators</div>
+        <div class="item-desc">
+          A dedicated companion application has been developed specifically for the HR team, enabling them to independently register new operators into the facial recognition system whenever a new joiner onboards — without requiring IT team involvement.
+          <br><br>
+          The app guides HR through a structured multi-angle face capture workflow, collects and validates biometric data on the spot, and updates the operator database in real time. This significantly reduces onboarding time for shop-floor employees and removes a key operational bottleneck from the IT queue.
+        </div>
+        <span class="item-tag green">Completed</span>
+      </div>
+      <div class="item-img">
+        <img src="14.jpeg" alt="HR Registration App"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">HR Face Registration</div>
+      </div>
+    </div>
+
+    <!-- 1c: Time-Gated -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Time-Gated Attendance Viewing (11:30 AM – 1:30 PM)</div>
+        <div class="item-desc">
+          To ensure the attendance kiosks do not interfere with production floor activity, a time-restriction feature has been added to the operator-facing interface. Operators can only access and view their attendance records between <strong>11:30 AM and 1:30 PM</strong> — aligned with canteen and lunch break hours.
+          <br><br>
+          Outside these windows, the kiosk display is locked with an informational message. This preserves operational discipline, prevents unnecessary device usage during active production shifts, and ensures the system serves its intended purpose without becoming a distraction.
+        </div>
+        <span class="item-tag">Production Safety</span>
+      </div>
+      <div class="item-img">
+        <img src="15.jpeg" alt="Time Restriction Feature"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Time Gate Feature</div>
+      </div>
+    </div>
+
+    <!-- 1d: Loyalty Points -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Loyalty Points Program — HR Marketing Integration</div>
+        <div class="item-desc">
+          A strategic discussion was conducted with HR to formally link the Attendance Look-up System to a structured <strong>Loyalty Points and Attendance Award program</strong>. This initiative is designed to reward consistent attendance, create visible incentives for operators, and build a culture of recognition on the shop floor.
+          <br><br>
+          The program introduces a milestone-based reward structure — the longer the unbroken attendance streak, the greater the recognition and reward:
+        </div>
+        <table class="loyalty-table">
+          <thead>
+            <tr>
+              <th>Milestone</th>
+              <th>Points Earned</th>
+              <th>Cumulative</th>
+              <th>Reward</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1 Month</td><td><span class="pts-badge">100 pts</span></td><td>100</td><td>Certificate &amp; Recognition</td></tr>
+            <tr><td>3 Months</td><td><span class="pts-badge">+100 pts</span></td><td>200</td><td>Merchandise &amp; Certificate</td></tr>
+            <tr><td>6 Months</td><td><span class="pts-badge">+300 pts</span></td><td>500</td><td>₹1,100 Cash Reward</td></tr>
+            <tr><td>12 Months</td><td><span class="pts-badge">+400 pts</span></td><td>900</td><td>₹2,100 Cash + Medal + Mgmt Recommendation for On-Role</td></tr>
+          </tbody>
+        </table>
+        <div class="tv-request">
+          <strong>Additional Request:</strong> Install a TV screen in the canteen area to publicly display employee achievements, loyalty milestones, and recognition announcements — creating a culture of visible appreciation on the shop floor.
+        </div>
+      </div>
+      <div class="item-img" style="margin-top:6px;">
+        <img src="19.jpeg" alt="Loyalty Points Program"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Loyalty Program</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. IT Asset Management ── -->
+  <div class="section-card" style="animation-delay:0.1s">
+    <div class="section-title">IT Asset Management</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">IT Asset Architecture Design — In Progress</div>
+        <div class="item-desc">
+          The foundational architecture for a centralized IT Asset Management system is being designed. This system will provide a structured framework to track, categorize, and manage all IT hardware and software assets across the entire facility from a single platform.
+          <br><br>
+          The design phase includes defining asset lifecycle stages (procurement → deployment → maintenance → retirement), ownership mapping per department, maintenance schedule integration, depreciation tracking, and data collection protocols for field agents. Once architecture is finalized, systematic data collection will begin across all defined asset zones next week. The goal is full visibility and control over the organization's IT estate to prevent loss, reduce downtime, and support budgeting decisions.
+        </div>
+        <span class="item-tag orange">Ongoing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Workforce Attendance Dashboard ── -->
+  <div class="section-card" style="animation-delay:0.15s">
+    <div class="section-title">Workforce Attendance Dashboard Enhancement</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">TP-Link Network Monitoring + API vs. Production Data Comparison Module</div>
+        <div class="item-desc">
+          Two major capabilities have been added to the internal workforce attendance dashboard in this release, significantly enhancing its utility as a daily operational tool:
+          <br><br>
+          <strong>TP-Link Network Monitoring Integration</strong> — real-time device and network connectivity status is now visible directly within the dashboard. On-floor managers no longer need to switch between tools; network health across all attendance terminals and connected devices is monitored from a single pane of glass, with instant alerts if a device goes offline.
+          <br><br>
+          <strong>API vs. Production Data Comparison Module</strong> — a dedicated module cross-references attendance records fetched from the Presence360 API against the production-level data maintained by the HR team. This surfaces discrepancies instantly, highlights records that are present in one source but missing in another, and provides a clearer and more reliable view of ground-level attendance. The dashboard is now moving closer to being the single source of truth for daily workforce visibility.
+        </div>
+        <span class="item-tag green">Deployed</span>
+      </div>
+      <div class="item-img">
+        <img src="16.jpeg" alt="Dashboard Enhancement"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Dashboard Update</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. SMT Feeder Automation ── -->
+  <div class="section-card" style="animation-delay:0.2s">
+    <div class="section-title">SMT Feeder Automation Upgrade</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Automatic Alternate Part Code Mapping from BOM Files</div>
+        <div class="item-desc">
+          The feeder list automation tool — currently in active daily use by the SMT team — is being upgraded with a critical new capability.
+          <br><br>
+          Currently, when a BOM contains alternate part codes, engineers must manually look up and substitute the correct feeder assignment before setup. This upgrade eliminates that step entirely: the tool will now <strong>intelligently detect and extract alternate part codes directly from BOM files</strong> during feeder list generation, resolving them automatically without engineer intervention.
+          <br><br>
+          This reduces the risk of feeder setup errors caused by part code mismatches, shortens line changeover preparation time, and removes a category of manual errors that previously required rework. The enhancement is currently under active development and is targeted for release in the next sprint, after which it will be rolled out to the SMT team for validation.
+        </div>
+        <span class="item-tag orange">In Development</span>
+      </div>
+      <div class="item-img">
+        <img src="17.jpeg" alt="SMT Feeder Automation"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">BOM Automation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. Presence360 Escalation ── -->
+  <div class="section-card" style="animation-delay:0.25s">
+    <div class="section-title">Presence360 Attendance Issue Escalation</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Punch Record Sync Failure — Formally Escalated to Support</div>
+        <div class="item-desc">
+          A critical data synchronisation failure has been identified on the Presence360 platform: employee punch records are not reaching the portal or the API, despite physical punches being successfully recorded at attendance devices on the factory floor — as confirmed by the HR team through manual log verification.
+          <br><br>
+          This behaviour points to a <strong>device-to-server synchronisation failure on Presence360's infrastructure</strong>, not at the device level. The physical devices are functioning correctly and recording punches locally. The failure occurs in the transmission layer between device and server.
+          <br><br>
+          Formal communication has been initiated with the Presence360 support team with full supporting documentation, including log evidence, affected device IDs, timestamps, and a detailed description of the issue. The matter has been officially escalated and is pending resolution from their side. The team will be kept informed as developments unfold and a workaround is being assessed internally in the interim.
+        </div>
+        <span class="item-tag red">Escalated</span>
+      </div>
+      <div class="item-img">
+        <img src="18.jpeg" alt="Presence360 Issue"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Presence360 Sync</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Engineering Capability ── -->
+  <div class="section-card" style="animation-delay:0.3s">
+    <div class="section-title">Engineering Capability Improvement — Technical Deck Sharing</div>
+    <p style="font-size:13.5px; color:#3a6a6a; margin-bottom:20px; line-height:1.65;">
+      As part of a continuous effort to upskill the engineering and operations teams, the following technical knowledge decks have been curated and shared internally this week. Each deck is targeted at a specific capability gap identified on the floor, and is designed to be practical, actionable, and directly applicable to day-to-day work.
+    </p>
+    <div class="deck-grid">
+      <div class="deck-item">
+        <div class="item-img">
+          <img src="20.jpeg" alt="Manpower Optimization"
+               onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">20.jpeg</div>
+        </div>
+        <div class="item-title" style="font-size:13px;">Manpower Optimization Guidelines</div>
+        <div class="item-desc" style="font-size:12.5px;">Structured guidelines covering workforce planning principles, headcount benchmarking, line balancing, and output-per-operator analysis. Equips team leaders with a framework to identify and address manpower inefficiencies proactively.</div>
+      </div>
+      <div class="deck-item">
+        <div class="item-img">
+          <img src="21.jpeg" alt="Six Levers Playbook"
+               onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">21.jpeg</div>
+        </div>
+        <div class="item-title" style="font-size:13px;">Six Levers Playbook — Manpower Recovery</div>
+        <div class="item-desc" style="font-size:12.5px;">A tactical playbook defining six actionable levers to recover manpower efficiency during peak demand or resource constraints. Provides a structured decision tree for supervisors when output is at risk due to absenteeism or sudden demand spikes.</div>
+      </div>
+      <div class="deck-item">
+        <div class="item-img">
+          <img src="22.jpeg" alt="ECRS Framework"
+               onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">22.jpeg</div>
+        </div>
+        <div class="item-title" style="font-size:13px;">ECRS Framework — Process & Line Optimization</div>
+        <div class="item-desc" style="font-size:12.5px;"><strong>Eliminate, Combine, Rearrange, Simplify</strong> — a lean methodology deck for systematically identifying and resolving inefficiencies in process flows and assembly lines. Includes worked examples and a step-by-step application guide for line engineers.</div>
+      </div>
+      <div class="deck-item">
+        <div class="item-img">
+          <img src="23.jpeg" alt="MTBF MTTR Deck"
+               onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">23.jpeg</div>
+        </div>
+        <div class="item-title" style="font-size:13px;">MTBF &amp; MTTR Information Deck</div>
+        <div class="item-desc" style="font-size:12.5px;"><strong>Mean Time Between Failures</strong> and <strong>Mean Time To Repair</strong> — a knowledge deck for maintenance and engineering teams explaining equipment reliability metrics, how to calculate them, how to interpret trends, and how to use them to drive better preventive maintenance protocols.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. Customer Coordination ── -->
+  <div class="section-card" style="animation-delay:0.33s">
+    <div class="section-title">Customer Coordination — Model Line Implementation</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Qubo Line (Third Floor) — Engagement Started</div>
+        <div class="item-desc">
+          Model line implementation has commenced for the Qubo product line on the third floor. Initial coordination meetings have been conducted with the customer team and relevant internal stakeholders. Ground-level assessment is currently underway to evaluate the current line layout, identify improvement opportunities, and define the implementation roadmap.
+          <br><br>
+          The engagement is in early stages and timelines will be firmed up as the assessment progresses. The objective is to establish a model line that can serve as a benchmark for efficiency, quality, and flow — both for internal improvement and as a demonstration of operational capability to the customer. Ongoing updates will be shared as the project develops.
+        </div>
+        <span class="item-tag orange">Ongoing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PLAN FOR NEXT WEEK ── -->
+  <div class="next-week-card" style="animation-delay:0.37s">
+    <div class="section-title">Plan for Next Week</div>
+    <ul class="plan-list">
+      <li><span class="plan-num">1</span><span>Unit 1 assessment for Workforce Attendance Dashboard — evaluate readiness, device coverage, and performance before wider rollout.</span></li>
+      <li><span class="plan-num">2</span><span>Unit 1 evaluation for PRODPLAN focused on Material Planning — coordinate with Mr. Sanjeev on requirements, data sources, and scope definition.</span></li>
+      <li><span class="plan-num">3</span><span>Feeder Automation upgrade for SMT — continue development of alternate part code mapping feature and target release to the SMT team.</span></li>
+      <li><span class="plan-num">4</span><span>Loyalty Points integration on Manpower Attendance Look-up — begin technical implementation of the rewards framework and database layer.</span></li>
+      <li><span class="plan-num">5</span><span>Further data collection for IT Asset Management — begin systematic cataloguing of assets across defined zones following architecture sign-off.</span></li>
+      <li><span class="plan-num">6</span><span>PM Tracker follow-up — review progress status and update relevant stakeholders with action items.</span></li>
+      <li><span class="plan-num">7</span><span>Continuous Engineering Capability Improvement — identify and share the next set of targeted technical knowledge decks.</span></li>
+      <li><span class="plan-num">8</span><span>Model line continuation — advance next steps for Qubo line implementation on the third floor.</span></li>
+    </ul>
+  </div>
+
+</div><!-- /main-report -->
+
+
+<!-- ══════════════════════════════════════════
+     ARCHIVE OVERLAY — visible only after logo click
+═══════════════════════════════════════════ -->
+<div id="archive-overlay">
+  <div class="archive-inner">
+
+    <div class="archive-logo">
+      <img src="IMG-20260605-WA0033.jpg" alt="OPEX"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <div class="logo-fallback" style="display:none">OPEX</div>
+      <p>Operational Excellence</p>
+    </div>
+
+    <h1 class="archive-title">OPEX Weekly Archive</h1>
+    <p class="archive-sub">Select a week to view the update report</p>
+
+    <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek22()">
+        <h2>Week 22</h2>
+        <small>May 2026</small>
+      </div>
+    </div>
+
+    <!-- ── WEEK 22 FULL CONTENT ── -->
+    <div id="week22-content">
+
+      <!-- W22 Section 1: Enhanced Manpower Visibility Dashboard -->
+      <div class="w22-section">
+        <div class="w22-title">Enhanced Manpower Visibility Dashboard</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Updated Dashboard — Improved UI, Date-Range Analysis & Attrition Tracking</div>
+            <div class="w22-item-desc">
+              The Manpower Visibility Dashboard was significantly updated this week with a refreshed UI, improved date-range filtering, and new modules for absenteeism and attrition tracking. Managers now have clearer, more actionable insights into workforce health with color-coded indicators and trend lines — enabling proactive decision-making before headcount gaps impact production output.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="3.jpeg" alt="Manpower Visibility Dashboard"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">3.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 2: Workforce Attendance Look-up -->
+      <div class="w22-section">
+        <div class="w22-title">Workforce Attendance Look-up System</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Face Recognition System — 100% Data Collection &amp; Validation Complete</div>
+            <div class="w22-item-desc">
+              The Manpower Attendance Look-up System was significantly enhanced with a robust Face Recognition engine covering detection, matching, and Loyalty Point integration linked to the Attendance Award program. All data collection, validation, pre-processing, and performance optimization phases are at 100%. Kiosk deployment was scheduled for the first week of June at the canteen area.
+              <br><br>
+              Key features completed: fully dynamic admin panel (all parameters editable via UI), operator management console with search/edit/deactivate/re-enrol, kiosk management for remote configuration, and guided multi-angle face capture workflow for HR to onboard new operators independently.
+            </div>
+            <span class="w22-tag green">100% Ready</span>
+          </div>
+          <div class="w22-img">
+            <img src="11.jpeg" alt="Attendance Look-up System"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">11.jpeg</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Additional Screens — Admin Console &amp; Kiosk Management</div>
+            <div class="w22-item-desc">Built dedicated admin and kiosk management screens for remote monitoring and configuration of deployed devices, reducing IT overhead for day-to-day system management.</div>
+          </div>
+          <div class="w22-img">
+            <img src="12.jpeg" alt="Admin Screens"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">12.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 3: Project-wise HC Dashboard -->
+      <div class="w22-section">
+        <div class="w22-title">Project-wise HC Present Dashboard</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">New Dashboard — Planning Team, Color-Coded HC Status</div>
+            <div class="w22-item-desc">
+              Built a new Headcount Present Dashboard for the Planning team providing project-wise present vs. required headcount visibility with color-coded status indicators: Green = On target, Blue = Short, Red = Excess. Enables quick identification of resourcing gaps across all active projects in real time.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="2.jpeg" alt="HC Present Dashboard"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">2.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 4: Production & HR Reconciliation Tool -->
+      <div class="w22-section">
+        <div class="w22-title">Production &amp; HR Reconciliation Tool</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">PyQt6 Desktop Tool — Duplicate Detection &amp; HR/GS Mismatch Analysis</div>
+            <div class="w22-item-desc">
+              Delivered a PyQt6 desktop application serving both the Production team (duplicate and discrepancy tracking in attendance records) and the HR team (GS vs. HR data comparison and mismatch analysis). Both teams can now quickly identify and resolve data inconsistencies without manual spreadsheet comparison, reducing reconciliation effort from hours to minutes.
+            </div>
+            <span class="w22-tag green">Delivered</span>
+          </div>
+          <div class="w22-img">
+            <img src="1.jpeg" alt="Reconciliation Tool"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">1.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 5: In-house Repair & Maintenance -->
+      <div class="w22-section">
+        <div class="w22-title">In-house Repair &amp; Maintenance — Reliability Lab Assets</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">4 Projects Completed — ₹8 Lakhs Savings Achieved</div>
+            <div class="w22-item-desc">
+              Four in-house repair and maintenance projects have been completed for Reliability Lab assets, generating cumulative savings of approximately ₹8 Lakhs by eliminating external vendor dependency. This initiative is ongoing, with a focus on building team capability, reducing maintenance costs, and improving lab uptime. The strategy supports supplier independence and long-term sustainability of lab operations.
+            </div>
+            <span class="w22-tag green">Savings: ₹8 Lakhs</span>
+          </div>
+          <div class="w22-img">
+            <img src="4.jpeg" alt="Reliability Lab Repair"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">4.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 6: HROne KPI Integration Deferral -->
+      <div class="w22-section">
+        <div class="w22-title">Deferral of HROne KPI Integration — Strategic Pivot</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Pivot to Culture Change &amp; Company Health KPIs Automation</div>
+            <div class="w22-item-desc">
+              The HROne KPI integration has been strategically deferred in favour of focusing resources on Culture Change and Company Health KPIs automation. This shift prioritizes metrics that directly reflect employee engagement and organizational wellness — providing more practical and impactful insights for leadership decision-making rather than transactional HR data integration.
+            </div>
+            <span class="w22-tag orange">Strategic Pivot</span>
+          </div>
+          <div class="w22-img">
+            <img src="5.jpeg" alt="KPI Strategic Shift"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">5.jpeg</div>
+          </div>
+        </div>
+        <div class="w22-multi-img">
+          <div class="w22-img">
+            <img src="6.jpeg" alt="KPI View 2"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">6.jpeg</div>
+          </div>
+          <div class="w22-img">
+            <img src="7.jpeg" alt="KPI View 3"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">7.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Section 7: Rewards & Recognition -->
+      <div class="w22-section">
+        <div class="w22-title">Suggestion for Rewards &amp; Recognition Program</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Comprehensive R&amp;R Framework Proposed — 2-Tier Structure with 7-Day Implementation Timeline</div>
+            <div class="w22-item-desc">
+              A comprehensive Rewards and Recognition framework was proposed to boost employee motivation, attendance, and engagement across the organization. The detailed suggestion covers program overview, business case, benefits, a two-tier recognition structure (individual + team), and a practical 7-day implementation timeline to enable rapid rollout.
+            </div>
+            <span class="w22-tag">Proposed</span>
+          </div>
+          <div class="w22-img">
+            <img src="8.jpeg" alt="R&R Framework"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">8.jpeg</div>
+          </div>
+        </div>
+        <div class="w22-multi-img">
+          <div class="w22-img">
+            <img src="9.jpeg" alt="R&R Framework 2"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">9.jpeg</div>
+          </div>
+          <div class="w22-img">
+            <img src="10.jpeg" alt="R&R Framework 3"
+                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">10.jpeg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W22 Footer -->
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        All major Week 22 deliverables are live or scheduled for early June rollout.<br>
+        Prepared by OPEX Team · May 2026
+      </div>
+
+    </div><!-- /week22-content -->
+
+    <br>
+    <button class="back-btn" onclick="closeArchive()">← Back to Latest</button>
+
+  </div><!-- /archive-inner -->
+</div><!-- /archive-overlay -->
+
+<!-- ══ LIGHTBOX OVERLAY ══ -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div id="lightbox-inner" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <button id="lightbox-close" onclick="closeLightbox()">&#x2715;</button>
+  </div>
+</div>
+
+<style>
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; animation: lbFadeIn 0.18s ease both; }
+  #lightbox-inner {
+    position: relative;
+    max-width: 88vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+    animation: lbZoomIn 0.22s cubic-bezier(0.34,1.4,0.64,1) both;
+    cursor: default;
+  }
+  #lightbox-img {
+    max-width: 88vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    object-fit: contain;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(0,0,0,0.55);
+    border: none;
+    color: white;
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    z-index: 1;
+  }
+  #lightbox-close:hover { background: rgba(0,0,0,0.8); }
+  @keyframes lbFadeIn  { from { opacity:0; } to { opacity:1; } }
+  @keyframes lbZoomIn  { from { opacity:0; transform:scale(0.82); } to { opacity:1; transform:scale(1); } }
+  /* Cursor hint on all tappable images */
+  .item-img img, .w22-img img, .deck-item img, .w22-deck-item img { cursor: zoom-in; }
+</style>
+
+<script>
+  function openArchive() {
+    document.getElementById('archive-overlay').classList.add('visible');
+    document.getElementById('week22-content').classList.remove('visible');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeArchive() {
+    document.getElementById('archive-overlay').classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+  function toggleWeek22() {
+    document.getElementById('week22-content').classList.toggle('visible');
+  }
+
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    if (!document.getElementById('archive-overlay').classList.contains('visible')) {
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+  document.addEventListener('click', function(e) {
+    var img = e.target.closest('img');
+    if (!img) return;
+    if (img.closest('.logo-trigger') || img.id === 'lightbox-img' || img.closest('.archive-logo')) return;
+    if (!img.src || img.src.indexOf('data:image/svg') !== -1) return;
+    openLightbox(img.src, img.alt);
+  });
+</script>
 </body>
 </html>
