@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPEX Weekly Update — Week 23</title>
+<title>OPEX Weekly Update — Week 24</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -43,7 +43,6 @@
     z-index: 0;
   }
 
-  /* ── LOGO TRIGGER (top-right, hidden archive access) ── */
   .logo-trigger {
     position: fixed;
     top: 18px;
@@ -146,7 +145,6 @@
     flex-shrink: 0;
   }
 
-  /* Update item row */
   .update-item {
     display: flex;
     align-items: flex-start;
@@ -185,11 +183,11 @@
   .item-tag.orange { background: #fff3e0; color: #b55a00; }
   .item-tag.green  { background: #e0f7ee; color: #0a6640; }
   .item-tag.red    { background: #fde8e8; color: #9b1c1c; }
+  .item-tag.blue   { background: #e0eeff; color: #0a2f7a; }
 
-  /* ── IMAGE beside item — PROPER SIZE ── */
   .item-img {
     flex-shrink: 0;
-    width: 260px;           /* ~50% of content column */
+    width: 260px;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 6px 22px rgba(0,0,0,0.15);
@@ -198,7 +196,7 @@
   }
   .item-img img {
     width: 100%;
-    height: auto;           /* preserve natural ratio — no cropping */
+    height: auto;
     display: block;
     object-fit: contain;
     cursor: zoom-in;
@@ -212,6 +210,29 @@
     color: #888;
     background: #f5fafa;
     border-top: 1px solid #e4f0f0;
+  }
+
+  /* Multi-image grid for side-by-side images */
+  .multi-img-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .multi-img-row .item-img {
+    flex: 1;
+    width: auto;
+  }
+
+  /* ESP32 IoT special layout — full width images below text */
+  .iot-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .iot-img-grid .item-img {
+    width: 100%;
+    flex-shrink: unset;
   }
 
   /* Loyalty table */
@@ -250,23 +271,6 @@
     padding: 2px 8px;
     border-radius: 8px;
   }
-
-  /* TV request */
-  .tv-request {
-    margin-top: 16px;
-    padding: 14px 18px;
-    background: linear-gradient(90deg, #e8f7f7, #f0fcfc);
-    border-radius: 10px;
-    border-left: 3px solid var(--teal-light);
-    font-size: 13px;
-    color: var(--text-mid);
-  }
-  .tv-request strong { color: var(--teal-dark); }
-
-  /* Loyalty item layout: text full-width top, image below table */
-  .loyalty-layout { display: flex; flex-direction: column; gap: 14px; }
-  .loyalty-img-row { display: flex; gap: 24px; align-items: flex-start; margin-top: 4px; }
-  .loyalty-img-row .item-img { width: 300px; }
 
   /* Deck grid */
   .deck-grid {
@@ -437,15 +441,7 @@
   }
   .back-btn:hover { background: rgba(255,255,255,0.2); }
 
-  /* ── WEEK 22 content inside archive ── */
-  #week22-content {
-    display: none;
-    text-align: left;
-    margin-top: 32px;
-  }
-  #week22-content.visible { display: block; }
-
-  /* Week 22 uses the same card/item styles, but on the teal overlay */
+  /* ── W22/W23 shared styles inside archive ── */
   .w22-section {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(8px);
@@ -474,8 +470,6 @@
     border-radius: 50%;
     flex-shrink: 0;
   }
-
-  /* W22 update item — same flex row pattern */
   .w22-update-item {
     display: flex;
     align-items: flex-start;
@@ -513,8 +507,9 @@
   }
   .w22-tag.orange { background: rgba(255,180,80,0.25); color: #ffd080; }
   .w22-tag.green  { background: rgba(80,220,160,0.2);  color: #80ffcc; }
+  .w22-tag.red    { background: rgba(255,80,80,0.2);   color: #ffaaaa; }
+  .w22-tag.blue   { background: rgba(80,160,255,0.2);  color: #aad4ff; }
 
-  /* Images in Week 22 archive */
   .w22-img {
     flex-shrink: 0;
     width: 220px;
@@ -538,7 +533,6 @@
     background: rgba(0,0,0,0.15);
   }
 
-  /* W22 multi-image grid */
   .w22-multi-img {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -547,7 +541,14 @@
   }
   .w22-multi-img .w22-img { width: 100%; }
 
-  /* W22 loyalty table */
+  .w22-2col-img {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .w22-2col-img .w22-img { width: 100%; }
+
   .w22-loyalty-table {
     width: 100%;
     border-collapse: collapse;
@@ -594,7 +595,6 @@
   }
   .w22-tv-request strong { color: white; }
 
-  /* W22 deck grid */
   .w22-deck-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -612,7 +612,6 @@
   }
   .w22-deck-item .w22-img { width: 100%; }
 
-  /* W22 next week */
   .w22-next-week {
     background: rgba(0,0,0,0.15);
     border-radius: 16px;
@@ -620,7 +619,6 @@
     margin-top: 10px;
     border: 1px solid rgba(255,255,255,0.1);
   }
-  .w22-next-week .w22-title { margin-bottom: 14px; }
   .w22-plan-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .w22-plan-list li {
     display: flex;
@@ -645,6 +643,14 @@
     color: white;
   }
 
+  /* Archive week content containers */
+  #week22-content, #week23-content {
+    display: none;
+    text-align: left;
+    margin-top: 32px;
+  }
+  #week22-content.visible, #week23-content.visible { display: block; }
+
   /* Animations */
   @keyframes fadeDown {
     from { opacity:0; transform: translateY(-20px); }
@@ -661,16 +667,19 @@
     .update-item { flex-direction: column; }
     .item-img { width: 100% !important; }
     .deck-grid { grid-template-columns: 1fr; }
+    .iot-img-grid { grid-template-columns: 1fr; }
+    .multi-img-row { flex-direction: column; }
     .w22-update-item { flex-direction: column; }
     .w22-img { width: 100% !important; }
     .w22-multi-img { grid-template-columns: 1fr 1fr; }
+    .w22-2col-img { grid-template-columns: 1fr; }
     .w22-deck-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGO — top-right, opens archive (visible only when clicked) ══ -->
+<!-- ══ LOGO — top-right, opens archive ══ -->
 <div class="logo-trigger" onclick="openArchive()" title="Archive">
   <img src="IMG-20260605-WA0033.jpg" alt="OPEX"
        onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
@@ -678,278 +687,341 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     MAIN REPORT — WEEK 23
+     MAIN REPORT — WEEK 24
 ═══════════════════════════════════════════ -->
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 23 · June 2026 · Current</div>
+    <div class="week-badge">Week 24 · June 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Manpower Attendance Look-up System ── -->
+  <!-- ── 1. Workforce Attendance Dashboard Enhancement ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Manpower Attendance Look-up System</div>
+    <div class="section-title">Workforce Attendance Dashboard Enhancement</div>
 
-    <!-- 1a: Tablet Deployment -->
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Face-Based Login — 3 Tablets Deployed in Canteen Area</div>
+        <div class="item-title">HROne API Discrepancy Resolution — Senior Team Coordination</div>
         <div class="item-desc">
-          Facial recognition-based login has been fully developed and is now live in production. Three tablets have been physically installed in the canteen area, enabling operators to check their own attendance records hands-free using just their face.
-          <br><br>
-          The system leverages a real-time face detection and matching pipeline, configured for speed and accuracy on low-end hardware. All three devices are currently under active monitoring to ensure stability, uptime, and recognition accuracy across varied lighting conditions in the canteen environment.
+          Coordinated with the senior team at HROne regarding API discrepancies identified in the attendance data pipeline. In-depth discussions were held to align on the root causes and implement the necessary changes for improved data accuracy and reliability. Action items have been defined and are being tracked for resolution.
         </div>
-        <span class="item-tag orange">Under Monitoring</span>
-      </div>
-      <div class="item-img">
-        <img src="13.jpeg" alt="Tablet Deployment"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Canteen Tablet Deployment</div>
+        <span class="item-tag orange">In Progress</span>
       </div>
     </div>
 
-    <!-- 1b: HR Registration App -->
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">HR Registration App for New Operators</div>
+        <div class="item-title">Manpower Visibility Dashboard — UI Refinements & Mismatch Alerts</div>
         <div class="item-desc">
-          A dedicated companion application has been developed specifically for the HR team, enabling them to independently register new operators into the facial recognition system whenever a new joiner onboards — without requiring IT team involvement.
+          Further enhancements have been delivered to the Manpower Visibility Dashboard. This release includes a refined UI for better usability, improved trend visibility for absenteeism and attrition patterns, and stronger mismatch alert logic to surface headcount discrepancies more prominently to managers.
           <br><br>
-          The app guides HR through a structured multi-angle face capture workflow, collects and validates biometric data on the spot, and updates the operator database in real time. This significantly reduces onboarding time for shop-floor employees and removes a key operational bottleneck from the IT queue.
+          Additionally, the IoT integration workstream is progressing in parallel — DHT22 sensors have been integrated and are currently being connected to the MQTT server to display real-time temperature and humidity data directly on the dashboard, marking the first step toward live environmental data on the production floor.
+        </div>
+        <span class="item-tag green">Deployed</span>
+
+        <!-- IoT inline illustration -->
+        <div style="margin-top:18px; border-radius:12px; overflow:hidden; border:2px solid #d4eeee; background:#060f1f;">
+          <svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>ESP32 IoT setup — DHT22 sensor to MQTT to OEL dashboard</title>
+            <desc>Illustration showing an ESP32 microcontroller connected to a DHT22 temperature and humidity sensor, transmitting readings via WiFi to an MQTT broker and appearing live on the OEL factory floor dashboard</desc>
+            <defs>
+              <marker id="iot-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+            <!-- DHT22 SENSOR -->
+            <g transform="translate(32,72)">
+              <rect x="0" y="0" width="72" height="110" rx="5" fill="#1D9E75" stroke="#0F6E56" stroke-width="1"/>
+              <rect x="6" y="6" width="60" height="64" rx="3" fill="#085041"/>
+              <ellipse cx="22" cy="32" rx="7" ry="9" fill="#5DCAA5"/>
+              <path d="M22 20 Q28 28 22 38 Q16 28 22 20Z" fill="#9FE1CB" fill-opacity="0.5"/>
+              <rect x="37" y="22" width="8" height="20" rx="4" fill="#5DCAA5"/>
+              <circle cx="41" cy="44" r="6" fill="#9FE1CB"/>
+              <text x="36" y="80" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#9FE1CB">28.4°C</text>
+              <text x="36" y="93" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#9FE1CB">62.1%</text>
+              <rect x="12" y="110" width="5" height="14" rx="1" fill="#888780"/>
+              <rect x="23" y="110" width="5" height="14" rx="1" fill="#888780"/>
+              <rect x="34" y="110" width="5" height="14" rx="1" fill="#888780"/>
+              <rect x="45" y="110" width="5" height="14" rx="1" fill="#888780"/>
+              <rect x="56" y="110" width="5" height="14" rx="1" fill="#888780"/>
+              <text x="36" y="106" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#E1F5EE">DHT22</text>
+            </g>
+            <text x="68" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">Sensor</text>
+            <!-- wire -->
+            <line x1="104" y1="147" x2="142" y2="147" stroke="#B4B2A9" stroke-width="2.5" stroke-dasharray="4 2"/>
+            <!-- ESP32 BOARD -->
+            <g transform="translate(142,100)">
+              <rect x="0" y="0" width="110" height="96" rx="4" fill="#0C447C" stroke="#185FA5" stroke-width="1"/>
+              <rect x="28" y="16" width="54" height="46" rx="3" fill="#042C53" stroke="#378ADD" stroke-width="0.8"/>
+              <text x="55" y="35" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#85B7EB">ESP32</text>
+              <text x="55" y="48" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">240MHz</text>
+              <text x="55" y="58" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">WiFi+BT</text>
+              <circle cx="88" cy="10" r="5" fill="#1D9E75"/>
+              <circle cx="88" cy="10" r="3" fill="#9FE1CB"/>
+              <path d="M90 4 Q96 0 96 6 Q96 12 102 8" fill="none" stroke="#B5D4F4" stroke-width="1.5"/>
+              <line x1="0" y1="20" x2="-7" y2="20" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="0" y1="30" x2="-7" y2="30" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="0" y1="40" x2="-7" y2="40" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="0" y1="50" x2="-7" y2="50" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="0" y1="60" x2="-7" y2="60" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="0" y1="70" x2="-7" y2="70" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="20" x2="117" y2="20" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="30" x2="117" y2="30" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="40" x2="117" y2="40" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="50" x2="117" y2="50" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="60" x2="117" y2="60" stroke="#D3D1C7" stroke-width="1.5"/>
+              <line x1="110" y1="70" x2="117" y2="70" stroke="#D3D1C7" stroke-width="1.5"/>
+              <rect x="38" y="92" width="34" height="8" rx="2" fill="#2C2C2A"/>
+              <rect x="42" y="94" width="26" height="4" rx="1" fill="#888780"/>
+            </g>
+            <text x="197" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#378ADD">ESP32 MCU</text>
+            <!-- WiFi arcs -->
+            <g transform="translate(288,136)">
+              <path d="M-28 14 Q0 -12 28 14" fill="none" stroke="#EF9F27" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+              <path d="M-18 8 Q0 -6 18 8" fill="none" stroke="#EF9F27" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+              <path d="M-8 3 Q0 -1 8 3" fill="none" stroke="#EF9F27" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+              <circle cx="0" cy="18" r="3" fill="#EF9F27"/>
+            </g>
+            <text x="288" y="182" text-anchor="middle" font-family="monospace" font-size="9" fill="#BA7517">MQTT</text>
+            <text x="288" y="193" text-anchor="middle" font-family="monospace" font-size="9" fill="#BA7517">WiFi</text>
+            <!-- arrows: ESP32 → WiFi → Laptop -->
+            <line x1="259" y1="148" x2="269" y2="148" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#iot-arr)"/>
+            <line x1="308" y1="148" x2="320" y2="148" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#iot-arr)"/>
+            <!-- LAPTOP -->
+            <g transform="translate(322,42)">
+              <rect x="0" y="0" width="268" height="172" rx="8" fill="#2C2C2A" stroke="#444441" stroke-width="1.5"/>
+              <rect x="8" y="8" width="252" height="156" rx="4" fill="#060f1f"/>
+              <!-- topbar -->
+              <rect x="8" y="8" width="252" height="22" rx="4" fill="#0d1f3a"/>
+              <text x="20" y="23" font-family="monospace" font-size="8" font-weight="700" fill="#85B7EB">⬡ OEL Dashboard  —  MQTT Live Feed</text>
+              <circle cx="248" cy="19" r="3" fill="#1D9E75"/>
+              <!-- temp card -->
+              <rect x="14" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#185FA5" stroke-width="0.8"/>
+              <text x="51" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">TEMPERATURE</text>
+              <text x="51" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#85B7EB">28.4</text>
+              <text x="51" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">°C</text>
+              <!-- humidity card -->
+              <rect x="94" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#0F6E56" stroke-width="0.8"/>
+              <text x="131" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#1D9E75">HUMIDITY</text>
+              <text x="131" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#5DCAA5">62.1</text>
+              <text x="131" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#1D9E75">%RH</text>
+              <!-- status card -->
+              <rect x="174" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#3B6D11" stroke-width="0.8"/>
+              <text x="211" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#639922">STATUS</text>
+              <circle cx="211" cy="64" r="7" fill="#1D9E75"/>
+              <text x="211" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#639922">CONNECTED</text>
+              <!-- sparkline -->
+              <rect x="14" y="100" width="234" height="50" rx="3" fill="#060f1f" stroke="#185FA5" stroke-width="0.5"/>
+              <text x="22" y="112" font-family="monospace" font-size="7" fill="#378ADD">Temperature — live readings (°C)</text>
+              <polyline points="22,142 44,136 66,139 88,132 110,137 132,130 154,133 176,128 198,131 220,126 240,129" fill="none" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="240" cy="129" r="3" fill="#85B7EB"/>
+              <!-- status bar -->
+              <text x="16" y="160" font-family="monospace" font-size="6.5" fill="#444441">Last update: 09:42:31  |  Broker: 192.168.1.100:1883  |  Topic: oel/floor/env</text>
+              <circle cx="134" cy="4" r="2.5" fill="#444441"/>
+            </g>
+            <!-- laptop base -->
+            <rect x="322" y="214" width="268" height="10" rx="2" fill="#444441"/>
+            <rect x="305" y="224" width="302" height="6" rx="3" fill="#2C2C2A"/>
+            <text x="456" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">OEL live dashboard</text>
+            <!-- bottom labels -->
+            <text x="68" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">DHT22 sensor</text>
+            <text x="197" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#378ADD">ESP32 MCU</text>
+            <text x="288" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#BA7517">WiFi / MQTT</text>
+            <text x="456" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">OEL dashboard</text>
+          </svg>
+          <div style="background:#0a1628; padding:6px 14px; font-family:monospace; font-size:10px; color:#378ADD; border-top:1px solid #185FA5;">
+            oel/floor/env &nbsp;|&nbsp; T: 28.4°C &nbsp;|&nbsp; RH: 62.1% &nbsp;|&nbsp; MQTT broker: 192.168.1.100:1883 &nbsp;|&nbsp; <span style="color:#1D9E75">● LIVE</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="item-img">
+        <img src="16.jpeg" alt="Manpower Visibility Dashboard"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Dashboard Enhancement</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. Manpower Attendance Look-up System Updates ── -->
+  <div class="section-card" style="animation-delay:0.1s">
+    <div class="section-title">Manpower Attendance Look-up System Updates</div>
+
+    <!-- Loyalty Points + DB Migration -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Loyalty Points Module Integrated — Launch Planned July Onwards</div>
+        <div class="item-desc">
+          The Attendance System has been completed and the Loyalty Points module has been successfully integrated. The Loyalty Points program is planned for launch from July onwards, rewarding operators with milestone-based points for consistent attendance.
+          <br><br>
+          The database has been migrated from SQLite3 to MySQL to improve scalability, reliability, and overall system performance — ensuring the system can handle growing operator data and concurrent access demands.
         </div>
         <span class="item-tag green">Completed</span>
       </div>
       <div class="item-img">
-        <img src="14.jpeg" alt="HR Registration App"
+        <img src="31.jpeg" alt="Attendance System"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HR Face Registration</div>
+        <div class="img-label">Attendance System</div>
       </div>
     </div>
 
-    <!-- 1c: Time-Gated -->
+    <!-- Reward Config + HR Monitoring -->
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Time-Gated Attendance Viewing (11:30 AM – 1:30 PM)</div>
+        <div class="item-title">Reward Configuration & HR Monitoring Pages</div>
         <div class="item-desc">
-          To ensure the attendance kiosks do not interfere with production floor activity, a time-restriction feature has been added to the operator-facing interface. Operators can only access and view their attendance records between <strong>11:30 AM and 1:30 PM</strong> — aligned with canteen and lunch break hours.
+          A <strong>Reward Configuration Page</strong> has been implemented, allowing administrators to configure the program start date and manually trigger reward processing in case of system failures — ensuring continuity and preventing data loss.
           <br><br>
-          Outside these windows, the kiosk display is locked with an informational message. This preserves operational discipline, prevents unnecessary device usage during active production shifts, and ensures the system serves its intended purpose without becoming a distraction.
-        </div>
-        <span class="item-tag">Production Safety</span>
-      </div>
-      <div class="item-img">
-        <img src="15.jpeg" alt="Time Restriction Feature"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Time Gate Feature</div>
-      </div>
-    </div>
-
-    <!-- 1d: Loyalty Points -->
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Loyalty Points Program — HR Marketing Integration</div>
-        <div class="item-desc">
-          A strategic discussion was conducted with HR to formally link the Attendance Look-up System to a structured <strong>Loyalty Points and Attendance Award program</strong>. This initiative is designed to reward consistent attendance, create visible incentives for operators, and build a culture of recognition on the shop floor.
-          <br><br>
-          The program introduces a milestone-based reward structure — the longer the unbroken attendance streak, the greater the recognition and reward:
-        </div>
-        <table class="loyalty-table">
-          <thead>
-            <tr>
-              <th>Milestone</th>
-              <th>Points Earned</th>
-              <th>Cumulative</th>
-              <th>Reward</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1 Month</td><td><span class="pts-badge">100 pts</span></td><td>100</td><td>Certificate &amp; Recognition</td></tr>
-            <tr><td>3 Months</td><td><span class="pts-badge">+100 pts</span></td><td>200</td><td>Merchandise &amp; Certificate</td></tr>
-            <tr><td>6 Months</td><td><span class="pts-badge">+300 pts</span></td><td>500</td><td>₹1,100 Cash Reward</td></tr>
-            <tr><td>12 Months</td><td><span class="pts-badge">+400 pts</span></td><td>900</td><td>₹2,100 Cash + Medal + Mgmt Recommendation for On-Role</td></tr>
-          </tbody>
-        </table>
-        <div class="tv-request">
-          <strong>Additional Request:</strong> Install a TV screen in the canteen area to publicly display employee achievements, loyalty milestones, and recognition announcements — creating a culture of visible appreciation on the shop floor.
-        </div>
-      </div>
-      <div class="item-img" style="margin-top:6px;">
-        <img src="19.jpeg" alt="Loyalty Points Program"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Loyalty Program</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 2. IT Asset Management ── -->
-  <div class="section-card" style="animation-delay:0.1s">
-    <div class="section-title">IT Asset Management</div>
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">IT Asset Architecture Design — In Progress</div>
-        <div class="item-desc">
-          The foundational architecture for a centralized IT Asset Management system is being designed. This system will provide a structured framework to track, categorize, and manage all IT hardware and software assets across the entire facility from a single platform.
-          <br><br>
-          The design phase includes defining asset lifecycle stages (procurement → deployment → maintenance → retirement), ownership mapping per department, maintenance schedule integration, depreciation tracking, and data collection protocols for field agents. Once architecture is finalized, systematic data collection will begin across all defined asset zones next week. The goal is full visibility and control over the organization's IT estate to prevent loss, reduce downtime, and support budgeting decisions.
-        </div>
-        <span class="item-tag orange">Ongoing</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 3. Workforce Attendance Dashboard ── -->
-  <div class="section-card" style="animation-delay:0.15s">
-    <div class="section-title">Workforce Attendance Dashboard Enhancement</div>
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">TP-Link Network Monitoring + API vs. Production Data Comparison Module</div>
-        <div class="item-desc">
-          Two major capabilities have been added to the internal workforce attendance dashboard in this release, significantly enhancing its utility as a daily operational tool:
-          <br><br>
-          <strong>TP-Link Network Monitoring Integration</strong> — real-time device and network connectivity status is now visible directly within the dashboard. On-floor managers no longer need to switch between tools; network health across all attendance terminals and connected devices is monitored from a single pane of glass, with instant alerts if a device goes offline.
-          <br><br>
-          <strong>API vs. Production Data Comparison Module</strong> — a dedicated module cross-references attendance records fetched from the Presence360 API against the production-level data maintained by the HR team. This surfaces discrepancies instantly, highlights records that are present in one source but missing in another, and provides a clearer and more reliable view of ground-level attendance. The dashboard is now moving closer to being the single source of truth for daily workforce visibility.
+          An <strong>HR Monitoring Page</strong> has also been developed, enabling the HR team to track employee reward points and identify eligible operators for reward distribution.
         </div>
         <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="16.jpeg" alt="Dashboard Enhancement"
+        <img src="32.jpeg" alt="HR Monitoring Page"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Dashboard Update</div>
+        <div class="img-label">HR Monitoring</div>
+      </div>
+    </div>
+
+    <!-- Monitoring & Alerting + Marketing -->
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Monitoring & Alerting System + Marketing Coordination</div>
+        <div class="item-desc">
+          A <strong>Monitoring and Alerting System</strong> has been integrated to track application errors in real time, enabling immediate detection and faster issue resolution for system administrators.
+          <br><br>
+          Coordination with the Marketing Team has been initiated to ensure better information reach to the workforce regarding the upcoming Loyalty Points launch and attendance-related announcements.
+        </div>
+        <span class="item-tag">Live Monitoring</span>
       </div>
     </div>
   </div>
 
-  <!-- ── 4. SMT Feeder Automation ── -->
+  <!-- ── 3. ESP32 IoT Automation ── -->
+  <div class="section-card" style="animation-delay:0.15s">
+    <div class="section-title">Introduction of ESP32 for Low Cost Automation in OEL</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">DHT22 Sensor Integration — Real-Time Humidity & Temperature Sensing</div>
+        <div class="item-desc">
+          IoT integration is progressing with DHT22 sensors now integrated onto the ESP32. Currently working on connecting them to the MQTT server to display real-time temperature and humidity data on the dashboard. Humidity and temperature sensing has been successfully replicated, confirming the hardware setup is production-ready.
+          <br><br>
+          This marks the <strong>first step in digitalization at OEL for Production Floor Data</strong> — a foundational milestone toward a fully connected factory environment.
+        </div>
+        <span class="item-tag blue">First Milestone</span>
+      </div>
+    </div>
+
+    <!-- ESP32 images in 2x2 grid below text -->
+    <div class="iot-img-grid">
+      <div class="item-img">
+        <img src="24.jpeg" alt="ESP32 with DHT22 Sensor"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">ESP32 + DHT22 Setup</div>
+      </div>
+      <div class="item-img">
+        <img src="25.jpeg" alt="Temperature & Humidity Readings"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Live Sensor Readings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. FATP Line Dashboard ── -->
   <div class="section-card" style="animation-delay:0.2s">
-    <div class="section-title">SMT Feeder Automation Upgrade</div>
+    <div class="section-title">FATP Line Dashboard / KPI Command Grid Commencement</div>
+
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Automatic Alternate Part Code Mapping from BOM Files</div>
+        <div class="item-title">Data Scraping Initiated — One Line Proof of Concept</div>
         <div class="item-desc">
-          The feeder list automation tool — currently in active daily use by the SMT team — is being upgraded with a critical new capability.
+          Data scraping has commenced for building a Dashboard per FATP line. The strategy is to proceed with one line first as a Proof of Concept, leveraging digitalized data gathering from MES and ESP32.
           <br><br>
-          Currently, when a BOM contains alternate part codes, engineers must manually look up and substitute the correct feeder assignment before setup. This upgrade eliminates that step entirely: the tool will now <strong>intelligently detect and extract alternate part codes directly from BOM files</strong> during feeder list generation, resolving them automatically without engineer intervention.
-          <br><br>
-          This reduces the risk of feeder setup errors caused by part code mismatches, shortens line changeover preparation time, and removes a category of manual errors that previously required rework. The enhancement is currently under active development and is targeted for release in the next sprint, after which it will be rolled out to the SMT team for validation.
+          Coordination with the MES team has been completed to obtain database credentials and table structure details. Currently analyzing the database schema, understanding data flow, and testing database connectivity for dashboard integration.
         </div>
-        <span class="item-tag orange">In Development</span>
+        <span class="item-tag orange">In Progress</span>
       </div>
       <div class="item-img">
-        <img src="17.jpeg" alt="SMT Feeder Automation"
+        <img src="26.jpeg" alt="FATP Dashboard"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">BOM Automation</div>
+        <div class="img-label">FATP Line PoC</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 5. Presence360 Escalation ── -->
+  <!-- ── 5. Strategic Engineering Initiatives ── -->
   <div class="section-card" style="animation-delay:0.25s">
-    <div class="section-title">Presence360 Attendance Issue Escalation</div>
+    <div class="section-title">Strategic Engineering Initiatives</div>
+
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Punch Record Sync Failure — Formally Escalated to Support</div>
+        <div class="item-title">Vivo Failure Analysis Reports & Analytics</div>
         <div class="item-desc">
-          A critical data synchronisation failure has been identified on the Presence360 platform: employee punch records are not reaching the portal or the API, despite physical punches being successfully recorded at attendance devices on the factory floor — as confirmed by the HR team through manual log verification.
-          <br><br>
-          This behaviour points to a <strong>device-to-server synchronisation failure on Presence360's infrastructure</strong>, not at the device level. The physical devices are functioning correctly and recording punches locally. The failure occurs in the transmission layer between device and server.
-          <br><br>
-          Formal communication has been initiated with the Presence360 support team with full supporting documentation, including log evidence, affected device IDs, timestamps, and a detailed description of the issue. The matter has been officially escalated and is pending resolution from their side. The team will be kept informed as developments unfold and a workaround is being assessed internally in the interim.
+          Comprehensive failure analysis reports and analytics prepared for the Vivo product line to identify recurring defect patterns, root causes, and corrective action recommendations.
         </div>
-        <span class="item-tag red">Escalated</span>
+        <span class="item-tag">Analysis</span>
       </div>
       <div class="item-img">
-        <img src="18.jpeg" alt="Presence360 Issue"
+        <img src="27.jpeg" alt="Vivo Failure Analysis"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Presence360 Sync</div>
+        <div class="img-label">Vivo FA Analytics</div>
       </div>
     </div>
-  </div>
 
-  <!-- ── 6. Engineering Capability ── -->
-  <div class="section-card" style="animation-delay:0.3s">
-    <div class="section-title">Engineering Capability Improvement — Technical Deck Sharing</div>
-    <p style="font-size:13.5px; color:#3a6a6a; margin-bottom:20px; line-height:1.65;">
-      As part of a continuous effort to upskill the engineering and operations teams, the following technical knowledge decks have been curated and shared internally this week. Each deck is targeted at a specific capability gap identified on the floor, and is designed to be practical, actionable, and directly applicable to day-to-day work.
-    </p>
-    <div class="deck-grid">
-      <div class="deck-item">
-        <div class="item-img">
-          <img src="20.jpeg" alt="Manpower Optimization"
-               onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">20.jpeg</div>
-        </div>
-        <div class="item-title" style="font-size:13px;">Manpower Optimization Guidelines</div>
-        <div class="item-desc" style="font-size:12.5px;">Structured guidelines covering workforce planning principles, headcount benchmarking, line balancing, and output-per-operator analysis. Equips team leaders with a framework to identify and address manpower inefficiencies proactively.</div>
-      </div>
-      <div class="deck-item">
-        <div class="item-img">
-          <img src="21.jpeg" alt="Six Levers Playbook"
-               onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">21.jpeg</div>
-        </div>
-        <div class="item-title" style="font-size:13px;">Six Levers Playbook — Manpower Recovery</div>
-        <div class="item-desc" style="font-size:12.5px;">A tactical playbook defining six actionable levers to recover manpower efficiency during peak demand or resource constraints. Provides a structured decision tree for supervisors when output is at risk due to absenteeism or sudden demand spikes.</div>
-      </div>
-      <div class="deck-item">
-        <div class="item-img">
-          <img src="22.jpeg" alt="ECRS Framework"
-               onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">22.jpeg</div>
-        </div>
-        <div class="item-title" style="font-size:13px;">ECRS Framework — Process & Line Optimization</div>
-        <div class="item-desc" style="font-size:12.5px;"><strong>Eliminate, Combine, Rearrange, Simplify</strong> — a lean methodology deck for systematically identifying and resolving inefficiencies in process flows and assembly lines. Includes worked examples and a step-by-step application guide for line engineers.</div>
-      </div>
-      <div class="deck-item">
-        <div class="item-img">
-          <img src="23.jpeg" alt="MTBF MTTR Deck"
-               onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">23.jpeg</div>
-        </div>
-        <div class="item-title" style="font-size:13px;">MTBF &amp; MTTR Information Deck</div>
-        <div class="item-desc" style="font-size:12.5px;"><strong>Mean Time Between Failures</strong> and <strong>Mean Time To Repair</strong> — a knowledge deck for maintenance and engineering teams explaining equipment reliability metrics, how to calculate them, how to interpret trends, and how to use them to drive better preventive maintenance protocols.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 7. Customer Coordination ── -->
-  <div class="section-card" style="animation-delay:0.33s">
-    <div class="section-title">Customer Coordination — Model Line Implementation</div>
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Qubo Line (Third Floor) — Engagement Started</div>
+        <div class="item-title">Quectel Double Throughput Recommendation</div>
         <div class="item-desc">
-          Model line implementation has commenced for the Qubo product line on the third floor. Initial coordination meetings have been conducted with the customer team and relevant internal stakeholders. Ground-level assessment is currently underway to evaluate the current line layout, identify improvement opportunities, and define the implementation roadmap.
-          <br><br>
-          The engagement is in early stages and timelines will be firmed up as the assessment progresses. The objective is to establish a model line that can serve as a benchmark for efficiency, quality, and flow — both for internal improvement and as a demonstration of operational capability to the customer. Ongoing updates will be shared as the project develops.
+          A recommendation has been developed to double throughput on the Quectel line by identifying and addressing bottlenecks in the current production process, with supporting data and implementation steps.
         </div>
-        <span class="item-tag orange">Ongoing</span>
+        <span class="item-tag">Recommendation</span>
+      </div>
+      <div class="item-img">
+        <img src="28.jpeg" alt="Quectel Throughput"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Quectel Throughput</div>
       </div>
     </div>
-  </div>
 
-  <!-- ── PLAN FOR NEXT WEEK ── -->
-  <div class="next-week-card" style="animation-delay:0.37s">
-    <div class="section-title">Plan for Next Week</div>
-    <ul class="plan-list">
-      <li><span class="plan-num">1</span><span>Unit 1 assessment for Workforce Attendance Dashboard — evaluate readiness, device coverage, and performance before wider rollout.</span></li>
-      <li><span class="plan-num">2</span><span>Unit 1 evaluation for PRODPLAN focused on Material Planning — coordinate with Mr. Sanjeev on requirements, data sources, and scope definition.</span></li>
-      <li><span class="plan-num">3</span><span>Feeder Automation upgrade for SMT — continue development of alternate part code mapping feature and target release to the SMT team.</span></li>
-      <li><span class="plan-num">4</span><span>Loyalty Points integration on Manpower Attendance Look-up — begin technical implementation of the rewards framework and database layer.</span></li>
-      <li><span class="plan-num">5</span><span>Further data collection for IT Asset Management — begin systematic cataloguing of assets across defined zones following architecture sign-off.</span></li>
-      <li><span class="plan-num">6</span><span>PM Tracker follow-up — review progress status and update relevant stakeholders with action items.</span></li>
-      <li><span class="plan-num">7</span><span>Continuous Engineering Capability Improvement — identify and share the next set of targeted technical knowledge decks.</span></li>
-      <li><span class="plan-num">8</span><span>Model line continuation — advance next steps for Qubo line implementation on the third floor.</span></li>
-    </ul>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Quectel NTF Reduction Program Suggestion</div>
+        <div class="item-desc">
+          A structured NTF (No Trouble Found) Reduction Program has been suggested for the Quectel line, outlining key triggers, prevention mechanisms, and measurable targets for reducing NTF incidents.
+        </div>
+        <span class="item-tag">Program Design</span>
+      </div>
+      <div class="item-img">
+        <img src="29.jpeg" alt="Quectel NTF Reduction"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">NTF Reduction</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">TNA — Training Need Analysis for Engineering Capability Improvement</div>
+        <div class="item-desc">
+          A Training Need Analysis (TNA) initiative has been planned for the Engineering team to systematically identify skill gaps and define a targeted capability improvement roadmap, supporting long-term engineering excellence.
+        </div>
+        <span class="item-tag orange">Planned</span>
+      </div>
+      <div class="item-img">
+        <img src="30.jpeg" alt="TNA Engineering"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">TNA Program</div>
+      </div>
+    </div>
   </div>
 
 </div><!-- /main-report -->
 
 
 <!-- ══════════════════════════════════════════
-     ARCHIVE OVERLAY — visible only after logo click
+     ARCHIVE OVERLAY — Week 22 + Week 23
 ═══════════════════════════════════════════ -->
 <div id="archive-overlay">
   <div class="archive-inner">
@@ -965,13 +1037,223 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
-      <div class="week-btn" onclick="toggleWeek22()">
+      <div class="week-btn" onclick="toggleWeek('week23-content', this)">
+        <h2>Week 23</h2>
+        <small>June 2026</small>
+      </div>
+      <div class="week-btn" onclick="toggleWeek('week22-content', this)">
         <h2>Week 22</h2>
         <small>May 2026</small>
       </div>
     </div>
 
-    <!-- ── WEEK 22 FULL CONTENT ── -->
+    <!-- ══════════════════ WEEK 23 CONTENT ══════════════════ -->
+    <div id="week23-content">
+
+      <!-- W23 Section 1: Manpower Attendance Look-up System -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Attendance Look-up System</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Face-Based Login — 3 Tablets Deployed in Canteen Area</div>
+            <div class="w22-item-desc">
+              Facial recognition-based login is live in production. Three tablets have been installed in the canteen area, enabling operators to check their own attendance records using just their face. All three devices are under active monitoring for stability, uptime, and recognition accuracy.
+            </div>
+            <span class="w22-tag orange">Under Monitoring</span>
+          </div>
+          <div class="w22-img">
+            <img src="13.jpeg" alt="Tablet Deployment" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Canteen Deployment</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">HR Registration App for New Operators</div>
+            <div class="w22-item-desc">
+              A dedicated companion app enables HR to independently register new operators into the facial recognition system. Guides HR through multi-angle face capture, validates biometric data on the spot, and updates the operator database in real time — removing the IT team from onboarding.
+            </div>
+            <span class="w22-tag green">Completed</span>
+          </div>
+          <div class="w22-img">
+            <img src="14.jpeg" alt="HR Registration App" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HR Registration</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Time-Gated Attendance Viewing (11:30 AM – 1:30 PM)</div>
+            <div class="w22-item-desc">
+              Operators can only access attendance records between 11:30 AM and 1:30 PM — aligned with canteen and lunch break hours. Outside these windows the kiosk is locked, preserving operational discipline during active production shifts.
+            </div>
+            <span class="w22-tag">Production Safety</span>
+          </div>
+          <div class="w22-img">
+            <img src="15.jpeg" alt="Time Gate Feature" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Time Gate</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Loyalty Points Program — HR Marketing Integration</div>
+            <div class="w22-item-desc">
+              Strategic discussion held with HR to link the Attendance Look-up System to a structured Loyalty Points and Attendance Award program with a milestone-based reward structure.
+            </div>
+            <table class="w22-loyalty-table">
+              <thead>
+                <tr><th>Milestone</th><th>Points</th><th>Cumulative</th><th>Reward</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1 Month</td><td><span class="w22-pts">100 pts</span></td><td>100</td><td>Certificate &amp; Recognition</td></tr>
+                <tr><td>3 Months</td><td><span class="w22-pts">+100 pts</span></td><td>200</td><td>Merchandise &amp; Certificate</td></tr>
+                <tr><td>6 Months</td><td><span class="w22-pts">+300 pts</span></td><td>500</td><td>₹1,100 Cash Reward</td></tr>
+                <tr><td>12 Months</td><td><span class="w22-pts">+400 pts</span></td><td>900</td><td>₹2,100 Cash + Medal + Mgmt Recommendation</td></tr>
+              </tbody>
+            </table>
+            <div class="w22-tv-request">
+              <strong>Additional Request:</strong> Install a TV screen in the canteen area to publicly display employee achievements and loyalty milestones.
+            </div>
+          </div>
+          <div class="w22-img" style="margin-top:6px;">
+            <img src="19.jpeg" alt="Loyalty Program" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Loyalty Program</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 2: IT Asset Management -->
+      <div class="w22-section">
+        <div class="w22-title">IT Asset Management</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">IT Asset Architecture Design — In Progress</div>
+            <div class="w22-item-desc">
+              The foundational architecture for a centralized IT Asset Management system is being designed — covering asset lifecycle stages, ownership mapping, maintenance schedules, depreciation tracking, and field data collection protocols. Systematic data collection to begin after architecture sign-off.
+            </div>
+            <span class="w22-tag orange">Ongoing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 3: Workforce Attendance Dashboard -->
+      <div class="w22-section">
+        <div class="w22-title">Workforce Attendance Dashboard Enhancement</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">TP-Link Network Monitoring + API vs. Production Data Comparison Module</div>
+            <div class="w22-item-desc">
+              Two major capabilities added: real-time TP-Link network monitoring visible directly in the dashboard, and an API vs. Production Data Comparison Module that cross-references Presence360 records against HR data to surface discrepancies instantly.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="16.jpeg" alt="Dashboard Enhancement" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Dashboard Update</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 4: SMT Feeder Automation -->
+      <div class="w22-section">
+        <div class="w22-title">SMT Feeder Automation Upgrade</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Automatic Alternate Part Code Mapping from BOM Files</div>
+            <div class="w22-item-desc">
+              The feeder list automation tool is being upgraded to intelligently detect and extract alternate part codes directly from BOM files during feeder list generation — eliminating manual lookups, reducing setup errors, and shortening changeover preparation time.
+            </div>
+            <span class="w22-tag orange">In Development</span>
+          </div>
+          <div class="w22-img">
+            <img src="17.jpeg" alt="SMT Feeder Automation" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">BOM Automation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 5: Presence360 Escalation -->
+      <div class="w22-section">
+        <div class="w22-title">Presence360 Attendance Issue Escalation</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Punch Record Sync Failure — Formally Escalated to Support</div>
+            <div class="w22-item-desc">
+              Employee punch records are not reaching the portal or API despite physical punches being successfully recorded at attendance devices. Points to a device-to-server synchronisation failure on Presence360's infrastructure. Formally escalated with full supporting documentation; pending resolution.
+            </div>
+            <span class="w22-tag red">Escalated</span>
+          </div>
+          <div class="w22-img">
+            <img src="18.jpeg" alt="Presence360 Issue" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Presence360 Sync</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 6: Engineering Capability Decks -->
+      <div class="w22-section">
+        <div class="w22-title">Engineering Capability Improvement — Technical Deck Sharing</div>
+        <div class="w22-deck-grid">
+          <div class="w22-deck-item">
+            <div class="w22-img"><img src="20.jpeg" alt="Manpower Optimization" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">Manpower Optimization</div></div>
+            <div class="w22-item-title">Manpower Optimization Guidelines</div>
+            <div class="w22-item-desc" style="font-size:12px;">Workforce planning, headcount benchmarking, line balancing, and output-per-operator analysis.</div>
+          </div>
+          <div class="w22-deck-item">
+            <div class="w22-img"><img src="21.jpeg" alt="Six Levers Playbook" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">Six Levers Playbook</div></div>
+            <div class="w22-item-title">Six Levers — Manpower Recovery</div>
+            <div class="w22-item-desc" style="font-size:12px;">Six actionable levers to recover manpower efficiency during peak demand or resource constraints.</div>
+          </div>
+          <div class="w22-deck-item">
+            <div class="w22-img"><img src="22.jpeg" alt="ECRS Framework" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">ECRS Framework</div></div>
+            <div class="w22-item-title">ECRS — Process & Line Optimization</div>
+            <div class="w22-item-desc" style="font-size:12px;">Eliminate, Combine, Rearrange, Simplify — lean methodology for systematic process improvement.</div>
+          </div>
+          <div class="w22-deck-item">
+            <div class="w22-img"><img src="23.jpeg" alt="MTBF MTTR Deck" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">MTBF &amp; MTTR</div></div>
+            <div class="w22-item-title">MTBF &amp; MTTR Information Deck</div>
+            <div class="w22-item-desc" style="font-size:12px;">Equipment reliability metrics — calculation, interpretation, and preventive maintenance application.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Section 7: Customer Coordination -->
+      <div class="w22-section">
+        <div class="w22-title">Customer Coordination — Model Line Implementation</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Qubo Line (Third Floor) — Engagement Started</div>
+            <div class="w22-item-desc">
+              Model line implementation has commenced for the Qubo product line on the third floor. Initial coordination with the customer team is complete; ground-level assessment underway to evaluate current layout and define the implementation roadmap.
+            </div>
+            <span class="w22-tag orange">Ongoing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W23 Plan for Next Week -->
+      <div class="w22-section w22-next-week">
+        <div class="w22-title">Plan for Next Week (from Week 23)</div>
+        <ul class="w22-plan-list">
+          <li><span class="w22-plan-num">1</span><span>Unit 1 assessment for Workforce Attendance Dashboard.</span></li>
+          <li><span class="w22-plan-num">2</span><span>Unit 1 evaluation for PRODPLAN — Material Planning, coordinate with Mr. Sanjeev.</span></li>
+          <li><span class="w22-plan-num">3</span><span>Feeder Automation upgrade — alternate part code mapping, target SMT team release.</span></li>
+          <li><span class="w22-plan-num">4</span><span>Loyalty Points integration — begin technical implementation of rewards framework.</span></li>
+          <li><span class="w22-plan-num">5</span><span>Further data collection for IT Asset Management.</span></li>
+          <li><span class="w22-plan-num">6</span><span>PM Tracker follow-up and stakeholder update.</span></li>
+          <li><span class="w22-plan-num">7</span><span>Continuous Engineering Capability Improvement — next knowledge deck batch.</span></li>
+          <li><span class="w22-plan-num">8</span><span>Model line continuation — Qubo line next steps on third floor.</span></li>
+        </ul>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 23 · June 2026
+      </div>
+    </div><!-- /week23-content -->
+
+    <!-- ══════════════════ WEEK 22 CONTENT ══════════════════ -->
     <div id="week22-content">
 
       <!-- W22 Section 1: Enhanced Manpower Visibility Dashboard -->
@@ -981,13 +1263,12 @@
           <div class="w22-item-content">
             <div class="w22-item-title">Updated Dashboard — Improved UI, Date-Range Analysis & Attrition Tracking</div>
             <div class="w22-item-desc">
-              The Manpower Visibility Dashboard was significantly updated this week with a refreshed UI, improved date-range filtering, and new modules for absenteeism and attrition tracking. Managers now have clearer, more actionable insights into workforce health with color-coded indicators and trend lines — enabling proactive decision-making before headcount gaps impact production output.
+              The Manpower Visibility Dashboard was significantly updated with a refreshed UI, improved date-range filtering, and new modules for absenteeism and attrition tracking. Managers now have clearer, more actionable insights with color-coded indicators and trend lines.
             </div>
             <span class="w22-tag green">Deployed</span>
           </div>
           <div class="w22-img">
-            <img src="3.jpeg" alt="Manpower Visibility Dashboard"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="3.jpeg" alt="Manpower Visibility Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">3.jpeg</div>
           </div>
         </div>
@@ -998,28 +1279,26 @@
         <div class="w22-title">Workforce Attendance Look-up System</div>
         <div class="w22-update-item">
           <div class="w22-item-content">
-            <div class="w22-item-title">Face Recognition System — 100% Data Collection &amp; Validation Complete</div>
+            <div class="w22-item-title">Face Recognition System — 100% Data Collection & Validation Complete</div>
             <div class="w22-item-desc">
-              The Manpower Attendance Look-up System was significantly enhanced with a robust Face Recognition engine covering detection, matching, and Loyalty Point integration linked to the Attendance Award program. All data collection, validation, pre-processing, and performance optimization phases are at 100%. Kiosk deployment was scheduled for the first week of June at the canteen area.
+              The Manpower Attendance Look-up System was significantly enhanced with a robust Face Recognition engine covering detection, matching, and Loyalty Point integration. All data collection, validation, pre-processing, and performance optimization phases at 100%. Kiosk deployment scheduled for first week of June at the canteen area.
               <br><br>
-              Key features completed: fully dynamic admin panel (all parameters editable via UI), operator management console with search/edit/deactivate/re-enrol, kiosk management for remote configuration, and guided multi-angle face capture workflow for HR to onboard new operators independently.
+              Key features: fully dynamic admin panel, operator management console, kiosk management for remote configuration, and guided multi-angle face capture for HR.
             </div>
             <span class="w22-tag green">100% Ready</span>
           </div>
           <div class="w22-img">
-            <img src="11.jpeg" alt="Attendance Look-up System"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="11.jpeg" alt="Attendance Look-up System" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">11.jpeg</div>
           </div>
         </div>
         <div class="w22-update-item">
           <div class="w22-item-content">
-            <div class="w22-item-title">Additional Screens — Admin Console &amp; Kiosk Management</div>
-            <div class="w22-item-desc">Built dedicated admin and kiosk management screens for remote monitoring and configuration of deployed devices, reducing IT overhead for day-to-day system management.</div>
+            <div class="w22-item-title">Additional Screens — Admin Console & Kiosk Management</div>
+            <div class="w22-item-desc">Dedicated admin and kiosk management screens for remote monitoring and configuration of deployed devices.</div>
           </div>
           <div class="w22-img">
-            <img src="12.jpeg" alt="Admin Screens"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="12.jpeg" alt="Admin Screens" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">12.jpeg</div>
           </div>
         </div>
@@ -1032,13 +1311,12 @@
           <div class="w22-item-content">
             <div class="w22-item-title">New Dashboard — Planning Team, Color-Coded HC Status</div>
             <div class="w22-item-desc">
-              Built a new Headcount Present Dashboard for the Planning team providing project-wise present vs. required headcount visibility with color-coded status indicators: Green = On target, Blue = Short, Red = Excess. Enables quick identification of resourcing gaps across all active projects in real time.
+              Built a new Headcount Present Dashboard for the Planning team with project-wise present vs. required headcount and color-coded status: Green = On target, Blue = Short, Red = Excess.
             </div>
             <span class="w22-tag green">Deployed</span>
           </div>
           <div class="w22-img">
-            <img src="2.jpeg" alt="HC Present Dashboard"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="2.jpeg" alt="HC Present Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">2.jpeg</div>
           </div>
         </div>
@@ -1046,110 +1324,100 @@
 
       <!-- W22 Section 4: Production & HR Reconciliation Tool -->
       <div class="w22-section">
-        <div class="w22-title">Production &amp; HR Reconciliation Tool</div>
+        <div class="w22-title">Production & HR Reconciliation Tool</div>
         <div class="w22-update-item">
           <div class="w22-item-content">
-            <div class="w22-item-title">PyQt6 Desktop Tool — Duplicate Detection &amp; HR/GS Mismatch Analysis</div>
+            <div class="w22-item-title">PyQt6 Desktop Tool — Duplicate Detection & HR/GS Mismatch Analysis</div>
             <div class="w22-item-desc">
-              Delivered a PyQt6 desktop application serving both the Production team (duplicate and discrepancy tracking in attendance records) and the HR team (GS vs. HR data comparison and mismatch analysis). Both teams can now quickly identify and resolve data inconsistencies without manual spreadsheet comparison, reducing reconciliation effort from hours to minutes.
+              Delivered a PyQt6 desktop application for the Production team (duplicate and discrepancy tracking) and the HR team (GS vs. HR data comparison). Reduces reconciliation effort from hours to minutes.
             </div>
             <span class="w22-tag green">Delivered</span>
           </div>
           <div class="w22-img">
-            <img src="1.jpeg" alt="Reconciliation Tool"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="1.jpeg" alt="Reconciliation Tool" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">1.jpeg</div>
           </div>
         </div>
       </div>
 
-      <!-- W22 Section 5: In-house Repair & Maintenance -->
+      <!-- W22 Section 5: In-house Repair -->
       <div class="w22-section">
-        <div class="w22-title">In-house Repair &amp; Maintenance — Reliability Lab Assets</div>
+        <div class="w22-title">In-house Repair & Maintenance — Reliability Lab Assets</div>
         <div class="w22-update-item">
           <div class="w22-item-content">
             <div class="w22-item-title">4 Projects Completed — ₹8 Lakhs Savings Achieved</div>
             <div class="w22-item-desc">
-              Four in-house repair and maintenance projects have been completed for Reliability Lab assets, generating cumulative savings of approximately ₹8 Lakhs by eliminating external vendor dependency. This initiative is ongoing, with a focus on building team capability, reducing maintenance costs, and improving lab uptime. The strategy supports supplier independence and long-term sustainability of lab operations.
+              Four in-house repair and maintenance projects completed for Reliability Lab assets, generating cumulative savings of approximately ₹8 Lakhs by eliminating external vendor dependency.
             </div>
             <span class="w22-tag green">Savings: ₹8 Lakhs</span>
           </div>
           <div class="w22-img">
-            <img src="4.jpeg" alt="Reliability Lab Repair"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="4.jpeg" alt="Reliability Lab Repair" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">4.jpeg</div>
           </div>
         </div>
       </div>
 
-      <!-- W22 Section 6: HROne KPI Integration Deferral -->
+      <!-- W22 Section 6: HROne KPI Deferral -->
       <div class="w22-section">
         <div class="w22-title">Deferral of HROne KPI Integration — Strategic Pivot</div>
         <div class="w22-update-item">
           <div class="w22-item-content">
-            <div class="w22-item-title">Pivot to Culture Change &amp; Company Health KPIs Automation</div>
+            <div class="w22-item-title">Pivot to Culture Change & Company Health KPIs Automation</div>
             <div class="w22-item-desc">
-              The HROne KPI integration has been strategically deferred in favour of focusing resources on Culture Change and Company Health KPIs automation. This shift prioritizes metrics that directly reflect employee engagement and organizational wellness — providing more practical and impactful insights for leadership decision-making rather than transactional HR data integration.
+              HROne KPI integration deferred in favour of Culture Change and Company Health KPIs automation, prioritizing metrics that directly reflect employee engagement and organizational wellness.
             </div>
             <span class="w22-tag orange">Strategic Pivot</span>
           </div>
           <div class="w22-img">
-            <img src="5.jpeg" alt="KPI Strategic Shift"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="5.jpeg" alt="KPI Strategic Shift" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">5.jpeg</div>
           </div>
         </div>
-        <div class="w22-multi-img">
+        <div class="w22-2col-img">
           <div class="w22-img">
-            <img src="6.jpeg" alt="KPI View 2"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="6.jpeg" alt="KPI View 2" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">6.jpeg</div>
           </div>
           <div class="w22-img">
-            <img src="7.jpeg" alt="KPI View 3"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="7.jpeg" alt="KPI View 3" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">7.jpeg</div>
           </div>
         </div>
       </div>
 
-      <!-- W22 Section 7: Rewards & Recognition -->
+      <!-- W22 Section 7: R&R -->
       <div class="w22-section">
-        <div class="w22-title">Suggestion for Rewards &amp; Recognition Program</div>
+        <div class="w22-title">Suggestion for Rewards & Recognition Program</div>
         <div class="w22-update-item">
           <div class="w22-item-content">
-            <div class="w22-item-title">Comprehensive R&amp;R Framework Proposed — 2-Tier Structure with 7-Day Implementation Timeline</div>
+            <div class="w22-item-title">Comprehensive R&R Framework Proposed — 2-Tier Structure with 7-Day Timeline</div>
             <div class="w22-item-desc">
-              A comprehensive Rewards and Recognition framework was proposed to boost employee motivation, attendance, and engagement across the organization. The detailed suggestion covers program overview, business case, benefits, a two-tier recognition structure (individual + team), and a practical 7-day implementation timeline to enable rapid rollout.
+              A comprehensive Rewards and Recognition framework was proposed covering program overview, business case, a two-tier recognition structure (individual + team), and a 7-day implementation timeline.
             </div>
             <span class="w22-tag">Proposed</span>
           </div>
           <div class="w22-img">
-            <img src="8.jpeg" alt="R&R Framework"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="8.jpeg" alt="R&R Framework" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">8.jpeg</div>
           </div>
         </div>
-        <div class="w22-multi-img">
+        <div class="w22-2col-img">
           <div class="w22-img">
-            <img src="9.jpeg" alt="R&R Framework 2"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="9.jpeg" alt="R&R Framework 2" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">9.jpeg</div>
           </div>
           <div class="w22-img">
-            <img src="10.jpeg" alt="R&R Framework 3"
-                 onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <img src="10.jpeg" alt="R&R Framework 3" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
             <div class="img-label">10.jpeg</div>
           </div>
         </div>
       </div>
 
-      <!-- W22 Footer -->
       <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
         All major Week 22 deliverables are live or scheduled for early June rollout.<br>
         Prepared by OPEX Team · May 2026
       </div>
-
     </div><!-- /week22-content -->
 
     <br>
@@ -1223,22 +1491,25 @@
   #lightbox-close:hover { background: rgba(0,0,0,0.8); }
   @keyframes lbFadeIn  { from { opacity:0; } to { opacity:1; } }
   @keyframes lbZoomIn  { from { opacity:0; transform:scale(0.82); } to { opacity:1; transform:scale(1); } }
-  /* Cursor hint on all tappable images */
   .item-img img, .w22-img img, .deck-item img, .w22-deck-item img { cursor: zoom-in; }
 </style>
 
 <script>
   function openArchive() {
     document.getElementById('archive-overlay').classList.add('visible');
-    document.getElementById('week22-content').classList.remove('visible');
     document.body.style.overflow = 'hidden';
   }
   function closeArchive() {
     document.getElementById('archive-overlay').classList.remove('visible');
     document.body.style.overflow = '';
   }
-  function toggleWeek22() {
-    document.getElementById('week22-content').classList.toggle('visible');
+  function toggleWeek(id, btn) {
+    // Close the other one
+    var ids = ['week22-content', 'week23-content'];
+    ids.forEach(function(wid) {
+      if (wid !== id) document.getElementById(wid).classList.remove('visible');
+    });
+    document.getElementById(id).classList.toggle('visible');
   }
 
   function openLightbox(src, alt) {
