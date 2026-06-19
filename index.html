@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPEX Weekly Update — Week 24</title>
+<title>OPEX Weekly Update — Week 25</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -687,25 +687,44 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     MAIN REPORT — WEEK 24
+     MAIN REPORT — WEEK 25
 ═══════════════════════════════════════════ -->
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 24 · June 2026 · Current</div>
+    <div class="week-badge">Week 25 · June 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Workforce Attendance Dashboard Enhancement ── -->
+  <!-- ── 1. KPI Grid / Dashboard Update ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Workforce Attendance Dashboard Enhancement</div>
+    <div class="section-title">KPI Grid / Dashboard Update</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">HROne API Discrepancy Resolution — Senior Team Coordination</div>
+        <div class="item-title">Application Architecture Mapped — Codebase, Schema & Query Logic</div>
         <div class="item-desc">
-          Coordinated with the senior team at HROne regarding API discrepancies identified in the attendance data pipeline. In-depth discussions were held to align on the root causes and implement the necessary changes for improved data accuracy and reliability. Action items have been defined and are being tracked for resolution.
+          Carried out a full architectural review of the FATP dashboard application — going through the codebase module by module, mapping the business logic layer, and documenting the underlying database schema along with table relationships and foreign-key dependencies. Each query used across the reporting layer was traced back to its source table and cross-checked against the fields actually consumed on the frontend.
+          <br><br>
+          This groundwork is meant to close the knowledge gap before the next phase of development — anyone picking up the codebase going forward should be able to follow the data flow from raw MES tables through to the dashboard views without having to reverse-engineer it from scratch. The documentation also surfaced a few redundant joins and a couple of tables that were being queried but never actually rendered, which will be cleaned up in the next pass.
+        </div>
+        <span class="item-tag green">Documented</span>
+      </div>
+      <div class="item-img">
+        <img src="41.jpeg" alt="Application Architecture Documentation"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Architecture Mapping</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">MES Database Connectivity Validated — Queries Optimized & Rewritten</div>
+        <div class="item-desc">
+          Tested the MES database connection end to end and reviewed the integration requirements against what the dashboard actually needs to pull. A number of the original queries were rewritten — some were doing unnecessary full table scans where an indexed lookup would do, and a few joins were restructured to avoid pulling more rows than the aggregation step actually needed.
+          <br><br>
+          Net result is lower query execution time and a connection layer that's been validated under repeated test runs rather than just a single successful connect. Integration requirements between the MES schema and the dashboard's data model have also been documented so future schema changes on the MES side can be flagged early.
         </div>
         <span class="item-tag orange">In Progress</span>
       </div>
@@ -713,241 +732,121 @@
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Manpower Visibility Dashboard — UI Refinements & Mismatch Alerts</div>
+        <div class="item-title">Code-Level Debugging & Impact Analysis</div>
         <div class="item-desc">
-          Further enhancements have been delivered to the Manpower Visibility Dashboard. This release includes a refined UI for better usability, improved trend visibility for absenteeism and attrition patterns, and stronger mismatch alert logic to surface headcount discrepancies more prominently to managers.
+          Went through code-level debugging and dependency tracing to identify where individual modules touch shared logic — particularly around the data transformation layer, where a change in one query could silently affect three or four downstream views. Impact analysis was done before pushing any fix, so each change could be verified against the modules it actually touches rather than assuming isolation.
           <br><br>
-          Additionally, the IoT integration workstream is progressing in parallel — DHT22 sensors have been integrated and are currently being connected to the MQTT server to display real-time temperature and humidity data directly on the dashboard, marking the first step toward live environmental data on the production floor.
+          This has helped catch a couple of issues early, including a stale cache reference and a mismatched data type between two tables that was causing silent truncation on one of the numeric fields.
         </div>
-        <span class="item-tag green">Deployed</span>
-
-        <!-- IoT inline illustration -->
-        <div style="margin-top:18px; border-radius:12px; overflow:hidden; border:2px solid #d4eeee; background:#060f1f;">
-          <svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
-            <title>ESP32 IoT setup — DHT22 sensor to MQTT to OEL dashboard</title>
-            <desc>Illustration showing an ESP32 microcontroller connected to a DHT22 temperature and humidity sensor, transmitting readings via WiFi to an MQTT broker and appearing live on the OEL factory floor dashboard</desc>
-            <defs>
-              <marker id="iot-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </marker>
-            </defs>
-            <!-- DHT22 SENSOR -->
-            <g transform="translate(32,72)">
-              <rect x="0" y="0" width="72" height="110" rx="5" fill="#1D9E75" stroke="#0F6E56" stroke-width="1"/>
-              <rect x="6" y="6" width="60" height="64" rx="3" fill="#085041"/>
-              <ellipse cx="22" cy="32" rx="7" ry="9" fill="#5DCAA5"/>
-              <path d="M22 20 Q28 28 22 38 Q16 28 22 20Z" fill="#9FE1CB" fill-opacity="0.5"/>
-              <rect x="37" y="22" width="8" height="20" rx="4" fill="#5DCAA5"/>
-              <circle cx="41" cy="44" r="6" fill="#9FE1CB"/>
-              <text x="36" y="80" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#9FE1CB">28.4°C</text>
-              <text x="36" y="93" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#9FE1CB">62.1%</text>
-              <rect x="12" y="110" width="5" height="14" rx="1" fill="#888780"/>
-              <rect x="23" y="110" width="5" height="14" rx="1" fill="#888780"/>
-              <rect x="34" y="110" width="5" height="14" rx="1" fill="#888780"/>
-              <rect x="45" y="110" width="5" height="14" rx="1" fill="#888780"/>
-              <rect x="56" y="110" width="5" height="14" rx="1" fill="#888780"/>
-              <text x="36" y="106" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#E1F5EE">DHT22</text>
-            </g>
-            <text x="68" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">Sensor</text>
-            <!-- wire -->
-            <line x1="104" y1="147" x2="142" y2="147" stroke="#B4B2A9" stroke-width="2.5" stroke-dasharray="4 2"/>
-            <!-- ESP32 BOARD -->
-            <g transform="translate(142,100)">
-              <rect x="0" y="0" width="110" height="96" rx="4" fill="#0C447C" stroke="#185FA5" stroke-width="1"/>
-              <rect x="28" y="16" width="54" height="46" rx="3" fill="#042C53" stroke="#378ADD" stroke-width="0.8"/>
-              <text x="55" y="35" text-anchor="middle" font-family="monospace" font-size="9" font-weight="700" fill="#85B7EB">ESP32</text>
-              <text x="55" y="48" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">240MHz</text>
-              <text x="55" y="58" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">WiFi+BT</text>
-              <circle cx="88" cy="10" r="5" fill="#1D9E75"/>
-              <circle cx="88" cy="10" r="3" fill="#9FE1CB"/>
-              <path d="M90 4 Q96 0 96 6 Q96 12 102 8" fill="none" stroke="#B5D4F4" stroke-width="1.5"/>
-              <line x1="0" y1="20" x2="-7" y2="20" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="0" y1="30" x2="-7" y2="30" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="0" y1="40" x2="-7" y2="40" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="0" y1="50" x2="-7" y2="50" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="0" y1="60" x2="-7" y2="60" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="0" y1="70" x2="-7" y2="70" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="20" x2="117" y2="20" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="30" x2="117" y2="30" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="40" x2="117" y2="40" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="50" x2="117" y2="50" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="60" x2="117" y2="60" stroke="#D3D1C7" stroke-width="1.5"/>
-              <line x1="110" y1="70" x2="117" y2="70" stroke="#D3D1C7" stroke-width="1.5"/>
-              <rect x="38" y="92" width="34" height="8" rx="2" fill="#2C2C2A"/>
-              <rect x="42" y="94" width="26" height="4" rx="1" fill="#888780"/>
-            </g>
-            <text x="197" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#378ADD">ESP32 MCU</text>
-            <!-- WiFi arcs -->
-            <g transform="translate(288,136)">
-              <path d="M-28 14 Q0 -12 28 14" fill="none" stroke="#EF9F27" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-              <path d="M-18 8 Q0 -6 18 8" fill="none" stroke="#EF9F27" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
-              <path d="M-8 3 Q0 -1 8 3" fill="none" stroke="#EF9F27" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
-              <circle cx="0" cy="18" r="3" fill="#EF9F27"/>
-            </g>
-            <text x="288" y="182" text-anchor="middle" font-family="monospace" font-size="9" fill="#BA7517">MQTT</text>
-            <text x="288" y="193" text-anchor="middle" font-family="monospace" font-size="9" fill="#BA7517">WiFi</text>
-            <!-- arrows: ESP32 → WiFi → Laptop -->
-            <line x1="259" y1="148" x2="269" y2="148" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#iot-arr)"/>
-            <line x1="308" y1="148" x2="320" y2="148" stroke="#EF9F27" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#iot-arr)"/>
-            <!-- LAPTOP -->
-            <g transform="translate(322,42)">
-              <rect x="0" y="0" width="268" height="172" rx="8" fill="#2C2C2A" stroke="#444441" stroke-width="1.5"/>
-              <rect x="8" y="8" width="252" height="156" rx="4" fill="#060f1f"/>
-              <!-- topbar -->
-              <rect x="8" y="8" width="252" height="22" rx="4" fill="#0d1f3a"/>
-              <text x="20" y="23" font-family="monospace" font-size="8" font-weight="700" fill="#85B7EB">⬡ OEL Dashboard  —  MQTT Live Feed</text>
-              <circle cx="248" cy="19" r="3" fill="#1D9E75"/>
-              <!-- temp card -->
-              <rect x="14" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#185FA5" stroke-width="0.8"/>
-              <text x="51" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">TEMPERATURE</text>
-              <text x="51" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#85B7EB">28.4</text>
-              <text x="51" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#378ADD">°C</text>
-              <!-- humidity card -->
-              <rect x="94" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#0F6E56" stroke-width="0.8"/>
-              <text x="131" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#1D9E75">HUMIDITY</text>
-              <text x="131" y="70" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#5DCAA5">62.1</text>
-              <text x="131" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#1D9E75">%RH</text>
-              <!-- status card -->
-              <rect x="174" y="36" width="74" height="56" rx="3" fill="#0d1f3a" stroke="#3B6D11" stroke-width="0.8"/>
-              <text x="211" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#639922">STATUS</text>
-              <circle cx="211" cy="64" r="7" fill="#1D9E75"/>
-              <text x="211" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#639922">CONNECTED</text>
-              <!-- sparkline -->
-              <rect x="14" y="100" width="234" height="50" rx="3" fill="#060f1f" stroke="#185FA5" stroke-width="0.5"/>
-              <text x="22" y="112" font-family="monospace" font-size="7" fill="#378ADD">Temperature — live readings (°C)</text>
-              <polyline points="22,142 44,136 66,139 88,132 110,137 132,130 154,133 176,128 198,131 220,126 240,129" fill="none" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="240" cy="129" r="3" fill="#85B7EB"/>
-              <!-- status bar -->
-              <text x="16" y="160" font-family="monospace" font-size="6.5" fill="#444441">Last update: 09:42:31  |  Broker: 192.168.1.100:1883  |  Topic: oel/floor/env</text>
-              <circle cx="134" cy="4" r="2.5" fill="#444441"/>
-            </g>
-            <!-- laptop base -->
-            <rect x="322" y="214" width="268" height="10" rx="2" fill="#444441"/>
-            <rect x="305" y="224" width="302" height="6" rx="3" fill="#2C2C2A"/>
-            <text x="456" y="215" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">OEL live dashboard</text>
-            <!-- bottom labels -->
-            <text x="68" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">DHT22 sensor</text>
-            <text x="197" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#378ADD">ESP32 MCU</text>
-            <text x="288" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#BA7517">WiFi / MQTT</text>
-            <text x="456" y="255" text-anchor="middle" font-family="monospace" font-size="10" fill="#5DCAA5">OEL dashboard</text>
-          </svg>
-          <div style="background:#0a1628; padding:6px 14px; font-family:monospace; font-size:10px; color:#378ADD; border-top:1px solid #185FA5;">
-            oel/floor/env &nbsp;|&nbsp; T: 28.4°C &nbsp;|&nbsp; RH: 62.1% &nbsp;|&nbsp; MQTT broker: 192.168.1.100:1883 &nbsp;|&nbsp; <span style="color:#1D9E75">● LIVE</span>
-          </div>
-        </div>
-
-      </div>
-      <div class="item-img">
-        <img src="16.jpeg" alt="Manpower Visibility Dashboard"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Dashboard Enhancement</div>
+        <span class="item-tag">Troubleshooting</span>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Manpower Attendance Look-up System Updates ── -->
+  <!-- ── 2. Attendance Look-up System ── -->
   <div class="section-card" style="animation-delay:0.1s">
-    <div class="section-title">Manpower Attendance Look-up System Updates</div>
+    <div class="section-title">Attendance Look-up System</div>
 
-    <!-- Loyalty Points + DB Migration -->
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Loyalty Points Module Integrated — Launch Planned July Onwards</div>
+        <div class="item-title">HR-Focused Enhancements — Bulk Registration, Filtering & Export</div>
         <div class="item-desc">
-          The Attendance System has been completed and the Loyalty Points module has been successfully integrated. The Loyalty Points program is planned for launch from July onwards, rewarding operators with milestone-based points for consistent attendance.
+          Added a set of HR-focused features to the Attendance Look-up System this week. Bulk face registration now lets HR onboard a batch of operators in one session instead of registering each one individually through the guided capture flow — useful for new-joiner intake days where a dozen or more operators show up at once.
           <br><br>
-          The database has been migrated from SQLite3 to MySQL to improve scalability, reliability, and overall system performance — ensuring the system can handle growing operator data and concurrent access demands.
-        </div>
-        <span class="item-tag green">Completed</span>
-      </div>
-      <div class="item-img">
-        <img src="31.jpeg" alt="Attendance System"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Attendance System</div>
-      </div>
-    </div>
-
-    <!-- Reward Config + HR Monitoring -->
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Reward Configuration & HR Monitoring Pages</div>
-        <div class="item-desc">
-          A <strong>Reward Configuration Page</strong> has been implemented, allowing administrators to configure the program start date and manually trigger reward processing in case of system failures — ensuring continuity and preventing data loss.
-          <br><br>
-          An <strong>HR Monitoring Page</strong> has also been developed, enabling the HR team to track employee reward points and identify eligible operators for reward distribution.
+          Face data filtering has also been added on the admin side, so HR can narrow down records by department, registration date, or active/inactive status instead of scrolling through the full operator list. On top of that, export and download functionality has been built in for active user records and registration tracking — HR can now pull a CSV export directly from the panel for audit or reporting purposes without going through IT.
         </div>
         <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="32.jpeg" alt="HR Monitoring Page"
+        <img src="37.jpeg" alt="Attendance Look-up System Enhancements"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HR Monitoring</div>
+        <div class="img-label">HR Enhancements</div>
       </div>
     </div>
 
-    <!-- Monitoring & Alerting + Marketing -->
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Monitoring & Alerting System + Marketing Coordination</div>
+        <div class="item-title">Response Time Cut from ~5s to ~2s — Backup & Monitoring Established</div>
         <div class="item-desc">
-          A <strong>Monitoring and Alerting System</strong> has been integrated to track application errors in real time, enabling immediate detection and faster issue resolution for system administrators.
+          Spent time on overall performance tuning for the system, bringing average response time down from roughly 5 seconds to about 2 seconds. Most of the gain came from trimming redundant database round-trips on the lookup endpoint and adding indexes on the fields used most often in the filter queries.
           <br><br>
-          Coordination with the Marketing Team has been initiated to ensure better information reach to the workforce regarding the upcoming Loyalty Points launch and attendance-related announcements.
+          Alongside that, database backup, monitoring, and maintenance procedures have been put in place — scheduled backups are now running, and basic health checks are in place to catch issues before they affect uptime. This should protect data integrity going forward and give a recovery path if something does go wrong.
         </div>
-        <span class="item-tag">Live Monitoring</span>
+        <span class="item-tag green">Optimized</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Workforce Announcement — Attendance Look-up System Rollout</div>
+        <div class="item-desc">
+          With the system stable and performing well, an announcement was made to operators and the wider workforce introducing the Attendance Look-up System and how to use it. This is meant to drive adoption on the floor now that the core functionality and HR tooling around it are in a solid state.
+        </div>
+        <span class="item-tag blue">Announced</span>
       </div>
     </div>
   </div>
 
-  <!-- ── 3. ESP32 IoT Automation ── -->
+  <!-- ── 3. ESP32 Project for Temperature and Humidity Sensing ── -->
   <div class="section-card" style="animation-delay:0.15s">
-    <div class="section-title">Introduction of ESP32 for Low Cost Automation in OEL</div>
+    <div class="section-title">ESP32 Project for Temperature and Humidity Sensing</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">DHT22 Sensor Integration — Real-Time Humidity & Temperature Sensing</div>
+        <div class="item-title">End-to-End Pipeline Completed</div>
         <div class="item-desc">
-          IoT integration is progressing with DHT22 sensors now integrated onto the ESP32. Currently working on connecting them to the MQTT server to display real-time temperature and humidity data on the dashboard. Humidity and temperature sensing has been successfully replicated, confirming the hardware setup is production-ready.
+          The full sensing pipeline is now complete and running: <strong>ESP32 → DHT22 → Arduino → HiveMQ → MongoDB → Dashboard.</strong> The ESP32 reads temperature and humidity off the DHT22 over a single-wire digital interface, the Arduino layer handles the serial bridging and packages each reading into a payload, and that payload is published to a HiveMQ broker over MQTT. From there, a subscriber service picks up the message and writes it into MongoDB as a time-stamped document, which the dashboard then queries for display.
           <br><br>
-          This marks the <strong>first step in digitalization at OEL for Production Floor Data</strong> — a foundational milestone toward a fully connected factory environment.
+          Getting this chain stable took a few iterations — the original setup had occasional packet drops on the MQTT publish step under bad WiFi conditions, so a basic retry/QoS adjustment was added on the publish side, and the Mongo writes were moved to a small buffered queue to avoid losing readings if the connection dropped for a few seconds.
         </div>
-        <span class="item-tag blue">First Milestone</span>
-      </div>
-    </div>
-
-    <!-- ESP32 images in 2x2 grid below text -->
-    <div class="iot-img-grid">
-      <div class="item-img">
-        <img src="24.jpeg" alt="ESP32 with DHT22 Sensor"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">ESP32 + DHT22 Setup</div>
+        <span class="item-tag green">Pipeline Live</span>
       </div>
       <div class="item-img">
-        <img src="25.jpeg" alt="Temperature & Humidity Readings"
+        <img src="39.jpeg" alt="ESP32 to Dashboard Pipeline"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Live Sensor Readings</div>
+        <div class="img-label">Sensor-to-Dashboard Pipeline</div>
       </div>
     </div>
-  </div>
-
-  <!-- ── 4. FATP Line Dashboard ── -->
-  <div class="section-card" style="animation-delay:0.2s">
-    <div class="section-title">FATP Line Dashboard / KPI Command Grid Commencement</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Data Scraping Initiated — One Line Proof of Concept</div>
+        <div class="item-title">Dashboard Build — Temperature & Humidity Visualization</div>
         <div class="item-desc">
-          Data scraping has commenced for building a Dashboard per FATP line. The strategy is to proceed with one line first as a Proof of Concept, leveraging digitalized data gathering from MES and ESP32.
-          <br><br>
-          Coordination with the MES team has been completed to obtain database credentials and table structure details. Currently analyzing the database schema, understanding data flow, and testing database connectivity for dashboard integration.
+          Work is underway on the dashboard front end to visualize the temperature and humidity stream coming out of MongoDB. The plan is a live-updating view with current readings up top and a rolling trend line underneath, pulling fresh documents from the database on a short polling interval until a websocket layer is added on top of the MQTT feed for true real-time push.
         </div>
         <span class="item-tag orange">In Progress</span>
       </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Planned Features — Alert Thresholds & Historical Calendar View</div>
+        <div class="item-desc">
+          Two features are planned for the next iteration of the dashboard. The first is configurable alert threshold messages — setting upper and lower bounds for temperature and humidity so the system can flag a reading that falls outside the safe operating range for the floor. The second is a calendar-based lookup, letting anyone pull up the recorded sensor data for any specific date stored in MongoDB, rather than only seeing the live feed.
+        </div>
+        <span class="item-tag">Planned</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. Feeder List Generator ── -->
+  <div class="section-card" style="animation-delay:0.2s">
+    <div class="section-title">Feeder List Generator</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">FeedSync Amended — QPS & Alternate Partcode Handling</div>
+        <div class="item-desc">
+          FeedSync has been amended to align with new requirements around QPS and alternate partcode handling. Previously, a change in alternate partcode consumption would trigger generation of a fresh feeder list file each time, which meant the SMT team was dealing with multiple file versions for what was effectively the same setup with a substituted part code.
+          <br><br>
+          The logic has been reworked so that alternate partcode consumption is handled within a single feeder list generation pass instead of forcing a new file, cutting down on the duplicate-file problem and making it clearer which file is the current source of truth during line changeover.
+        </div>
+        <span class="item-tag green">Amended</span>
+      </div>
       <div class="item-img">
-        <img src="26.jpeg" alt="FATP Dashboard"
+        <img src="40.jpeg" alt="FeedSync QPS Update"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">FATP Line PoC</div>
+        <div class="img-label">FeedSync Update</div>
       </div>
     </div>
   </div>
@@ -958,61 +857,61 @@
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Vivo Failure Analysis Reports & Analytics</div>
+        <div class="item-title">1. Opportunity for Improvement in IQC</div>
         <div class="item-desc">
-          Comprehensive failure analysis reports and analytics prepared for the Vivo product line to identify recurring defect patterns, root causes, and corrective action recommendations.
+          Looked at the current Material Receiving to IQC flow and found that the cycle is taking around 7 days end to end with the existing AI + smartphone-based inspection step in the loop. With an OPEX initiative around this, paired with further AI/automation work, the target is to bring down the overall Dock-to-Stock cycle time — reducing the gap between material physically arriving at the dock and it being available as usable stock.
         </div>
-        <span class="item-tag">Analysis</span>
+        <span class="item-tag orange">Improvement Opportunity</span>
       </div>
       <div class="item-img">
-        <img src="27.jpeg" alt="Vivo Failure Analysis"
+        <img src="33.jpeg" alt="IQC Improvement Opportunity"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Vivo FA Analytics</div>
+        <div class="img-label">IQC Cycle Time</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Quectel Double Throughput Recommendation</div>
+        <div class="item-title">2. Vivo Report Improvement Shared with PM for Team Reference</div>
         <div class="item-desc">
-          A recommendation has been developed to double throughput on the Quectel line by identifying and addressing bottlenecks in the current production process, with supporting data and implementation steps.
+          Shared a quick guideline with the team outlining the gap between the current OEL analysis reports and what the customer actually expects to see in them. This was passed on to the PM as a reference point, so the next round of failure analysis reports for Vivo can be brought closer in line with the format and depth of detail the customer is looking for.
         </div>
-        <span class="item-tag">Recommendation</span>
+        <span class="item-tag">Shared</span>
       </div>
       <div class="item-img">
-        <img src="28.jpeg" alt="Quectel Throughput"
+        <img src="34.jpeg" alt="Vivo Report Improvement"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Quectel Throughput</div>
+        <div class="img-label">Vivo Report Guideline</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Quectel NTF Reduction Program Suggestion</div>
+        <div class="item-title">3. AI + RF Shield Box Correlation Support to ODM</div>
         <div class="item-desc">
-          A structured NTF (No Trouble Found) Reduction Program has been suggested for the Quectel line, outlining key triggers, prevention mechanisms, and measurable targets for reducing NTF incidents.
+          Provided correlation support to the ODM on an RF setup issue tied to the shielding box, working through where the readings inside the shield box were diverging from the expected RF baseline. The intent is to use this correlation data, combined with AI-assisted pattern checks, to narrow down whether the variance is coming from the shield box itself or from the RF test setup around it.
         </div>
-        <span class="item-tag">Program Design</span>
+        <span class="item-tag">ODM Support</span>
       </div>
       <div class="item-img">
-        <img src="29.jpeg" alt="Quectel NTF Reduction"
+        <img src="35.jpeg" alt="RF Shield Box Correlation"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">NTF Reduction</div>
+        <div class="img-label">RF Shield Box Correlation</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">TNA — Training Need Analysis for Engineering Capability Improvement</div>
+        <div class="item-title">4. Commencement of AI Initiative Projects Across All Departments in OEL</div>
         <div class="item-desc">
-          A Training Need Analysis (TNA) initiative has been planned for the Engineering team to systematically identify skill gaps and define a targeted capability improvement roadmap, supporting long-term engineering excellence.
+          Kicked off the groundwork for a broader AI initiative spanning all departments in OEL. This starts with studying where AI and automation opportunities actually exist department by department — rather than applying a one-size-fits-all approach — followed by implementing AI-driven automation where it makes sense, and putting together formal proposals for the departments where a clear case for adoption emerges.
         </div>
-        <span class="item-tag orange">Planned</span>
+        <span class="item-tag blue">Commenced</span>
       </div>
       <div class="item-img">
-        <img src="30.jpeg" alt="TNA Engineering"
+        <img src="38.jpeg" alt="AI Initiative Across Departments"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">TNA Program</div>
+        <div class="img-label">AI Initiative Rollout</div>
       </div>
     </div>
   </div>
@@ -1037,6 +936,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week24-content', this)">
+        <h2>Week 24</h2>
+        <small>June 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week23-content', this)">
         <h2>Week 23</h2>
         <small>June 2026</small>
@@ -1046,6 +949,181 @@
         <small>May 2026</small>
       </div>
     </div>
+
+    <!-- ══════════════════ WEEK 24 CONTENT ══════════════════ -->
+    <div id="week24-content">
+
+      <!-- W24 Section 1: Workforce Attendance Dashboard Enhancement -->
+      <div class="w22-section">
+        <div class="w22-title">Workforce Attendance Dashboard Enhancement</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">HROne API Discrepancy Resolution — Senior Team Coordination</div>
+            <div class="w22-item-desc">
+              Coordinated with the senior team at HROne regarding API discrepancies identified in the attendance data pipeline. In-depth discussions were held to align on root causes and implement the necessary changes for improved data accuracy and reliability.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Manpower Visibility Dashboard — UI Refinements & Mismatch Alerts</div>
+            <div class="w22-item-desc">
+              Further enhancements delivered to the Manpower Visibility Dashboard — refined UI, improved trend visibility for absenteeism and attrition patterns, and stronger mismatch alert logic. IoT integration progressed in parallel, with DHT22 sensors connected to the MQTT server for real-time temperature and humidity data on the dashboard.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="16.jpeg" alt="Manpower Visibility Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Dashboard Enhancement</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W24 Section 2: Manpower Attendance Look-up System Updates -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Attendance Look-up System Updates</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Loyalty Points Module Integrated — Launch Planned July Onwards</div>
+            <div class="w22-item-desc">
+              Attendance System completed and Loyalty Points module successfully integrated, planned for July launch. Database migrated from SQLite3 to MySQL to improve scalability, reliability, and overall system performance.
+            </div>
+            <span class="w22-tag green">Completed</span>
+          </div>
+          <div class="w22-img">
+            <img src="31.jpeg" alt="Attendance System" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Attendance System</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Reward Configuration & HR Monitoring Pages</div>
+            <div class="w22-item-desc">
+              Reward Configuration Page implemented, letting admins set the program start date and manually trigger reward processing during system failures. HR Monitoring Page developed to track reward points and identify eligible operators for distribution.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="32.jpeg" alt="HR Monitoring Page" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HR Monitoring</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Monitoring & Alerting System + Marketing Coordination</div>
+            <div class="w22-item-desc">
+              Monitoring and Alerting System integrated to track application errors in real time. Coordinated with the Marketing Team for better information reach to the workforce on the upcoming Loyalty Points launch.
+            </div>
+            <span class="w22-tag">Live Monitoring</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W24 Section 3: ESP32 IoT Automation -->
+      <div class="w22-section">
+        <div class="w22-title">Introduction of ESP32 for Low Cost Automation in OEL</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">DHT22 Sensor Integration — Real-Time Humidity & Temperature Sensing</div>
+            <div class="w22-item-desc">
+              DHT22 sensors integrated onto the ESP32; connection to the MQTT server in progress for real-time temperature and humidity data on the dashboard. Sensing successfully replicated, confirming the hardware setup is production-ready — the first step in digitalization at OEL for production floor data.
+            </div>
+            <span class="w22-tag blue">First Milestone</span>
+          </div>
+        </div>
+        <div class="w22-2col-img">
+          <div class="w22-img">
+            <img src="24.jpeg" alt="ESP32 with DHT22 Sensor" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">ESP32 + DHT22 Setup</div>
+          </div>
+          <div class="w22-img">
+            <img src="25.jpeg" alt="Temperature & Humidity Readings" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Live Sensor Readings</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W24 Section 4: FATP Line Dashboard -->
+      <div class="w22-section">
+        <div class="w22-title">FATP Line Dashboard / KPI Command Grid Commencement</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Data Scraping Initiated — One Line Proof of Concept</div>
+            <div class="w22-item-desc">
+              Data scraping commenced for building a dashboard per FATP line, proceeding with one line first as a proof of concept using MES and ESP32 data. Coordinated with the MES team for database credentials and table structure; currently analyzing schema, data flow, and connectivity for dashboard integration.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="26.jpeg" alt="FATP Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">FATP Line PoC</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W24 Section 5: Strategic Engineering Initiatives -->
+      <div class="w22-section">
+        <div class="w22-title">Strategic Engineering Initiatives</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Vivo Failure Analysis Reports & Analytics</div>
+            <div class="w22-item-desc">Failure analysis reports and analytics prepared for the Vivo line to identify recurring defect patterns and corrective action recommendations.</div>
+            <span class="w22-tag">Analysis</span>
+          </div>
+          <div class="w22-img">
+            <img src="27.jpeg" alt="Vivo Failure Analysis" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Vivo FA Analytics</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Quectel Double Throughput Recommendation</div>
+            <div class="w22-item-desc">Recommendation developed to double throughput on the Quectel line by addressing bottlenecks in the current process, with supporting data and implementation steps.</div>
+            <span class="w22-tag">Recommendation</span>
+          </div>
+          <div class="w22-img">
+            <img src="28.jpeg" alt="Quectel Throughput" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Quectel Throughput</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Quectel NTF Reduction Program Suggestion</div>
+            <div class="w22-item-desc">Structured NTF (No Trouble Found) Reduction Program suggested for the Quectel line, outlining triggers, prevention mechanisms, and measurable targets.</div>
+            <span class="w22-tag">Program Design</span>
+          </div>
+          <div class="w22-img">
+            <img src="29.jpeg" alt="Quectel NTF Reduction" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">NTF Reduction</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">TNA — Training Need Analysis for Engineering Capability Improvement</div>
+            <div class="w22-item-desc">Training Need Analysis planned for the Engineering team to identify skill gaps and define a targeted capability improvement roadmap.</div>
+            <span class="w22-tag orange">Planned</span>
+          </div>
+          <div class="w22-img">
+            <img src="30.jpeg" alt="TNA Engineering" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">TNA Program</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 24 · June 2026
+      </div>
+    </div><!-- /week24-content -->
 
     <!-- ══════════════════ WEEK 23 CONTENT ══════════════════ -->
     <div id="week23-content">
@@ -1504,8 +1582,8 @@
     document.body.style.overflow = '';
   }
   function toggleWeek(id, btn) {
-    // Close the other one
-    var ids = ['week22-content', 'week23-content'];
+    // Close the others
+    var ids = ['week22-content', 'week23-content', 'week24-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
