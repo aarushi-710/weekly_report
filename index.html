@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPEX Weekly Update — Week 25</title>
+<title>OPEX Weekly Update — Week 26</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -687,231 +687,260 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     MAIN REPORT — WEEK 25
+<!-- ══════════════════════════════════════════
+     MAIN REPORT — WEEK 26
 ═══════════════════════════════════════════ -->
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 25 · June 2026 · Current</div>
+    <div class="week-badge">Week 26 · June–July 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. KPI Grid / Dashboard Update ── -->
+  <!-- ── 1. Database Analysis & Query Development ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">KPI Grid / Dashboard Update</div>
-
+    <div class="section-title">Database Analysis & Query Development</div>
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Application Architecture Mapped — Codebase, Schema & Query Logic</div>
+        <div class="item-title">MES Database Study — SQL Queries Built for Yield, TRC, USN & I/O</div>
         <div class="item-desc">
-          Carried out a full architectural review of the FATP dashboard application — going through the codebase module by module, mapping the business logic layer, and documenting the underlying database schema along with table relationships and foreign-key dependencies. Each query used across the reporting layer was traced back to its source table and cross-checked against the fields actually consumed on the frontend.
+          Went through the MES database in detail this week — mapping how production data is structured across the different staging tables, understanding which fields get populated at each step of the line, and working out how the records link together across stations.
           <br><br>
-          This groundwork is meant to close the knowledge gap before the next phase of development — anyone picking up the codebase going forward should be able to follow the data flow from raw MES tables through to the dashboard views without having to reverse-engineer it from scratch. The documentation also surfaced a few redundant joins and a couple of tables that were being queried but never actually rendered, which will be cleaned up in the next pass.
+          From there, SQL queries were developed, tested, and verified for four core metrics: <strong>Yield</strong> (pass count over total input), <strong>TRC Defects</strong> (defect records logged through the Test and Repair Centre), <strong>USN</strong> (Unit Serial Number traceability counts), and <strong>Input/Output</strong> calculations per production stage. Each query was verified against the live MES data to make sure the numbers coming back matched what the line team already knew from their manual counts — a few small discrepancies were found and corrected by adjusting how the stage boundary filters were applied.
         </div>
-        <span class="item-tag green">Documented</span>
+        <span class="item-tag green">Verified</span>
       </div>
       <div class="item-img">
-        <img src="41.jpeg" alt="Application Architecture Documentation"
+        <img src="44.jpeg" alt="MES Database SQL Queries"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Architecture Mapping</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">MES Database Connectivity Validated — Queries Optimized & Rewritten</div>
-        <div class="item-desc">
-          Tested the MES database connection end to end and reviewed the integration requirements against what the dashboard actually needs to pull. A number of the original queries were rewritten — some were doing unnecessary full table scans where an indexed lookup would do, and a few joins were restructured to avoid pulling more rows than the aggregation step actually needed.
-          <br><br>
-          Net result is lower query execution time and a connection layer that's been validated under repeated test runs rather than just a single successful connect. Integration requirements between the MES schema and the dashboard's data model have also been documented so future schema changes on the MES side can be flagged early.
-        </div>
-        <span class="item-tag orange">In Progress</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Code-Level Debugging & Impact Analysis</div>
-        <div class="item-desc">
-          Went through code-level debugging and dependency tracing to identify where individual modules touch shared logic — particularly around the data transformation layer, where a change in one query could silently affect three or four downstream views. Impact analysis was done before pushing any fix, so each change could be verified against the modules it actually touches rather than assuming isolation.
-          <br><br>
-          This has helped catch a couple of issues early, including a stale cache reference and a mismatched data type between two tables that was causing silent truncation on one of the numeric fields.
-        </div>
-        <span class="item-tag">Troubleshooting</span>
+        <div class="img-label">SQL Query Development</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Attendance Look-up System ── -->
-  <div class="section-card" style="animation-delay:0.1s">
-    <div class="section-title">Attendance Look-up System</div>
-
+  <!-- ── 2. Production Dashboard Development ── -->
+  <div class="section-card" style="animation-delay:0.08s">
+    <div class="section-title">Production Dashboard Development</div>
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">HR-Focused Enhancements — Bulk Registration, Filtering & Export</div>
+        <div class="item-title">Dynamic FATP Production Dashboard — Live Metrics with Auto-Refresh</div>
         <div class="item-desc">
-          Added a set of HR-focused features to the Attendance Look-up System this week. Bulk face registration now lets HR onboard a batch of operators in one session instead of registering each one individually through the guided capture flow — useful for new-joiner intake days where a dozen or more operators show up at once.
+          Built a production dashboard that pulls from the verified MES queries and surfaces the key metrics in one place. The dashboard supports <strong>Line</strong> and <strong>Date</strong> filters, so a supervisor can narrow the view to a specific FATP line or shift date without the full dataset loading every time.
           <br><br>
-          Face data filtering has also been added on the admin side, so HR can narrow down records by department, registration date, or active/inactive status instead of scrolling through the full operator list. On top of that, export and download functionality has been built in for active user records and registration tracking — HR can now pull a CSV export directly from the panel for audit or reporting purposes without going through IT.
+          Metrics displayed: <strong>Yield</strong>, <strong>USN</strong>, <strong>Input</strong>, <strong>Output</strong>, <strong>TRC Defects</strong>, <strong>Hourly Yield</strong>, and <strong>Hourly USN</strong> trends, alongside <strong>Line Team details</strong> and <strong>attendance</strong> for that line, and real-time <strong>Temperature &amp; Humidity</strong> values pulled from the ESP32/MQTT pipeline. The dashboard auto-refreshes every <strong>5 seconds</strong> so the production data stays live without needing a manual page reload.
         </div>
         <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="37.jpeg" alt="Attendance Look-up System Enhancements"
+        <img src="42.jpeg" alt="Production Dashboard"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HR Enhancements</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Response Time Cut from ~5s to ~2s — Backup & Monitoring Established</div>
-        <div class="item-desc">
-          Spent time on overall performance tuning for the system, bringing average response time down from roughly 5 seconds to about 2 seconds. Most of the gain came from trimming redundant database round-trips on the lookup endpoint and adding indexes on the fields used most often in the filter queries.
-          <br><br>
-          Alongside that, database backup, monitoring, and maintenance procedures have been put in place — scheduled backups are now running, and basic health checks are in place to catch issues before they affect uptime. This should protect data integrity going forward and give a recovery path if something does go wrong.
-        </div>
-        <span class="item-tag green">Optimized</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Workforce Announcement — Attendance Look-up System Rollout</div>
-        <div class="item-desc">
-          With the system stable and performing well, an announcement was made to operators and the wider workforce introducing the Attendance Look-up System and how to use it. This is meant to drive adoption on the floor now that the core functionality and HR tooling around it are in a solid state.
-        </div>
-        <span class="item-tag blue">Announced</span>
+        <div class="img-label">FATP Production Dashboard</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 3. ESP32 Project for Temperature and Humidity Sensing ── -->
-  <div class="section-card" style="animation-delay:0.15s">
-    <div class="section-title">ESP32 Project for Temperature and Humidity Sensing</div>
+  <!-- ── 3. Admin Portal Development ── -->
+  <div class="section-card" style="animation-delay:0.11s">
+    <div class="section-title">Admin Portal Development</div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Complete Admin Panel — Production Targets, Line Team & Sensor Config</div>
+        <div class="item-desc">
+          Built a complete admin portal to sit alongside the production dashboard, covering three main areas. <strong>Production targets</strong> can be set per line, so the dashboard's yield view knows what it's measuring against. <strong>Line Team management</strong> lets admins add, edit, or remove team members for each line, upload and crop team photos, and keep the line team display card current without touching the code. Each production line can also independently configure its own <strong>Temperature and Humidity alert thresholds</strong>, so the environmental monitoring parameters make sense for each line's specific process requirements rather than using a blanket setting.
+        </div>
+        <span class="item-tag green">Built</span>
+      </div>
+      <div class="item-img">
+        <img src="43.jpeg" alt="Admin Portal"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Admin Portal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. Manpower Visibility Dashboard Enhancements ── -->
+  <div class="section-card" style="animation-delay:0.14s">
+    <div class="section-title">Manpower Visibility Dashboard Enhancements</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">End-to-End Pipeline Completed</div>
+        <div class="item-title">Daily HC Matrix — Developed in Coordination with PPC Team</div>
         <div class="item-desc">
-          The full sensing pipeline is now complete and running: <strong>ESP32 → DHT22 → Arduino → HiveMQ → MongoDB → Dashboard.</strong> The ESP32 reads temperature and humidity off the DHT22 over a single-wire digital interface, the Arduino layer handles the serial bridging and packages each reading into a payload, and that payload is published to a HiveMQ broker over MQTT. From there, a subscriber service picks up the message and writes it into MongoDB as a time-stamped document, which the dashboard then queries for display.
-          <br><br>
-          Getting this chain stable took a few iterations — the original setup had occasional packet drops on the MQTT publish step under bad WiFi conditions, so a basic retry/QoS adjustment was added on the publish side, and the Mongo writes were moved to a small buffered queue to avoid losing readings if the connection dropped for a few seconds.
+          A Daily Headcount Matrix has been developed in coordination with the PPC team, giving a day-wise structured view of headcount availability against planned targets across lines. The matrix helps PPC and production planning align on manpower at the start of each shift, and surfaces gaps early enough to act on them before they affect output.
         </div>
-        <span class="item-tag green">Pipeline Live</span>
+        <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="39.jpeg" alt="ESP32 to Dashboard Pipeline"
+        <img src="56.jpeg" alt="Daily HC Matrix"
              onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Sensor-to-Dashboard Pipeline</div>
+        <div class="img-label">Daily HC Matrix</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Dashboard Build — Temperature & Humidity Visualization</div>
+        <div class="item-title">Male : Female Ratio Now Visible Across the Dashboard</div>
         <div class="item-desc">
-          Work is underway on the dashboard front end to visualize the temperature and humidity stream coming out of MongoDB. The plan is a live-updating view with current readings up top and a rolling trend line underneath, pulling fresh documents from the database on a short polling interval until a websocket layer is added on top of the MQTT feed for true real-time push.
+          Gender ratio visibility has been added across the dashboard — Male:Female split is now displayed as part of the headcount breakdown on the relevant views, giving HR and operations a quick read on workforce composition at a glance. This ties into broader traceability requirements around workforce metrics and makes it easier to spot distribution imbalances across departments or lines.
+        </div>
+        <span class="item-tag green">Added</span>
+      </div>
+      <div class="item-img">
+        <img src="55.jpeg" alt="Male Female Ratio"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">M:F Ratio Visibility</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. Environment Monitoring System ── -->
+  <div class="section-card" style="animation-delay:0.17s">
+    <div class="section-title">Environment Monitoring System</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Backend Deployed on Render — 24/7 Uptime & Continuous Data Collection</div>
+        <div class="item-desc">
+          The backend server for the environmental monitoring system has been deployed on the <strong>Render</strong> cloud platform, taking it off the local machine and ensuring it stays up continuously — no more dependency on a specific laptop or local network for the data collection pipeline to keep running. The server is handling MQTT message intake from the FATP line sensors, writing timestamped records to MongoDB, and serving data to the frontend on a persistent connection.
+        </div>
+        <span class="item-tag green">Deployed</span>
+      </div>
+      <div class="item-img">
+        <img src="54.jpeg" alt="Render Backend Deployment"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Render Cloud Deployment</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Frontend Deployed on Netlify — Accessible from Any Device & Location</div>
+        <div class="item-desc">
+          The monitoring dashboard frontend has been deployed on <strong>Netlify</strong>, making it accessible from any browser on any device without needing a local setup or VPN into the factory network. This includes the live temperature/humidity display, historical data charts, date-wise data lookback (stored in MongoDB), configurable threshold alerts that flag out-of-range readings, and a <strong>CSV export</strong> function for pulling date-range data offline.
+        </div>
+        <span class="item-tag green">Live</span>
+      </div>
+      <div class="item-img">
+        <img src="45.jpeg" alt="Frontend Live Monitoring Dashboard"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Netlify Frontend Live</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">T&H Dashboard Merged into Main FATP Monitoring Dashboard</div>
+        <div class="item-desc">
+          The temperature and humidity monitoring view has been integrated and merged into the main FATP production dashboard, so the team no longer needs to switch between two separate tools to get the full picture of line conditions. Environmental data now sits alongside the production metrics — Yield, USN, TRC Defects — in a unified view, making it easier to spot correlations between floor conditions and production performance.
+        </div>
+        <span class="item-tag green">Integrated</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">PM2.5 / PM10 Dust Particle Sensor — Researched & Ordered</div>
+        <div class="item-desc">
+          Carried out research on adding dust particle count monitoring to the FATP line environmental setup. PM2.5 and PM10 particle levels are relevant for FATP because solder flux fumes and PCB dust can build up on the floor, and having a reading gives a basis for air quality alerts alongside the existing temperature and humidity data. The new dust particle sensor has been <strong>ordered</strong> — integration and deployment are planned for the upcoming week.
+        </div>
+        <span class="item-tag orange">Ordered</span>
+      </div>
+      <div class="item-img">
+        <img src="47.jpeg" alt="PM2.5 PM10 Dust Sensor Research"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">PM2.5/PM10 Research</div>
+      </div>
+    </div>
+
+    <div class="update-item" style="padding-bottom:0; border-bottom:none;">
+      <div class="item-content" style="display:flex; gap:24px; align-items:flex-start;">
+        <div style="flex:1;">
+          <div class="item-img" style="width:100%;">
+            <img src="46.jpeg" alt="Dust Sensor Order"
+                 onerror="this.parentElement.style.background='#cce8e8'">
+            <div class="img-label">Sensor Ordered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. Intelligent Operations Initiative ── -->
+  <div class="section-card" style="animation-delay:0.2s">
+    <div class="section-title">Intelligent Operations Initiative</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI Analytics in Daily Reports — Shark Ninja Milestone Automation</div>
+        <div class="item-desc">
+          Started applying AI-assisted analytics to daily reporting formats. The first application was on the <strong>Shark Ninja Milestone tracking file</strong> — rather than manually scanning through the full milestone list to identify what's overdue or approaching deadline, an automated summary is now generated that surfaces the top 10 nearest-to-deadline tasks and calculates an overall <strong>Readiness Summary</strong> as a percentage. This gives the team a fast read on project health without opening the full tracker.
+        </div>
+        <span class="item-tag blue">Applied</span>
+      </div>
+      <div class="item-img">
+        <img src="49.jpeg" alt="AI Analytics Shark Ninja Milestone"
+             onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">AI Milestone Analytics</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI Rendering — Layout & Conveyor Design Preview from Limited Input</div>
+        <div class="item-desc">
+          Used AI image rendering to generate a concept preview of a production line layout and conveyor design, working from limited input information — floor dimensions, rough line configuration, and conveyor type. This gives the team a visual reference to review and react to before any formal CAD work is started, and works as a quick alignment tool during early-stage discussions where not all parameters are locked down yet.
+        </div>
+        <span class="item-tag blue">Generated</span>
+      </div>
+      <!-- 3 images side by side -->
+      <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px; width:260px;">
+        <div class="item-img" style="width:100%;">
+          <img src="50.jpeg" alt="AI Layout Rendering 1" onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">Concept Layout A</div>
+        </div>
+        <div class="item-img" style="width:100%;">
+          <img src="51.jpeg" alt="AI Layout Rendering 2" onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">Concept Layout B</div>
+        </div>
+        <div class="item-img" style="width:100%;">
+          <img src="52.jpeg" alt="AI Layout Rendering 3" onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">Conveyor Design</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI-Assisted Query Register — Faster Turnaround via Structured Prompting</div>
+        <div class="item-desc">
+          Applied structured AI prompting to the task of building a Query Register, inputting the actual project-specific information required rather than using generic prompts, and getting a properly formatted register back in a fraction of the time it would have taken manually. This is a practical example of using AI as a work acceleration tool on documentation tasks — the output still needs review and sign-off, but the drafting effort drops significantly.
+        </div>
+        <span class="item-tag blue">Applied</span>
+      </div>
+      <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px; width:260px;">
+        <div class="item-img" style="width:100%;">
+          <img src="53.jpeg" alt="AI Query Register 1" onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">Query Register — Draft</div>
+        </div>
+        <div class="item-img" style="width:100%;">
+          <img src="54.jpeg" alt="AI Query Register 2" onerror="this.parentElement.style.background='#cce8e8'">
+          <div class="img-label">Query Register — Output</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">WH → IQC Process Integration Study</div>
+        <div class="item-desc">
+          The Warehouse to IQC process study continued this week, building on the earlier access escalation with Devendra Sir. The core problem identified is that supplier QR codes arrive in inconsistent formats, while the MES application expects a fixed, validated format for MPN, Part Code, and associated fields — the mismatch forces the Store team into manual data entry by reading the printed values above the barcode, which are small, hard to read under factory lighting, and frequently differ only in the last two characters for alternate part codes.
+          <br><br>
+          The risk profile here is straightforward: a small transcription error in an alternate part code can pass through unnoticed at entry but surface as a mismatch or a defect later in the IQC or production flow. The current study is focused on mapping the exact field validation rules inside the MES application, understanding how the QR parsing works, and building the case for either a QR standardization approach at the supplier end or an automated parsing/translation layer that bridges supplier format to MES format before the data ever touches the entry screen.
+          <br><br>
+          MES application access was confirmed and the location provided. Hands-on study of the data entry screens, field validations, and alternate part code handling is now underway.
         </div>
         <span class="item-tag orange">In Progress</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Planned Features — Alert Thresholds & Historical Calendar View</div>
-        <div class="item-desc">
-          Two features are planned for the next iteration of the dashboard. The first is configurable alert threshold messages — setting upper and lower bounds for temperature and humidity so the system can flag a reading that falls outside the safe operating range for the floor. The second is a calendar-based lookup, letting anyone pull up the recorded sensor data for any specific date stored in MongoDB, rather than only seeing the live feed.
-        </div>
-        <span class="item-tag">Planned</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 4. Feeder List Generator ── -->
-  <div class="section-card" style="animation-delay:0.2s">
-    <div class="section-title">Feeder List Generator</div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">FeedSync Amended — QPS & Alternate Partcode Handling</div>
-        <div class="item-desc">
-          FeedSync has been amended to align with new requirements around QPS and alternate partcode handling. Previously, a change in alternate partcode consumption would trigger generation of a fresh feeder list file each time, which meant the SMT team was dealing with multiple file versions for what was effectively the same setup with a substituted part code.
-          <br><br>
-          The logic has been reworked so that alternate partcode consumption is handled within a single feeder list generation pass instead of forcing a new file, cutting down on the duplicate-file problem and making it clearer which file is the current source of truth during line changeover.
-        </div>
-        <span class="item-tag green">Amended</span>
-      </div>
-      <div class="item-img">
-        <img src="40.jpeg" alt="FeedSync QPS Update"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">FeedSync Update</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 5. Strategic Engineering Initiatives ── -->
-  <div class="section-card" style="animation-delay:0.25s">
-    <div class="section-title">Strategic Engineering Initiatives</div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">1. Opportunity for Improvement in IQC</div>
-        <div class="item-desc">
-          Looked at the current Material Receiving to IQC flow and found that the cycle is taking around 7 days end to end with the existing AI + smartphone-based inspection step in the loop. With an OPEX initiative around this, paired with further AI/automation work, the target is to bring down the overall Dock-to-Stock cycle time — reducing the gap between material physically arriving at the dock and it being available as usable stock.
-        </div>
-        <span class="item-tag orange">Improvement Opportunity</span>
-      </div>
-      <div class="item-img">
-        <img src="33.jpeg" alt="IQC Improvement Opportunity"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">IQC Cycle Time</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">2. Vivo Report Improvement Shared with PM for Team Reference</div>
-        <div class="item-desc">
-          Shared a quick guideline with the team outlining the gap between the current OEL analysis reports and what the customer actually expects to see in them. This was passed on to the PM as a reference point, so the next round of failure analysis reports for Vivo can be brought closer in line with the format and depth of detail the customer is looking for.
-        </div>
-        <span class="item-tag">Shared</span>
-      </div>
-      <div class="item-img">
-        <img src="34.jpeg" alt="Vivo Report Improvement"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Vivo Report Guideline</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">3. AI + RF Shield Box Correlation Support to ODM</div>
-        <div class="item-desc">
-          Provided correlation support to the ODM on an RF setup issue tied to the shielding box, working through where the readings inside the shield box were diverging from the expected RF baseline. The intent is to use this correlation data, combined with AI-assisted pattern checks, to narrow down whether the variance is coming from the shield box itself or from the RF test setup around it.
-        </div>
-        <span class="item-tag">ODM Support</span>
-      </div>
-      <div class="item-img">
-        <img src="35.jpeg" alt="RF Shield Box Correlation"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">RF Shield Box Correlation</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">4. Commencement of AI Initiative Projects Across All Departments in OEL</div>
-        <div class="item-desc">
-          Kicked off the groundwork for a broader AI initiative spanning all departments in OEL. This starts with studying where AI and automation opportunities actually exist department by department — rather than applying a one-size-fits-all approach — followed by implementing AI-driven automation where it makes sense, and putting together formal proposals for the departments where a clear case for adoption emerges.
-        </div>
-        <span class="item-tag blue">Commenced</span>
-      </div>
-      <div class="item-img">
-        <img src="38.jpeg" alt="AI Initiative Across Departments"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">AI Initiative Rollout</div>
       </div>
     </div>
   </div>
@@ -936,6 +965,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week25-content', this)">
+        <h2>Week 25</h2>
+        <small>June 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week24-content', this)">
         <h2>Week 24</h2>
         <small>June 2026</small>
@@ -949,6 +982,170 @@
         <small>May 2026</small>
       </div>
     </div>
+
+
+    <!-- ══════════════════ WEEK 25 CONTENT ══════════════════ -->
+    <div id="week25-content">
+
+      <!-- W25 Section 1: KPI Grid -->
+      <div class="w22-section">
+        <div class="w22-title">KPI Grid / Dashboard Update</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Application Architecture Mapped — Codebase, Schema & Query Logic</div>
+            <div class="w22-item-desc">
+              Full architectural review of the FATP dashboard application — module-by-module codebase walkthrough, business logic mapping, database schema documentation with table relationships and foreign-key dependencies. Each query traced back to its source table. Surfaced redundant joins and unrendered table queries for cleanup.
+            </div>
+            <span class="w22-tag green">Documented</span>
+          </div>
+          <div class="w22-img">
+            <img src="38.jpeg" alt="Architecture Documentation" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Architecture Mapping</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">MES Database Connectivity Validated — Queries Optimized & Rewritten</div>
+            <div class="w22-item-desc">
+              End-to-end MES database connection tested and integration requirements reviewed. Queries rewritten — full table scans replaced with indexed lookups, joins restructured to reduce row-pull overhead. MES schema-to-dashboard data model integration requirements documented.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Code-Level Debugging & Impact Analysis</div>
+            <div class="w22-item-desc">
+              Dependency tracing across shared logic modules in the data transformation layer. Impact analysis done before each fix. Caught a stale cache reference and a data type mismatch causing silent truncation on a numeric field.
+            </div>
+            <span class="w22-tag">Troubleshooting</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W25 Section 2: Attendance Look-up -->
+      <div class="w22-section">
+        <div class="w22-title">Attendance Look-up System</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">HR-Focused Enhancements — Bulk Registration, Filtering & Export</div>
+            <div class="w22-item-desc">
+              Bulk face registration for batch operator onboarding. Face data filtering by department, date, and status. CSV export/download added to admin panel for audit without IT involvement.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="37.jpeg" alt="HR Enhancements" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HR Enhancements</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Response Time ~5s → ~2s — Backup & Monitoring Established</div>
+            <div class="w22-item-desc">Average response time reduced by trimming redundant DB round-trips and adding indexes on filter fields. Scheduled backups and health checks now running.</div>
+            <span class="w22-tag green">Optimized</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Workforce Announcement — System Rollout</div>
+            <div class="w22-item-desc">Attendance Look-up System announced to operators and workforce to drive floor adoption.</div>
+            <span class="w22-tag blue">Announced</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W25 Section 3: ESP32 Pipeline -->
+      <div class="w22-section">
+        <div class="w22-title">ESP32 Project for Temperature and Humidity Sensing</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">End-to-End Pipeline Complete — ESP32 → DHT22 → Arduino → HiveMQ → MongoDB → Dashboard</div>
+            <div class="w22-item-desc">
+              Full sensing pipeline live. ESP32 reads DHT22 over single-wire digital interface, Arduino bridges serial and packages payload, HiveMQ receives MQTT publish, subscriber writes timestamped documents to MongoDB. MQTT QoS adjusted and buffered Mongo writes added after packet drops on weak WiFi. Dashboard visualization, threshold alerts, and calendar-based historical lookup planned for next iteration.
+            </div>
+            <span class="w22-tag green">Pipeline Live</span>
+          </div>
+          <div class="w22-img">
+            <img src="36.jpeg" alt="ESP32 Pipeline" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Sensor → Dashboard</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W25 Section 4: FeedSync -->
+      <div class="w22-section">
+        <div class="w22-title">Feeder List Generator</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">FeedSync Amended — QPS & Alternate Partcode Handling</div>
+            <div class="w22-item-desc">
+              Alternate partcode consumption reworked into a single generation pass — eliminates multiple file versions on partcode substitution and keeps one clear source of truth during SMT line changeover.
+            </div>
+            <span class="w22-tag green">Amended</span>
+          </div>
+          <div class="w22-img">
+            <img src="40.jpeg" alt="FeedSync" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">FeedSync Update</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W25 Section 5: Strategic Engineering -->
+      <div class="w22-section">
+        <div class="w22-title">Strategic Engineering Initiatives</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">1. IQC Improvement — Dock to Stock Cycle Time Reduction</div>
+            <div class="w22-item-desc">AI + smartphone receiving-to-IQC flow currently ~7 days. OPEX initiative targeting Dock-to-Stock cycle time reduction via AI/automation.</div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="33.jpeg" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">IQC Cycle Time</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">2. Vivo Report Improvement — Shared with PM</div>
+            <div class="w22-item-desc">Guideline shared outlining gap between current OEL analysis reports and customer expectations, for team reference via PM.</div>
+            <span class="w22-tag">Shared</span>
+          </div>
+          <div class="w22-img">
+            <img src="34.jpeg" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">Vivo Report</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">3. RF Shield Box Correlation Support to ODM</div>
+            <div class="w22-item-desc">Correlation support provided to ODM to isolate RF variance between the shielding box and the surrounding test setup.</div>
+            <span class="w22-tag">ODM Support</span>
+          </div>
+          <div class="w22-img">
+            <img src="35.jpeg" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">RF Shield Box</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">4. AI Initiative Commenced Across All OEL Departments</div>
+            <div class="w22-item-desc">Department-wide AI initiative groundwork started — studying opportunities, targeting automation, and preparing formal proposals per department.</div>
+            <span class="w22-tag blue">Commenced</span>
+          </div>
+          <div class="w22-img">
+            <img src="39.jpeg" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'"><div class="img-label">AI Initiative</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 25 · June 2026
+      </div>
+    </div><!-- /week25-content -->
 
     <!-- ══════════════════ WEEK 24 CONTENT ══════════════════ -->
     <div id="week24-content">
@@ -1583,7 +1780,7 @@
   }
   function toggleWeek(id, btn) {
     // Close the others
-    var ids = ['week22-content', 'week23-content', 'week24-content'];
+    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
