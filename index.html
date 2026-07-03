@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPEX Weekly Update — Week 26</title>
+<title>OPEX Weekly Update — Week 27</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -167,6 +167,13 @@
     font-size: 13.5px;
     color: #2a5a5a;
     line-height: 1.68;
+  }
+  .item-desc ul, .item-desc ol {
+    margin: 8px 0 0 18px;
+    padding: 0;
+  }
+  .item-desc li {
+    margin-bottom: 4px;
   }
   .item-tag {
     display: inline-block;
@@ -441,7 +448,7 @@
   }
   .back-btn:hover { background: rgba(255,255,255,0.2); }
 
-  /* ── W22/W23 shared styles inside archive ── */
+  /* ── shared archive week styles ── */
   .w22-section {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(8px);
@@ -644,12 +651,12 @@
   }
 
   /* Archive week content containers */
-  #week22-content, #week23-content {
+  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content {
     display: none;
     text-align: left;
     margin-top: 32px;
   }
-  #week22-content.visible, #week23-content.visible { display: block; }
+  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible { display: block; }
 
   /* Animations */
   @keyframes fadeDown {
@@ -687,152 +694,82 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-<!-- ══════════════════════════════════════════
-     MAIN REPORT — WEEK 26
+     MAIN REPORT — WEEK 27
 ═══════════════════════════════════════════ -->
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 26 · June–July 2026 · Current</div>
+    <div class="week-badge">Week 27 · July 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Database Analysis & Query Development ── -->
+  <!-- ── 1. Environment Monitoring System through IoT (ESP32) ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Database Analysis & Query Development</div>
+    <div class="section-title">Environment Monitoring System through IoT (ESP32)</div>
+
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">MES Database Study — SQL Queries Built for Yield, TRC, USN & I/O</div>
+        <div class="item-title">PMS7003T Dust Particle Sensor — Second ESP32 Unit Commissioned</div>
         <div class="item-desc">
-          Went through the MES database in detail this week — mapping how production data is structured across the different staging tables, understanding which fields get populated at each step of the line, and working out how the records link together across stations.
-          <br><br>
-          From there, SQL queries were developed, tested, and verified for four core metrics: <strong>Yield</strong> (pass count over total input), <strong>TRC Defects</strong> (defect records logged through the Test and Repair Centre), <strong>USN</strong> (Unit Serial Number traceability counts), and <strong>Input/Output</strong> calculations per production stage. Each query was verified against the live MES data to make sure the numbers coming back matched what the line team already knew from their manual counts — a few small discrepancies were found and corrected by adjusting how the stage boundary filters were applied.
+          Received the new dust particle sensor (<strong>PMS7003T</strong>) and began integration work. A second ESP32 has been set up dedicated to this sensor, running alongside the existing DHT22-based temperature and humidity unit, keeping the two sensing pipelines independent so one doesn't disturb the other's timing or connection stability.
         </div>
-        <span class="item-tag green">Verified</span>
+        <span class="item-tag orange">In Progress</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Firmware Developed — PM1.0/PM2.5/PM10 Readings Validated & Calibrated</div>
+        <div class="item-desc">
+          Firmware developed and uploaded to read PM1.0, PM2.5, and PM10 concentration and particle count data from the PMS7003T. Readings were validated across multiple test cycles, and calibration corrections were applied to bring the measured values in line with expected reference accuracy.
+        </div>
+        <span class="item-tag green">Validated</span>
       </div>
       <div class="item-img">
-        <img src="44.jpeg" alt="MES Database SQL Queries"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">SQL Query Development</div>
+        <img src="57.jpeg" alt="PM Firmware Validation" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">PM Readings Validation</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">MQTT Pipeline Live on New HiveMQ Cluster</div>
+        <div class="item-desc">
+          Built the MQTT pipeline connecting the new ESP32 to a fresh HiveMQ cluster — dust particle data is now being published and received successfully on HiveMQ. Next week: connect HiveMQ to MongoDB for historical data storage, and integrate this data into the dashboard for live and historical visualization.
+        </div>
+        <span class="item-tag green">Pipeline Live</span>
+      </div>
+      <div class="item-img">
+        <img src="58.jpeg" alt="MQTT HiveMQ Pipeline" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">HiveMQ Cluster</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Production Dashboard Development ── -->
+  <!-- ── 2. Manufacturing Dashboard ── -->
   <div class="section-card" style="animation-delay:0.08s">
-    <div class="section-title">Production Dashboard Development</div>
+    <div class="section-title">Manufacturing Dashboard</div>
+
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Dynamic FATP Production Dashboard — Live Metrics with Auto-Refresh</div>
+        <div class="item-title">Real-Time Production Monitoring Dashboard — Yield, UPH, Output, WIP, TRC & Environment</div>
         <div class="item-desc">
-          Built a production dashboard that pulls from the verified MES queries and surfaces the key metrics in one place. The dashboard supports <strong>Line</strong> and <strong>Date</strong> filters, so a supervisor can narrow the view to a specific FATP line or shift date without the full dataset loading every time.
-          <br><br>
-          Metrics displayed: <strong>Yield</strong>, <strong>USN</strong>, <strong>Input</strong>, <strong>Output</strong>, <strong>TRC Defects</strong>, <strong>Hourly Yield</strong>, and <strong>Hourly USN</strong> trends, alongside <strong>Line Team details</strong> and <strong>attendance</strong> for that line, and real-time <strong>Temperature &amp; Humidity</strong> values pulled from the ESP32/MQTT pipeline. The dashboard auto-refreshes every <strong>5 seconds</strong> so the production data stays live without needing a manual page reload.
+          Developed a real-time production monitoring dashboard tracking live KPIs across the line: <strong>Yield %</strong>, <strong>UPH</strong>, <strong>Output</strong>, <strong>WIP</strong>, <strong>TRC Defects</strong>, and <strong>Environment</strong> (Temperature/Humidity), giving a single unified view of line health and conditions.
         </div>
         <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="42.jpeg" alt="Production Dashboard"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">FATP Production Dashboard</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 3. Admin Portal Development ── -->
-  <div class="section-card" style="animation-delay:0.11s">
-    <div class="section-title">Admin Portal Development</div>
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Complete Admin Panel — Production Targets, Line Team & Sensor Config</div>
-        <div class="item-desc">
-          Built a complete admin portal to sit alongside the production dashboard, covering three main areas. <strong>Production targets</strong> can be set per line, so the dashboard's yield view knows what it's measuring against. <strong>Line Team management</strong> lets admins add, edit, or remove team members for each line, upload and crop team photos, and keep the line team display card current without touching the code. Each production line can also independently configure its own <strong>Temperature and Humidity alert thresholds</strong>, so the environmental monitoring parameters make sense for each line's specific process requirements rather than using a blanket setting.
-        </div>
-        <span class="item-tag green">Built</span>
-      </div>
-      <div class="item-img">
-        <img src="43.jpeg" alt="Admin Portal"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Admin Portal</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 4. Manpower Visibility Dashboard Enhancements ── -->
-  <div class="section-card" style="animation-delay:0.14s">
-    <div class="section-title">Manpower Visibility Dashboard Enhancements</div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Daily HC Matrix — Developed in Coordination with PPC Team</div>
-        <div class="item-desc">
-          A Daily Headcount Matrix has been developed in coordination with the PPC team, giving a day-wise structured view of headcount availability against planned targets across lines. The matrix helps PPC and production planning align on manpower at the start of each shift, and surfaces gaps early enough to act on them before they affect output.
-        </div>
-        <span class="item-tag green">Deployed</span>
-      </div>
-      <div class="item-img">
-        <img src="56.jpeg" alt="Daily HC Matrix"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Daily HC Matrix</div>
+        <img src="59.jpeg" alt="Production Monitoring Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Production Monitoring Dashboard</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Male : Female Ratio Now Visible Across the Dashboard</div>
+        <div class="item-title">Oracle (SFC) + MySQL Integration — Live Production Data & Configuration Management</div>
         <div class="item-desc">
-          Gender ratio visibility has been added across the dashboard — Male:Female split is now displayed as part of the headcount breakdown on the relevant views, giving HR and operations a quick read on workforce composition at a glance. This ties into broader traceability requirements around workforce metrics and makes it easier to spot distribution imbalances across departments or lines.
-        </div>
-        <span class="item-tag green">Added</span>
-      </div>
-      <div class="item-img">
-        <img src="55.jpeg" alt="Male Female Ratio"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">M:F Ratio Visibility</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 5. Environment Monitoring System ── -->
-  <div class="section-card" style="animation-delay:0.17s">
-    <div class="section-title">Environment Monitoring System</div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Backend Deployed on Render — 24/7 Uptime & Continuous Data Collection</div>
-        <div class="item-desc">
-          The backend server for the environmental monitoring system has been deployed on the <strong>Render</strong> cloud platform, taking it off the local machine and ensuring it stays up continuously — no more dependency on a specific laptop or local network for the data collection pipeline to keep running. The server is handling MQTT message intake from the FATP line sensors, writing timestamped records to MongoDB, and serving data to the frontend on a persistent connection.
-        </div>
-        <span class="item-tag green">Deployed</span>
-      </div>
-      <div class="item-img">
-        <img src="54.jpeg" alt="Render Backend Deployment"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Render Cloud Deployment</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Frontend Deployed on Netlify — Accessible from Any Device & Location</div>
-        <div class="item-desc">
-          The monitoring dashboard frontend has been deployed on <strong>Netlify</strong>, making it accessible from any browser on any device without needing a local setup or VPN into the factory network. This includes the live temperature/humidity display, historical data charts, date-wise data lookback (stored in MongoDB), configurable threshold alerts that flag out-of-range readings, and a <strong>CSV export</strong> function for pulling date-range data offline.
-        </div>
-        <span class="item-tag green">Live</span>
-      </div>
-      <div class="item-img">
-        <img src="45.jpeg" alt="Frontend Live Monitoring Dashboard"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Netlify Frontend Live</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">T&H Dashboard Merged into Main FATP Monitoring Dashboard</div>
-        <div class="item-desc">
-          The temperature and humidity monitoring view has been integrated and merged into the main FATP production dashboard, so the team no longer needs to switch between two separate tools to get the full picture of line conditions. Environmental data now sits alongside the production metrics — Yield, USN, TRC Defects — in a unified view, making it easier to spot correlations between floor conditions and production performance.
+          Integrated <strong>Oracle (SFC)</strong> for live production data and <strong>MySQL</strong> for managing targets, team, attendance, and stage configuration — keeping fast-moving shop-floor data and slower-moving configuration data on the sources best suited for each.
         </div>
         <span class="item-tag green">Integrated</span>
       </div>
@@ -840,107 +777,117 @@
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">PM2.5 / PM10 Dust Particle Sensor — Researched & Ordered</div>
+        <div class="item-title">Deployed via IIS + FastAPI Backend, React Frontend — Network-Wide Access</div>
         <div class="item-desc">
-          Carried out research on adding dust particle count monitoring to the FATP line environmental setup. PM2.5 and PM10 particle levels are relevant for FATP because solder flux fumes and PCB dust can build up on the floor, and having a reading gives a basis for air quality alerts alongside the existing temperature and humidity data. The new dust particle sensor has been <strong>ordered</strong> — integration and deployment are planned for the upcoming week.
+          Deployed the system via <strong>IIS + FastAPI</strong> backend with a <strong>React</strong> frontend, accessible across all network machines — no local install or VPN required for anyone on the factory network to view the dashboard.
         </div>
-        <span class="item-tag orange">Ordered</span>
-      </div>
-      <div class="item-img">
-        <img src="47.jpeg" alt="PM2.5 PM10 Dust Sensor Research"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">PM2.5/PM10 Research</div>
+        <span class="item-tag green">Deployed</span>
       </div>
     </div>
 
-    <div class="update-item" style="padding-bottom:0; border-bottom:none;">
-      <div class="item-content" style="display:flex; gap:24px; align-items:flex-start;">
-        <div style="flex:1;">
-          <div class="item-img" style="width:100%;">
-            <img src="46.jpeg" alt="Dust Sensor Order"
-                 onerror="this.parentElement.style.background='#cce8e8'">
-            <div class="img-label">Sensor Ordered</div>
-          </div>
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Pilot Monitor Installed on Alpha Line</div>
+        <div class="item-desc">
+          A monitor was installed directly on the production line (Alpha) for a pilot run, letting the line team view live metrics directly from their workstation without needing to open a separate device or screen.
         </div>
+        <span class="item-tag blue">Pilot Live</span>
+      </div>
+      <div class="item-img">
+        <img src="60.jpeg" alt="Alpha Line Pilot Monitor" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Alpha Line Pilot Monitor</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 6. Intelligent Operations Initiative ── -->
-  <div class="section-card" style="animation-delay:0.2s">
-    <div class="section-title">Intelligent Operations Initiative</div>
+  <!-- ── 3. Manpower Visibility Update ── -->
+  <div class="section-card" style="animation-delay:0.11s">
+    <div class="section-title">Manpower Visibility Update</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">AI Analytics in Daily Reports — Shark Ninja Milestone Automation</div>
+        <div class="item-title">Presence360 Staff Attendance Pie Chart Dashboard — HR Team, Date-wise Live Visualization</div>
         <div class="item-desc">
-          Started applying AI-assisted analytics to daily reporting formats. The first application was on the <strong>Shark Ninja Milestone tracking file</strong> — rather than manually scanning through the full milestone list to identify what's overdue or approaching deadline, an automated summary is now generated that surfaces the top 10 nearest-to-deadline tasks and calculates an overall <strong>Readiness Summary</strong> as a percentage. This gives the team a fast read on project health without opening the full tracker.
+          Developed a Presence360 Staff Attendance Pie Chart Dashboard for the HR team, with date-wise live visualization letting HR pull up attendance distribution for any given day directly from the P360 API.
+        </div>
+        <span class="item-tag green">Deployed</span>
+      </div>
+      <div class="item-img">
+        <img src="61.jpeg" alt="P360 Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">P360 Pie Chart Dashboard</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across Views</div>
+        <div class="item-desc">
+          Integrated the Daily Manpower HC Matrix, developed with the PPC team, into the Visibility Dashboard — now showing the Male:Female ratio across views for better traceability of workforce composition alongside headcount targets.
+        </div>
+        <span class="item-tag green">Integrated</span>
+      </div>
+      <div class="item-img">
+        <img src="62.jpeg" alt="Daily HC Matrix M:F Ratio" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">HC Matrix — M:F Ratio</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. AI Assisted Initiative ── -->
+  <div class="section-card" style="animation-delay:0.14s">
+    <div class="section-title">AI Assisted Initiative</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI-Assisted Comprehensive Translation</div>
+        <div class="item-desc">
+          <ul>
+            <li>AI-assisted translation delivers a noticeably higher quality result than standard machine translation tools.</li>
+            <li>Capable of properly translating across languages regardless of file size or file type.</li>
+            <li>Translation accuracy is guaranteed at the level required for internal documentation and cross-team communication.</li>
+          </ul>
         </div>
         <span class="item-tag blue">Applied</span>
       </div>
       <div class="item-img">
-        <img src="49.jpeg" alt="AI Analytics Shark Ninja Milestone"
-             onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">AI Milestone Analytics</div>
+        <img src="63.jpeg" alt="AI Assisted Translation" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">AI Translation</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">AI Rendering — Layout & Conveyor Design Preview from Limited Input</div>
+        <div class="item-title">AI Portfolio for OPEX</div>
         <div class="item-desc">
-          Used AI image rendering to generate a concept preview of a production line layout and conveyor design, working from limited input information — floor dimensions, rough line configuration, and conveyor type. This gives the team a visual reference to review and react to before any formal CAD work is started, and works as a quick alignment tool during early-stage discussions where not all parameters are locked down yet.
+          <ul>
+            <li>Created analytics on AI &amp; Automation opportunities for the top 7 departments.</li>
+            <li>Aligned with the broader Intelligent Operations initiative.</li>
+            <li>Completed a detailed study of the WH to IQC process — no major improvement points identified from our side at this stage; review will continue with additional teams. Further areas and teams are being explored for potential AI initiatives.</li>
+          </ul>
         </div>
-        <span class="item-tag blue">Generated</span>
+        <span class="item-tag orange">In Progress</span>
       </div>
-      <!-- 3 images side by side -->
-      <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px; width:260px;">
-        <div class="item-img" style="width:100%;">
-          <img src="50.jpeg" alt="AI Layout Rendering 1" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Concept Layout A</div>
-        </div>
-        <div class="item-img" style="width:100%;">
-          <img src="51.jpeg" alt="AI Layout Rendering 2" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Concept Layout B</div>
-        </div>
-        <div class="item-img" style="width:100%;">
-          <img src="52.jpeg" alt="AI Layout Rendering 3" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Conveyor Design</div>
-        </div>
+      <div class="item-img">
+        <img src="64.jpeg" alt="AI Portfolio for OPEX" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">AI Portfolio — OPEX</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">AI-Assisted Query Register — Faster Turnaround via Structured Prompting</div>
+        <div class="item-title">AI-Assisted Comprehensive Data Analytics</div>
         <div class="item-desc">
-          Applied structured AI prompting to the task of building a Query Register, inputting the actual project-specific information required rather than using generic prompts, and getting a properly formatted register back in a fraction of the time it would have taken manually. This is a practical example of using AI as a work acceleration tool on documentation tasks — the output still needs review and sign-off, but the drafting effort drops significantly.
+          <ul>
+            <li>MES data is extensive and qualifies as a large, complex dataset.</li>
+            <li>With AI assistance, difficult analytics on this data can be carried out accurately and at speed.</li>
+            <li>Aligned with the ongoing MES deep-study work feeding into KPI Deck / Dashboard generation.</li>
+          </ul>
         </div>
         <span class="item-tag blue">Applied</span>
       </div>
-      <div style="flex-shrink:0; display:flex; flex-direction:column; gap:8px; width:260px;">
-        <div class="item-img" style="width:100%;">
-          <img src="53.jpeg" alt="AI Query Register 1" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Query Register — Draft</div>
-        </div>
-        <div class="item-img" style="width:100%;">
-          <img src="54.jpeg" alt="AI Query Register 2" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Query Register — Output</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">WH → IQC Process Integration Study</div>
-        <div class="item-desc">
-          The Warehouse to IQC process study continued this week, building on the earlier access escalation with Devendra Sir. The core problem identified is that supplier QR codes arrive in inconsistent formats, while the MES application expects a fixed, validated format for MPN, Part Code, and associated fields — the mismatch forces the Store team into manual data entry by reading the printed values above the barcode, which are small, hard to read under factory lighting, and frequently differ only in the last two characters for alternate part codes.
-          <br><br>
-          The risk profile here is straightforward: a small transcription error in an alternate part code can pass through unnoticed at entry but surface as a mismatch or a defect later in the IQC or production flow. The current study is focused on mapping the exact field validation rules inside the MES application, understanding how the QR parsing works, and building the case for either a QR standardization approach at the supplier end or an automated parsing/translation layer that bridges supplier format to MES format before the data ever touches the entry screen.
-          <br><br>
-          MES application access was confirmed and the location provided. Hands-on study of the data entry screens, field validations, and alternate part code handling is now underway.
-        </div>
-        <span class="item-tag orange">In Progress</span>
+      <div class="item-img">
+        <img src="65.jpeg" alt="AI Data Analytics MES" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">MES Data Analytics</div>
       </div>
     </div>
   </div>
@@ -949,7 +896,7 @@
 
 
 <!-- ══════════════════════════════════════════
-     ARCHIVE OVERLAY — Week 22 + Week 23
+     ARCHIVE OVERLAY — Week 22 through Week 26
 ═══════════════════════════════════════════ -->
 <div id="archive-overlay">
   <div class="archive-inner">
@@ -965,6 +912,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week26-content', this)">
+        <h2>Week 26</h2>
+        <small>June–July 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week25-content', this)">
         <h2>Week 25</h2>
         <small>June 2026</small>
@@ -983,6 +934,222 @@
       </div>
     </div>
 
+    <!-- ══════════════════ WEEK 26 CONTENT ══════════════════ -->
+    <div id="week26-content">
+
+      <!-- W26 Section 1: Database Analysis & Query Development -->
+      <div class="w22-section">
+        <div class="w22-title">Database Analysis & Query Development</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">MES Database Study — SQL Queries Built for Yield, TRC, USN & I/O</div>
+            <div class="w22-item-desc">
+              Went through the MES database in detail — mapping how production data is structured across staging tables, which fields populate at each line step, and how records link across stations. SQL queries developed, tested, and verified for four core metrics: Yield, TRC Defects, USN traceability counts, and Input/Output per production stage. Each query verified against live MES data; small discrepancies found and corrected by adjusting stage boundary filters.
+            </div>
+            <span class="w22-tag green">Verified</span>
+          </div>
+          <div class="w22-img">
+            <img src="44.jpeg" alt="MES Database SQL Queries" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">SQL Query Development</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W26 Section 2: Production Dashboard Development -->
+      <div class="w22-section">
+        <div class="w22-title">Production Dashboard Development</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Dynamic FATP Production Dashboard — Live Metrics with Auto-Refresh</div>
+            <div class="w22-item-desc">
+              Built a production dashboard pulling from the verified MES queries, with Line and Date filters. Displays Yield, USN, Input, Output, TRC Defects, Hourly Yield and Hourly USN trends, Line Team details and attendance, and real-time Temperature &amp; Humidity from the ESP32/MQTT pipeline. Auto-refreshes every 5 seconds.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="42.jpeg" alt="Production Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">FATP Production Dashboard</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W26 Section 3: Admin Portal Development -->
+      <div class="w22-section">
+        <div class="w22-title">Admin Portal Development</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Complete Admin Panel — Production Targets, Line Team & Sensor Config</div>
+            <div class="w22-item-desc">
+              Built a complete admin portal covering Production Targets per line, Line Team management (add/edit/remove members, upload &amp; crop photos), and per-line Temperature and Humidity alert threshold configuration.
+            </div>
+            <span class="w22-tag green">Built</span>
+          </div>
+          <div class="w22-img">
+            <img src="43.jpeg" alt="Admin Portal" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Admin Portal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W26 Section 4: Manpower Visibility Dashboard Enhancements -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Visibility Dashboard Enhancements</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Daily HC Matrix — Developed in Coordination with PPC Team</div>
+            <div class="w22-item-desc">
+              A Daily Headcount Matrix developed with the PPC team, giving a day-wise structured view of headcount availability against planned targets across lines, surfacing gaps early enough to act on before they affect output.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="56.jpeg" alt="Daily HC Matrix" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Daily HC Matrix</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Male : Female Ratio Now Visible Across the Dashboard</div>
+            <div class="w22-item-desc">
+              Gender ratio visibility added across the dashboard — Male:Female split displayed as part of headcount breakdown, giving HR and operations a quick read on workforce composition and making it easier to spot distribution imbalances.
+            </div>
+            <span class="w22-tag green">Added</span>
+          </div>
+          <div class="w22-img">
+            <img src="55.jpeg" alt="Male Female Ratio" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">M:F Ratio Visibility</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W26 Section 5: Environment Monitoring System -->
+      <div class="w22-section">
+        <div class="w22-title">Environment Monitoring System</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Backend Deployed on Render — 24/7 Uptime & Continuous Data Collection</div>
+            <div class="w22-item-desc">
+              Backend server deployed on Render, off the local machine, ensuring continuous uptime independent of any specific laptop or local network. Handles MQTT intake from FATP sensors, writes timestamped records to MongoDB, and serves data to the frontend on a persistent connection.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="54.jpeg" alt="Render Backend Deployment" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Render Cloud Deployment</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Frontend Deployed on Netlify — Accessible from Any Device & Location</div>
+            <div class="w22-item-desc">
+              Monitoring dashboard frontend deployed on Netlify — accessible from any browser without local setup or VPN. Includes live T/H display, historical charts, date-wise lookback, configurable threshold alerts, and CSV export for date-range data.
+            </div>
+            <span class="w22-tag green">Live</span>
+          </div>
+          <div class="w22-img">
+            <img src="45.jpeg" alt="Frontend Live Monitoring Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Netlify Frontend Live</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">T&H Dashboard Merged into Main FATP Monitoring Dashboard</div>
+            <div class="w22-item-desc">
+              Temperature and humidity monitoring integrated into the main FATP production dashboard — environmental data now sits alongside Yield, USN, and TRC Defects in a unified view, making it easier to spot correlations with floor conditions.
+            </div>
+            <span class="w22-tag green">Integrated</span>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">PM2.5 / PM10 Dust Particle Sensor — Researched & Ordered</div>
+            <div class="w22-item-desc">
+              Researched adding dust particle count monitoring to the FATP environmental setup — PM2.5/PM10 levels relevant given solder flux fumes and PCB dust build-up. Sensor ordered, integration planned for the following week.
+            </div>
+            <span class="w22-tag orange">Ordered</span>
+          </div>
+          <div class="w22-img">
+            <img src="47.jpeg" alt="PM2.5 PM10 Dust Sensor Research" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">PM2.5/PM10 Research</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W26 Section 6: Intelligent Operations Initiative -->
+      <div class="w22-section">
+        <div class="w22-title">Intelligent Operations Initiative</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI Analytics in Daily Reports — Shark Ninja Milestone Automation</div>
+            <div class="w22-item-desc">
+              Applied AI-assisted analytics to the Shark Ninja Milestone tracking file — automated summary now surfaces the top 10 nearest-to-deadline tasks and calculates an overall Readiness Summary percentage, giving a fast read on project health.
+            </div>
+            <span class="w22-tag blue">Applied</span>
+          </div>
+          <div class="w22-img">
+            <img src="49.jpeg" alt="AI Analytics Shark Ninja Milestone" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">AI Milestone Analytics</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI Rendering — Layout & Conveyor Design Preview from Limited Input</div>
+            <div class="w22-item-desc">
+              Used AI image rendering to generate a concept preview of a production line layout and conveyor design from floor dimensions, rough line configuration, and conveyor type — a visual reference for review before formal CAD work begins.
+            </div>
+            <span class="w22-tag blue">Generated</span>
+          </div>
+          <div class="w22-multi-img">
+            <div class="w22-img">
+              <img src="50.jpeg" alt="AI Layout Rendering 1" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Concept Layout A</div>
+            </div>
+            <div class="w22-img">
+              <img src="51.jpeg" alt="AI Layout Rendering 2" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Concept Layout B</div>
+            </div>
+            <div class="w22-img">
+              <img src="52.jpeg" alt="AI Layout Rendering 3" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Conveyor Design</div>
+            </div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI-Assisted Query Register — Faster Turnaround via Structured Prompting</div>
+            <div class="w22-item-desc">
+              Applied structured AI prompting to build a Query Register with actual project-specific information, returning a properly formatted register in a fraction of the manual drafting time — output still needs review and sign-off.
+            </div>
+            <span class="w22-tag blue">Applied</span>
+          </div>
+          <div class="w22-2col-img">
+            <div class="w22-img">
+              <img src="53.jpeg" alt="AI Query Register 1" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Query Register — Draft</div>
+            </div>
+            <div class="w22-img">
+              <img src="54.jpeg" alt="AI Query Register 2" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Query Register — Output</div>
+            </div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">WH → IQC Process Integration Study</div>
+            <div class="w22-item-desc">
+              Continued the Warehouse to IQC process study, building on the earlier access escalation with Devendra Sir. Core problem: supplier QR codes arrive in inconsistent formats while MES expects a fixed, validated format for MPN, Part Code, and related fields — forcing manual data entry from small, hard-to-read printed values that often differ only in the last two characters for alternate part codes.
+              <br><br>
+              A small transcription error in an alternate part code can pass unnoticed at entry but surface as a mismatch or defect later in IQC or production. Study focused on mapping MES field validation rules, understanding QR parsing, and building the case for either supplier-side QR standardization or an automated parsing/translation layer bridging supplier format to MES format. MES access confirmed and location provided; hands-on study of data entry screens now underway.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 26 · June–July 2026
+      </div>
+    </div><!-- /week26-content -->
 
     <!-- ══════════════════ WEEK 25 CONTENT ══════════════════ -->
     <div id="week25-content">
@@ -1780,7 +1947,7 @@
   }
   function toggleWeek(id, btn) {
     // Close the others
-    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content'];
+    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
