@@ -651,12 +651,12 @@
   }
 
   /* Archive week content containers */
-  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content {
+  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content, #week27-content {
     display: none;
     text-align: left;
     margin-top: 32px;
   }
-  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible { display: block; }
+  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible, #week27-content.visible { display: block; }
 
   /* Animations */
   @keyframes fadeDown {
@@ -699,199 +699,141 @@
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 27 · July 2026 · Current</div>
+    <div class="week-badge">Week 28 · July 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Environment Monitoring System through IoT (ESP32) ── -->
+  <!-- ── 1. Operational Efficiency Dashboard integration MES IoT ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Environment Monitoring System through IoT (ESP32)</div>
+    <div class="section-title">Operational Efficiency Dashboard integration MES IoT</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">PMS7003T Dust Particle Sensor — Second ESP32 Unit Commissioned</div>
+        <div class="item-title">Stage Mapping Data Collection Complete for MES Integration — Dust Sensor Now Live on Main FATP Dashboard</div>
         <div class="item-desc">
-          Received the new dust particle sensor (<strong>PMS7003T</strong>) and began integration work. A second ESP32 has been set up dedicated to this sensor, running alongside the existing DHT22-based temperature and humidity unit, keeping the two sensing pipelines independent so one doesn't disturb the other's timing or connection stability.
+          Data collection for Stage Mapping has been completed, covering the mapping of each production stage boundary needed to feed MES data cleanly into the Operational Efficiency Dashboard — this groundwork ensures downstream metrics like Yield, TRC, and USN pull from the correct stage-level records once integration goes live.
+          <br><br>
+          In parallel, the dust particle sensor (<strong>PMS7003T</strong>) has been successfully integrated in the final section of the line, marking the completion of its physical installation and commissioning. The new ESP32 unit dedicated to this sensor is now live and reporting on the main FATP Dashboard, bringing dust monitoring into the same operational view as the rest of the line's environmental data.
         </div>
-        <span class="item-tag orange">In Progress</span>
+        <span class="item-tag green">Live</span>
+      </div>
+      <div class="item-img">
+        <img src="67.jpeg" alt="Stage Mapping and Dust Sensor Integration" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Stage Mapping / Dust Sensor Live</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Firmware Developed — PM1.0/PM2.5/PM10 Readings Validated & Calibrated</div>
+        <div class="item-title">PM Firmware Developed, Tested & Calibrated — MQTT Pipeline Now Publishing to HiveMQ</div>
         <div class="item-desc">
-          Firmware developed and uploaded to read PM1.0, PM2.5, and PM10 concentration and particle count data from the PMS7003T. Readings were validated across multiple test cycles, and calibration corrections were applied to bring the measured values in line with expected reference accuracy.
+          Firmware has been developed and tested for the PMS7003T to read PM1.0, PM2.5, and PM10 particle concentration data, with calibration corrections applied so the readings track closer to expected reference values and give an accurate basis for air quality monitoring on the floor.
+          <br><br>
+          The MQTT pipeline connecting this sensor to the cloud has now been established, and dust particle data is successfully publishing to HiveMQ in real time — completing the sensing-to-cloud leg of the pipeline and setting up the next step of routing this data into MongoDB and the dashboard.
         </div>
-        <span class="item-tag green">Validated</span>
+        <span class="item-tag green">Publishing</span>
       </div>
       <div class="item-img">
-        <img src="57.jpeg" alt="PM Firmware Validation" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">PM Readings Validation</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">MQTT Pipeline Live on New HiveMQ Cluster</div>
-        <div class="item-desc">
-          Built the MQTT pipeline connecting the new ESP32 to a fresh HiveMQ cluster — dust particle data is now being published and received successfully on HiveMQ. Next week: connect HiveMQ to MongoDB for historical data storage, and integrate this data into the dashboard for live and historical visualization.
-        </div>
-        <span class="item-tag green">Pipeline Live</span>
-      </div>
-      <div class="item-img">
-        <img src="58.jpeg" alt="MQTT HiveMQ Pipeline" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HiveMQ Cluster</div>
+        <img src="68.jpeg" alt="PM Firmware and MQTT Pipeline" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Firmware &amp; MQTT Pipeline</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Manufacturing Dashboard ── -->
+  <!-- ── 2. Manufacturing Dashboard (FATP Environment Dashboard) ── -->
   <div class="section-card" style="animation-delay:0.08s">
-    <div class="section-title">Manufacturing Dashboard</div>
+    <div class="section-title">Manufacturing Dashboard (FATP Environment Dashboard)</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Real-Time Production Monitoring Dashboard — Yield, UPH, Output, WIP, TRC & Environment</div>
+        <div class="item-title">FATP Environment Dashboard Completed — ISO/WHO Class, Admin Access & FA2 Installation</div>
         <div class="item-desc">
-          Developed a real-time production monitoring dashboard tracking live KPIs across the line: <strong>Yield %</strong>, <strong>UPH</strong>, <strong>Output</strong>, <strong>WIP</strong>, <strong>TRC Defects</strong>, and <strong>Environment</strong> (Temperature/Humidity), giving a single unified view of line health and conditions.
+          The FATP Environment Dashboard has been completed end-to-end. Key features added include <strong>ISO Class</strong> and <strong>WHO Class</strong> air quality classification views, giving the team a standardized reference point for interpreting environmental readings, along with full <strong>Admin access</strong> controls for managing configuration and permissions.
+          <br><br>
+          A number of additional enhancements were layered in through to deployment, rounding out the dashboard's feature set before rollout. Physical installation has also been completed for <strong>Production FA2</strong>, extending environmental monitoring coverage to that line.
         </div>
         <span class="item-tag green">Deployed</span>
       </div>
       <div class="item-img">
-        <img src="59.jpeg" alt="Production Monitoring Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Production Monitoring Dashboard</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Oracle (SFC) + MySQL Integration — Live Production Data & Configuration Management</div>
-        <div class="item-desc">
-          Integrated <strong>Oracle (SFC)</strong> for live production data and <strong>MySQL</strong> for managing targets, team, attendance, and stage configuration — keeping fast-moving shop-floor data and slower-moving configuration data on the sources best suited for each.
-        </div>
-        <span class="item-tag green">Integrated</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Deployed via IIS + FastAPI Backend, React Frontend — Network-Wide Access</div>
-        <div class="item-desc">
-          Deployed the system via <strong>IIS + FastAPI</strong> backend with a <strong>React</strong> frontend, accessible across all network machines — no local install or VPN required for anyone on the factory network to view the dashboard.
-        </div>
-        <span class="item-tag green">Deployed</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Pilot Monitor Installed on Alpha Line</div>
-        <div class="item-desc">
-          A monitor was installed directly on the production line (Alpha) for a pilot run, letting the line team view live metrics directly from their workstation without needing to open a separate device or screen.
-        </div>
-        <span class="item-tag blue">Pilot Live</span>
-        <div class="item-img" style="width:100%; margin-top:18px;">
-          <img src="60.jpeg" alt="Alpha Line Pilot Monitor" onerror="this.parentElement.style.background='#cce8e8'">
-          <div class="img-label">Alpha Line Pilot Monitor</div>
-        </div>
-      </div>
-      <div class="item-img">
-        <img src="66.jpeg" alt="Alpha Line Pilot Monitor 2" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Alpha Line Pilot Monitor</div>
+        <img src="69.jpeg" alt="FATP Environment Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">FATP Environment Dashboard</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 3. Manpower Visibility Update ── -->
+  <!-- ── 3. Manpower Visibility & Attendance System ── -->
   <div class="section-card" style="animation-delay:0.11s">
-    <div class="section-title">Manpower Visibility Update</div>
+    <div class="section-title">Manpower Visibility & Attendance System</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Presence360 Staff Attendance Pie Chart Dashboard — HR Team, Date-wise Live Visualization</div>
+        <div class="item-title">Manpower Visibility System — Unit 1 KT Session Conducted</div>
         <div class="item-desc">
-          Developed a Presence360 Staff Attendance Pie Chart Dashboard for the HR team, with date-wise live visualization letting HR pull up attendance distribution for any given day directly from the P360 API.
+          Coordinated and conducted a knowledge-transfer (KT) session with the Unit 1 department leads to walk them through the Manpower Visibility System ahead of its rollout there. A Google Sheet was shared with the department leads for structured data collection, and commitment was received that the required information would be filled in and returned by the following day — keeping the rollout timeline on track.
         </div>
-        <span class="item-tag green">Deployed</span>
-      </div>
-      <div class="item-img">
-        <img src="61.jpeg" alt="P360 Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">P360 Pie Chart Dashboard</div>
+        <span class="item-tag orange">In Progress</span>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across Views</div>
+        <div class="item-title">Staff Attendance Dashboard — P360 Pie Chart Live, HR Refinements Underway</div>
         <div class="item-desc">
-          Integrated the Daily Manpower HC Matrix, developed with the PPC team, into the Visibility Dashboard — now showing the Male:Female ratio across views for better traceability of workforce composition alongside headcount targets.
-        </div>
-        <span class="item-tag green">Integrated</span>
-      </div>
-      <div class="item-img">
-        <img src="62.jpeg" alt="Daily HC Matrix M:F Ratio" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HC Matrix — M:F Ratio</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 4. AI Assisted Initiative ── -->
-  <div class="section-card" style="animation-delay:0.14s">
-    <div class="section-title">AI Assisted Initiative</div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">AI-Assisted Comprehensive Translation</div>
-        <div class="item-desc">
-          <ul>
-            <li>AI-assisted translation delivers a noticeably higher quality result than standard machine translation tools.</li>
-            <li>Capable of properly translating across languages regardless of file size or file type.</li>
-            <li>Translation accuracy is guaranteed at the level required for internal documentation and cross-team communication.</li>
-          </ul>
-        </div>
-        <span class="item-tag blue">Applied</span>
-      </div>
-      <div class="item-img">
-        <img src="63.jpeg" alt="AI Assisted Translation" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">AI Translation</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">AI Portfolio for OPEX</div>
-        <div class="item-desc">
-          <ul>
-            <li>Created analytics on AI &amp; Automation opportunities for the top 7 departments.</li>
-            <li>Aligned with the broader Intelligent Operations initiative.</li>
-            <li>Completed a detailed study of the WH to IQC process — no major improvement points identified from our side at this stage; review will continue with additional teams. Further areas and teams are being explored for potential AI initiatives.</li>
-          </ul>
+          Developed the Presence360 Staff Attendance Pie Chart Dashboard for the HR team, giving date-wise live visualization of attendance distribution pulled directly from the P360 API. Requirements and differences in expectation were discussed directly with HR, and the team is working ahead on refinements to close the gap between the current output and what HR needs for day-to-day use.
         </div>
         <span class="item-tag orange">In Progress</span>
       </div>
       <div class="item-img">
-        <img src="64.jpeg" alt="AI Portfolio for OPEX" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">AI Portfolio — OPEX</div>
+        <img src="70.png" alt="Staff Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Staff Attendance Dashboard</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">AI-Assisted Comprehensive Data Analytics</div>
+        <div class="item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across All Views</div>
         <div class="item-desc">
-          <ul>
-            <li>MES data is extensive and qualifies as a large, complex dataset.</li>
-            <li>With AI assistance, difficult analytics on this data can be carried out accurately and at speed.</li>
-            <li>Aligned with the ongoing MES deep-study work feeding into KPI Deck / Dashboard generation.</li>
-          </ul>
+          Integrated the Daily Manpower HC Matrix, developed jointly with the PPC team, into the Visibility Dashboard. The Male:Female ratio is now shown across all views for better traceability of workforce composition, giving HR and operations a consistent, dashboard-wide read on gender distribution alongside existing headcount metrics.
         </div>
-        <span class="item-tag blue">Applied</span>
+        <span class="item-tag green">Integrated</span>
       </div>
       <div class="item-img">
-        <img src="65.jpeg" alt="AI Data Analytics MES" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">MES Data Analytics</div>
+        <img src="71.png" alt="Daily Manpower HC Matrix" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">HC Matrix Integration</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Attendance Reward System — Automated Point Calculation & Downloadable Milestone Reports</div>
+        <div class="item-desc">
+          Enhancement work has been initiated on the Attendance Reward System to automatically calculate and assign reward points to eligible operators, removing the need for manual point tallying. Alongside this, downloadable milestone reports are being built out, covering the <strong>1-month</strong>, <strong>3-month</strong>, <strong>6-month</strong>, and <strong>12-month</strong> reward milestones, so HR can pull a clean record of who has hit which milestone at any time.
+        </div>
+        <span class="item-tag orange">In Progress</span>
+      </div>
+      <div class="item-img">
+        <img src="72.jpeg" alt="Attendance Reward System" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Attendance Reward System</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. Other Initiatives ── -->
+  <div class="section-card" style="animation-delay:0.14s">
+    <div class="section-title">Other Initiatives</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">FeedSync Updates Verified by SMT Team</div>
+        <div class="item-desc">
+          Received verification and confirmation of the recent FeedSync updates from the SMT team, closing the loop on the changes rolled out to the feeder list generation tool and confirming they're working as expected on the floor.
+        </div>
+        <span class="item-tag green">Confirmed</span>
+      </div>
+      <div class="item-img">
+        <img src="73.png" alt="FeedSync Verification" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">FeedSync Verification</div>
       </div>
     </div>
   </div>
@@ -916,6 +858,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week27-content', this)">
+        <h2>Week 27</h2>
+        <small>July 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week26-content', this)">
         <h2>Week 26</h2>
         <small>June–July 2026</small>
@@ -937,6 +883,196 @@
         <small>May 2026</small>
       </div>
     </div>
+
+    <!-- ══════════════════ WEEK 27 CONTENT ══════════════════ -->
+    <div id="week27-content">
+
+      <!-- W27 Section 1: Environment Monitoring System through IoT (ESP32) -->
+      <div class="w22-section">
+        <div class="w22-title">Environment Monitoring System through IoT (ESP32)</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">PMS7003T Dust Particle Sensor — Second ESP32 Unit Commissioned</div>
+            <div class="w22-item-desc">
+              Received the new dust particle sensor (PMS7003T) and began integration work. A second ESP32 has been set up dedicated to this sensor, running alongside the existing DHT22-based temperature and humidity unit, keeping the two sensing pipelines independent so one doesn't disturb the other's timing or connection stability.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Firmware Developed — PM1.0/PM2.5/PM10 Readings Validated & Calibrated</div>
+            <div class="w22-item-desc">
+              Firmware developed and uploaded to read PM1.0, PM2.5, and PM10 concentration and particle count data from the PMS7003T. Readings were validated across multiple test cycles, and calibration corrections were applied to bring the measured values in line with expected reference accuracy.
+            </div>
+            <span class="w22-tag green">Validated</span>
+          </div>
+          <div class="w22-img">
+            <img src="57.jpeg" alt="PM Firmware Validation" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">PM Readings Validation</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">MQTT Pipeline Live on New HiveMQ Cluster</div>
+            <div class="w22-item-desc">
+              Built the MQTT pipeline connecting the new ESP32 to a fresh HiveMQ cluster — dust particle data is now being published and received successfully on HiveMQ. Next week: connect HiveMQ to MongoDB for historical data storage, and integrate this data into the dashboard for live and historical visualization.
+            </div>
+            <span class="w22-tag green">Pipeline Live</span>
+          </div>
+          <div class="w22-img">
+            <img src="58.jpeg" alt="MQTT HiveMQ Pipeline" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HiveMQ Cluster</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W27 Section 2: Manufacturing Dashboard -->
+      <div class="w22-section">
+        <div class="w22-title">Manufacturing Dashboard</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Real-Time Production Monitoring Dashboard — Yield, UPH, Output, WIP, TRC & Environment</div>
+            <div class="w22-item-desc">
+              Developed a real-time production monitoring dashboard tracking live KPIs across the line: Yield %, UPH, Output, WIP, TRC Defects, and Environment (Temperature/Humidity), giving a single unified view of line health and conditions.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="59.jpeg" alt="Production Monitoring Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Production Monitoring Dashboard</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Oracle (SFC) + MySQL Integration — Live Production Data & Configuration Management</div>
+            <div class="w22-item-desc">
+              Integrated Oracle (SFC) for live production data and MySQL for managing targets, team, attendance, and stage configuration — keeping fast-moving shop-floor data and slower-moving configuration data on the sources best suited for each.
+            </div>
+            <span class="w22-tag green">Integrated</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Deployed via IIS + FastAPI Backend, React Frontend — Network-Wide Access</div>
+            <div class="w22-item-desc">
+              Deployed the system via IIS + FastAPI backend with a React frontend, accessible across all network machines — no local install or VPN required for anyone on the factory network to view the dashboard.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Pilot Monitor Installed on Alpha Line</div>
+            <div class="w22-item-desc">
+              A monitor was installed directly on the production line (Alpha) for a pilot run, letting the line team view live metrics directly from their workstation without needing to open a separate device or screen.
+            </div>
+            <span class="w22-tag blue">Pilot Live</span>
+          </div>
+          <div class="w22-2col-img">
+            <div class="w22-img">
+              <img src="60.jpeg" alt="Alpha Line Pilot Monitor" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Alpha Line Pilot Monitor</div>
+            </div>
+            <div class="w22-img">
+              <img src="66.jpeg" alt="Alpha Line Pilot Monitor 2" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+              <div class="img-label">Alpha Line Pilot Monitor</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W27 Section 3: Manpower Visibility Update -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Visibility Update</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Presence360 Staff Attendance Pie Chart Dashboard — HR Team, Date-wise Live Visualization</div>
+            <div class="w22-item-desc">
+              Developed a Presence360 Staff Attendance Pie Chart Dashboard for the HR team, with date-wise live visualization letting HR pull up attendance distribution for any given day directly from the P360 API.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="61.jpeg" alt="P360 Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">P360 Pie Chart Dashboard</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across Views</div>
+            <div class="w22-item-desc">
+              Integrated the Daily Manpower HC Matrix, developed with the PPC team, into the Visibility Dashboard — now showing the Male:Female ratio across views for better traceability of workforce composition alongside headcount targets.
+            </div>
+            <span class="w22-tag green">Integrated</span>
+          </div>
+          <div class="w22-img">
+            <img src="62.jpeg" alt="Daily HC Matrix M:F Ratio" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HC Matrix — M:F Ratio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W27 Section 4: AI Assisted Initiative -->
+      <div class="w22-section">
+        <div class="w22-title">AI Assisted Initiative</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI-Assisted Comprehensive Translation</div>
+            <div class="w22-item-desc">
+              AI-assisted translation delivers a noticeably higher quality result than standard machine translation tools, capable of properly translating across languages regardless of file size or file type, with accuracy guaranteed at the level required for internal documentation and cross-team communication.
+            </div>
+            <span class="w22-tag blue">Applied</span>
+          </div>
+          <div class="w22-img">
+            <img src="63.jpeg" alt="AI Assisted Translation" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">AI Translation</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI Portfolio for OPEX</div>
+            <div class="w22-item-desc">
+              Created analytics on AI &amp; Automation opportunities for the top 7 departments, aligned with the broader Intelligent Operations initiative. Completed a detailed study of the WH to IQC process — no major improvement points identified from our side at this stage; review will continue with additional teams, and further areas and teams are being explored for potential AI initiatives.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="64.jpeg" alt="AI Portfolio for OPEX" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">AI Portfolio — OPEX</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">AI-Assisted Comprehensive Data Analytics</div>
+            <div class="w22-item-desc">
+              MES data is extensive and qualifies as a large, complex dataset. With AI assistance, difficult analytics on this data can be carried out accurately and at speed, aligned with the ongoing MES deep-study work feeding into KPI Deck / Dashboard generation.
+            </div>
+            <span class="w22-tag blue">Applied</span>
+          </div>
+          <div class="w22-img">
+            <img src="65.jpeg" alt="AI Data Analytics MES" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">MES Data Analytics</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 27 · July 2026
+      </div>
+    </div><!-- /week27-content -->
 
     <!-- ══════════════════ WEEK 26 CONTENT ══════════════════ -->
     <div id="week26-content">
@@ -1951,7 +2087,7 @@
   }
   function toggleWeek(id, btn) {
     // Close the others
-    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content'];
+    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content', 'week27-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
