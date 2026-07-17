@@ -651,12 +651,12 @@
   }
 
   /* Archive week content containers */
-  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content, #week27-content {
+  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content, #week27-content, #week28-content {
     display: none;
     text-align: left;
     margin-top: 32px;
   }
-  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible, #week27-content.visible { display: block; }
+  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible, #week27-content.visible, #week28-content.visible { display: block; }
 
   /* Animations */
   @keyframes fadeDown {
@@ -699,65 +699,55 @@
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 28 · July 2026 · Current</div>
+    <div class="week-badge">Week 29 · July 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Operational Efficiency Dashboard integration MES IoT ── -->
+  <!-- ── 1. Multi-Product Production Dashboards — Vivo & Realme ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Operational Efficiency Dashboard integrating MES & IoT</div>
+    <div class="section-title">Multi-Product Production Dashboards — Vivo & Realme</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Stage Mapping Data Collection Complete for MES Integration — Dust Sensor Now Live on Main FATP Dashboard</div>
+        <div class="item-title">Vivo Dashboard Completed & Deployed Across Both Shifts — Realme TWS/Power Bank Development Complete</div>
         <div class="item-desc">
-          Data collection for Stage Mapping has been completed, covering the mapping of each production stage boundary needed to feed MES data cleanly into the Operational Efficiency Dashboard — this groundwork ensures downstream metrics like Yield, TRC, and USN pull from the correct stage-level records once integration goes live.
-          <br><br>
-          In parallel, the dust particle sensor (<strong>PMS7003T</strong>) has been successfully integrated in the final section of the line, marking the completion of its physical installation and commissioning. The new ESP32 unit dedicated to this sensor is now live and reporting on the main FATP Dashboard, bringing dust monitoring into the same operational view as the rest of the line's environmental data.
+          <ul>
+            <li>Completed the Vivo production dashboard with all required KPIs, including Yield, UPH, Input, Output, WIP, TRC Defects, Hourly UPH, Yield per Line, Attendance, and Line Leader details — bringing every metric the Vivo line team needs into one consolidated view.</li>
+            <li>Implemented and deployed the completed Vivo dashboard directly on the Vivo production line, covering both day and night shift so the line has continuous live visibility regardless of which shift is running.</li>
+            <li>Completed the software development for the Realme TWS and Realme Power Bank dashboards, bringing both to the same level of readiness as the Vivo build.</li>
+            <li>Once the desktop system is available on the floor, the Realme TWS and Realme Power Bank dashboards will be deployed and made live on the production line, following the same rollout approach used for Vivo.</li>
+          </ul>
         </div>
-        <span class="item-tag green">Live</span>
+        <span class="item-tag orange">In Progress</span>
       </div>
       <div class="item-img">
-        <img src="67.jpeg" alt="Stage Mapping and Dust Sensor Integration" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Stage Mapping / Dust Sensor Live</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">PM Firmware Developed, Tested & Calibrated — MQTT Pipeline Now Publishing to HiveMQ</div>
-        <div class="item-desc">
-          Firmware has been developed and tested for the PMS7003T to read PM1.0, PM2.5, and PM10 particle concentration data, with calibration corrections applied so the readings track closer to expected reference values and give an accurate basis for air quality monitoring on the floor.
-          <br><br>
-          The MQTT pipeline connecting this sensor to the cloud has now been established, and dust particle data is successfully publishing to HiveMQ in real time — completing the sensing-to-cloud leg of the pipeline and setting up the next step of routing this data into MongoDB and the dashboard.
-        </div>
-        <span class="item-tag green">Publishing</span>
-      </div>
-      <div class="item-img">
-        <img src="68.jpeg" alt="PM Firmware and MQTT Pipeline" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Firmware &amp; MQTT Pipeline</div>
+        <img src="73.jpeg" alt="Vivo and Realme Production Dashboards" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Vivo / Realme Dashboards</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Manufacturing Dashboard (FATP Environment Dashboard) ── -->
+  <!-- ── 2. Environment Monitoring — Multi-Floor Sensor Network ── -->
   <div class="section-card" style="animation-delay:0.08s">
-    <div class="section-title">Manufacturing Dashboard (FATP Environment Dashboard)</div>
+    <div class="section-title">Environment Monitoring — Multi-Floor Sensor Network</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">FATP Environment Dashboard Completed — ISO/WHO Class, Admin Access & FA2 Installation</div>
+        <div class="item-title">All 5 Floor Sensors Live — Backend Extended for SMT & REL Lab, Phase 2 Planned</div>
         <div class="item-desc">
-          The FATP Environment Dashboard has been completed end-to-end. Key features added include <strong>ISO Class</strong> and <strong>WHO Class</strong> air quality classification views, giving the team a standardized reference point for interpreting environmental readings, along with full <strong>Admin access</strong> controls for managing configuration and permissions.
-          <br><br>
-          A number of additional enhancements were layered in through to deployment, rounding out the dashboard's feature set before rollout. Physical installation has also been completed for <strong>Production FA2</strong>, extending environmental monitoring coverage to that line.
+          <ul>
+            <li>All 5 floor sensors — FATP1, FATP2, FATP3, SMT, and REL Lab — are now live on the dashboard with real-time readings, bringing the full set of monitored locations onto a single environmental view.</li>
+            <li>The backend (server.js) has been updated to support SMT and REL Lab, with MQTT, database, and API layers extended beyond the original FATP1–3 scope to accommodate the two new locations.</li>
+            <li>Dashboard UI/UX has been customized per team preference, so each floor's view reflects how that team actually wants to read its data.</li>
+            <li>Phase 1 is complete — one sensor per floor live across all 5 locations. Phase 2, covering multi-sensor zone monitoring within each floor, is planned next.</li>
+          </ul>
         </div>
-        <span class="item-tag green">Deployed</span>
+        <span class="item-tag green">Phase 1 Live</span>
       </div>
       <div class="item-img">
-        <img src="69.jpeg" alt="FATP Environment Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">FATP Environment Dashboard</div>
+        <img src="76.jpeg" alt="Multi-Floor Sensor Network" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">5-Floor Sensor Network</div>
       </div>
     </div>
   </div>
@@ -768,72 +758,52 @@
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Manpower Visibility System — Unit 1 KT Session Conducted</div>
+        <div class="item-title">Attendance Dashboard Integrated with FATP Operational Efficiency Dashboard</div>
         <div class="item-desc">
-          Coordinated and conducted a knowledge-transfer (KT) session with the Unit 1 department leads to walk them through the Manpower Visibility System ahead of its rollout there. A Google Sheet was shared with the department leads for structured data collection, and commitment was received that the required information would be filled in and returned by the following day — keeping the rollout timeline on track.
-        </div>
-        <span class="item-tag orange">In Progress</span>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Staff Attendance Dashboard — P360 Pie Chart Live, HR Refinements Underway</div>
-        <div class="item-desc">
-          Developed the Presence360 Staff Attendance Pie Chart Dashboard for the HR team, giving date-wise live visualization of attendance distribution pulled directly from the P360 API. Requirements and differences in expectation were discussed directly with HR, and the team is working ahead on refinements to close the gap between the current output and what HR needs for day-to-day use.
-        </div>
-        <span class="item-tag orange">In Progress</span>
-      </div>
-      <div class="item-img">
-        <img src="70.png" alt="Staff Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Staff Attendance Dashboard</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across All Views</div>
-        <div class="item-desc">
-          Integrated the Daily Manpower HC Matrix, developed jointly with the PPC team, into the Visibility Dashboard. The Male:Female ratio is now shown across all views for better traceability of workforce composition, giving HR and operations a consistent, dashboard-wide read on gender distribution alongside existing headcount metrics.
+          Worked on integrating the Attendance Dashboard with the FATP Operational Efficiency Dashboard, enabling seamless data flow between the two systems and giving the team better visibility into attendance alongside operational metrics in one place.
         </div>
         <span class="item-tag green">Integrated</span>
       </div>
       <div class="item-img">
-        <img src="71.png" alt="Daily Manpower HC Matrix" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">HC Matrix Integration</div>
+        <img src="75.png" alt="Attendance Dashboard Integration" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Attendance Dashboard Integration</div>
       </div>
     </div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Attendance Reward System — Automated Point Calculation & Downloadable Milestone Reports</div>
+        <div class="item-title">Absenteeism/Attrition Study, HR & Unit 1 Coordination, IE & PPC Collaboration</div>
         <div class="item-desc">
-          Enhancement work has been initiated on the Attendance Reward System to automatically calculate and assign reward points to eligible operators, removing the need for manual point tallying. Alongside this, downloadable milestone reports are being built out, covering the <strong>1-month</strong>, <strong>3-month</strong>, <strong>6-month</strong>, and <strong>12-month</strong> reward milestones, so HR can pull a clean record of who has hit which milestone at any time.
+          <ul>
+            <li>Performed dashboard improvements alongside an in-depth study on the absenteeism and attrition tracking modules, to sharpen how those trends are surfaced.</li>
+            <li>Coordinated with the HR team on Staff Attendance system enhancements, and with Unit 1 on GS integration.</li>
+            <li>Collaborated with the IE team on the HC Matrix and the Glue Consumption issue, and with the PPC team on Alternate Part Consumption tracking — further study is in progress on both fronts.</li>
+          </ul>
         </div>
         <span class="item-tag orange">In Progress</span>
-      </div>
-      <div class="item-img">
-        <img src="72.jpeg" alt="Attendance Reward System" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Attendance Reward System</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 4. Other Initiatives ── -->
+  <!-- ── 4. Strategic Engineering Initiatives ── -->
   <div class="section-card" style="animation-delay:0.14s">
-    <div class="section-title">Other Initiatives</div>
+    <div class="section-title">Strategic Engineering Initiatives</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">FeedSync Updates Verified by SMT Team</div>
+        <div class="item-title">Line Balancing Reference from Yueda Factory (Vietnam) — Manpower & Layout Optimization</div>
         <div class="item-desc">
-          Received verification and confirmation of the recent FeedSync updates from the SMT team, closing the loop on the changes rolled out to the feeder list generation tool and confirming they're working as expected on the floor.
+          <ul>
+            <li>Based on the Line Balancing Rate information from Yueda Factory in Vietnam, analysis was carried out across different kinds of manufacturing scenarios.</li>
+            <li>Based on this analysis, an optimized plan for manpower allocation could be provided.</li>
+            <li>This analytics work now serves as a reference point for designing line layout, conveyor design, and line infrastructure for the specific project.</li>
+          </ul>
         </div>
-        <span class="item-tag green">Confirmed</span>
+        <span class="item-tag blue">Applied</span>
       </div>
       <div class="item-img">
-        <img src="73.png" alt="FeedSync Verification" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">FeedSync Verification</div>
+        <img src="74.jpeg" alt="Yueda Factory Line Balancing Analysis" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Line Balancing Analysis</div>
       </div>
     </div>
   </div>
@@ -858,6 +828,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week28-content', this)">
+        <h2>Week 28</h2>
+        <small>July 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week27-content', this)">
         <h2>Week 27</h2>
         <small>July 2026</small>
@@ -883,6 +857,142 @@
         <small>May 2026</small>
       </div>
     </div>
+
+    <!-- ══════════════════ WEEK 28 CONTENT ══════════════════ -->
+    <div id="week28-content">
+
+      <!-- W28 Section 1: Operational Efficiency Dashboard integration MES IoT -->
+      <div class="w22-section">
+        <div class="w22-title">Operational Efficiency Dashboard integration MES IoT</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Stage Mapping Data Collection Complete for MES Integration — Dust Sensor Now Live on Main FATP Dashboard</div>
+            <div class="w22-item-desc">
+              Data collection for Stage Mapping completed, covering the mapping of each production stage boundary needed to feed MES data cleanly into the Operational Efficiency Dashboard. In parallel, the dust particle sensor (PMS7003T) was successfully integrated in the final section of the line, and the new ESP32 unit dedicated to this sensor is now live and reporting on the main FATP Dashboard.
+            </div>
+            <span class="w22-tag green">Live</span>
+          </div>
+          <div class="w22-img">
+            <img src="67.jpeg" alt="Stage Mapping and Dust Sensor Integration" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Stage Mapping / Dust Sensor Live</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">PM Firmware Developed, Tested & Calibrated — MQTT Pipeline Now Publishing to HiveMQ</div>
+            <div class="w22-item-desc">
+              Firmware developed and tested for the PMS7003T to read PM1.0, PM2.5, and PM10 particle concentration data, with calibration corrections applied for improved accuracy. The MQTT pipeline connecting this sensor to the cloud has been established, and dust particle data is successfully publishing to HiveMQ in real time.
+            </div>
+            <span class="w22-tag green">Publishing</span>
+          </div>
+          <div class="w22-img">
+            <img src="68.jpeg" alt="PM Firmware and MQTT Pipeline" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Firmware &amp; MQTT Pipeline</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W28 Section 2: Manufacturing Dashboard (FATP Environment Dashboard) -->
+      <div class="w22-section">
+        <div class="w22-title">Manufacturing Dashboard (FATP Environment Dashboard)</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">FATP Environment Dashboard Completed — ISO/WHO Class, Admin Access & FA2 Installation</div>
+            <div class="w22-item-desc">
+              The FATP Environment Dashboard has been completed end-to-end, with key features added including ISO Class and WHO Class air quality classification views, along with full Admin access controls. A number of additional enhancements were layered in through to deployment, and physical installation has also been completed for Production FA2.
+            </div>
+            <span class="w22-tag green">Deployed</span>
+          </div>
+          <div class="w22-img">
+            <img src="69.jpeg" alt="FATP Environment Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">FATP Environment Dashboard</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W28 Section 3: Manpower Visibility & Attendance System -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Visibility & Attendance System</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Manpower Visibility System — Unit 1 KT Session Conducted</div>
+            <div class="w22-item-desc">
+              Coordinated and conducted a knowledge-transfer session with the Unit 1 department leads to walk them through the Manpower Visibility System ahead of its rollout. A Google Sheet was shared for structured data collection, with commitment received that the required information would be returned the following day.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Staff Attendance Dashboard — P360 Pie Chart Live, HR Refinements Underway</div>
+            <div class="w22-item-desc">
+              Developed the Presence360 Staff Attendance Pie Chart Dashboard for the HR team, giving date-wise live visualization of attendance distribution. Requirements and differences in expectation were discussed with HR, with refinements underway to close the gap between current output and HR's day-to-day needs.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="70.png" alt="Staff Attendance Pie Chart Dashboard" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Staff Attendance Dashboard</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Daily Manpower HC Matrix Integrated with PPC — M:F Ratio Across All Views</div>
+            <div class="w22-item-desc">
+              Integrated the Daily Manpower HC Matrix, developed jointly with the PPC team, into the Visibility Dashboard, with the Male:Female ratio now shown across all views for better traceability of workforce composition.
+            </div>
+            <span class="w22-tag green">Integrated</span>
+          </div>
+          <div class="w22-img">
+            <img src="71.png" alt="Daily Manpower HC Matrix" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">HC Matrix Integration</div>
+          </div>
+        </div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Attendance Reward System — Automated Point Calculation & Downloadable Milestone Reports</div>
+            <div class="w22-item-desc">
+              Enhancement work initiated on the Attendance Reward System to automatically calculate and assign reward points to eligible operators, alongside downloadable milestone reports covering the 1-month, 3-month, 6-month, and 12-month reward milestones.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="72.jpeg" alt="Attendance Reward System" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Attendance Reward System</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W28 Section 4: Other Initiatives -->
+      <div class="w22-section">
+        <div class="w22-title">Other Initiatives</div>
+
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">FeedSync Updates Verified by SMT Team</div>
+            <div class="w22-item-desc">
+              Received verification and confirmation of the recent FeedSync updates from the SMT team, closing the loop on the changes rolled out to the feeder list generation tool.
+            </div>
+            <span class="w22-tag green">Confirmed</span>
+          </div>
+          <div class="w22-img">
+            <img src="73.png" alt="FeedSync Verification" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">FeedSync Verification</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 28 · July 2026
+      </div>
+    </div><!-- /week28-content -->
 
     <!-- ══════════════════ WEEK 27 CONTENT ══════════════════ -->
     <div id="week27-content">
@@ -2087,7 +2197,7 @@
   }
   function toggleWeek(id, btn) {
     // Close the others
-    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content', 'week27-content'];
+    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content', 'week27-content', 'week28-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
