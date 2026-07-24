@@ -651,12 +651,12 @@
   }
 
   /* Archive week content containers */
-  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content, #week27-content, #week28-content {
+  #week22-content, #week23-content, #week24-content, #week25-content, #week26-content, #week27-content, #week28-content, #week29-content {
     display: none;
     text-align: left;
     margin-top: 32px;
   }
-  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible, #week27-content.visible, #week28-content.visible { display: block; }
+  #week22-content.visible, #week23-content.visible, #week24-content.visible, #week25-content.visible, #week26-content.visible, #week27-content.visible, #week28-content.visible, #week29-content.visible { display: block; }
 
   /* Animations */
   @keyframes fadeDown {
@@ -699,111 +699,183 @@
 <div id="main-report">
 
   <div class="report-header">
-    <div class="week-badge">Week 29 · July 2026 · Current</div>
+    <div class="week-badge">Week 30 · July 2026 · Current</div>
     <h1>OPEX Weekly Update</h1>
     <p class="sub">Operational Excellence — Digital & Process Initiatives</p>
   </div>
 
-  <!-- ── 1. Multi-Product Production Dashboards — Vivo & Realme ── -->
+  <!-- ── 1. Environment Monitoring System through IoT (Phase 2) ── -->
   <div class="section-card" style="animation-delay:0.05s">
-    <div class="section-title">Multi-Product Production Dashboards — Vivo & Realme</div>
+    <div class="section-title">Environment Monitoring System through IoT (Phase 2)</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Vivo Dashboard Completed & Deployed Across Both Shifts — Realme TWS/Power Bank Development Complete</div>
+        <div class="item-title">Phase 2 Initiated — Production Floor Divided into Six Monitoring Zones</div>
         <div class="item-desc">
-          <ul>
-            <li>Completed the Vivo production dashboard with all required KPIs, including Yield, UPH, Input, Output, WIP, TRC Defects, Hourly UPH, Yield per Line, Attendance, and Line Leader details — bringing every metric the Vivo line team needs into one consolidated view.</li>
-            <li>Implemented and deployed the completed Vivo dashboard directly on the Vivo production line, covering both day and night shift so the line has continuous live visibility regardless of which shift is running.</li>
-            <li>Completed the software development for the Realme TWS and Realme Power Bank dashboards, bringing both to the same level of readiness as the Vivo build.</li>
-            <li>Once the desktop system is available on the floor, the Realme TWS and Realme Power Bank dashboards will be deployed and made live on the production line, following the same rollout approach used for Vivo.</li>
-          </ul>
+          Initiated <strong>Phase 2</strong> of the Environment Monitoring System by dividing the production floor into <strong>six monitoring zones</strong>, moving beyond the single-sensor-per-floor coverage of Phase 1. This zoning gives enhanced environmental visibility and enables localized analysis, so readings can be traced back to a specific area of the floor rather than an averaged floor-level figure.
+        </div>
+        <span class="item-tag orange">Initiated</span>
+      </div>
+      <div class="item-img">
+        <img src="77.jpeg" alt="Six Monitoring Zones — Phase 2" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Six Monitoring Zones</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Phase 2 Environment Dashboard Developed — Backend Pipeline Integration Underway</div>
+        <div class="item-desc">
+          Completed development of the <strong>Phase 2 Environment Dashboard</strong> and initiated backend pipeline integration to enable <strong>live real-time data visualization</strong> from all six monitoring zones, extending the sensing-to-dashboard pipeline built in Phase 1 to the new zone-based structure.
         </div>
         <span class="item-tag orange">In Progress</span>
       </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Zone-Wise Heatmaps & Structured Floor Segmentation Added</div>
+        <div class="item-desc">
+          Enhanced the dashboard with advanced visualization features, including <strong>zone-wise heatmaps</strong> and structured floor segmentation, to improve monitoring accuracy, trend analysis, and operational decision-making — giving the team an at-a-glance visual read on which zones are trending out of range.
+        </div>
+        <span class="item-tag green">Enhanced</span>
+      </div>
       <div class="item-img">
-        <img src="73.jpeg" alt="Vivo and Realme Production Dashboards" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Vivo / Realme Dashboards</div>
+        <img src="78.jpeg" alt="Zone-Wise Heatmaps" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Zone-Wise Heatmaps</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. Environment Monitoring — Multi-Floor Sensor Network ── -->
+  <!-- ── 2. Manufacturing Dashboard (Model-wise Production Dashboard) ── -->
   <div class="section-card" style="animation-delay:0.08s">
-    <div class="section-title">Environment Monitoring — Multi-Floor Sensor Network</div>
+    <div class="section-title">Manufacturing Dashboard (Model-wise Production Dashboard)</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">All 5 Floor Sensors Live — Backend Extended for SMT & REL Lab, Phase 2 Planned</div>
+        <div class="item-title">Model-wise Production Dashboard Completed for Floors 1–3</div>
         <div class="item-desc">
-          <ul>
-            <li>All 5 floor sensors — FATP1, FATP2, FATP3, SMT, and REL Lab — are now live on the dashboard with real-time readings, bringing the full set of monitored locations onto a single environmental view.</li>
-            <li>The backend (server.js) has been updated to support SMT and REL Lab, with MQTT, database, and API layers extended beyond the original FATP1–3 scope to accommodate the two new locations.</li>
-            <li>Dashboard UI/UX has been customized per team preference, so each floor's view reflects how that team actually wants to read its data.</li>
-            <li>Phase 1 is complete — one sensor per floor live across all 5 locations. Phase 2, covering multi-sensor zone monitoring within each floor, is planned next.</li>
-          </ul>
+          Successfully completed the <strong>Model-wise Production Dashboard</strong> for <strong>Floors 1–3</strong>, integrating key production KPIs including <strong>Output, Hourly Output, TRC Defects, Hourly TRC Defects, UPH, Hourly UPH, Combined Yield, Hourly Yield, Top 5 TRC Defects, Top 5 UPH Loss Reasons, Attendance,</strong> and <strong>Line Leader details</strong> — giving each model a dedicated, fully-instrumented view across all three floors.
         </div>
-        <span class="item-tag green">Phase 1 Live</span>
+        <span class="item-tag green">Completed</span>
       </div>
       <div class="item-img">
-        <img src="76.jpeg" alt="Multi-Floor Sensor Network" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">5-Floor Sensor Network</div>
+        <img src="79.jpeg" alt="Model-wise Production Dashboard" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Model-wise Production Dashboard</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Dynamic Admin Panel & Backend — Full Add/Edit/Delete, History & Audit</div>
+        <div class="item-desc">
+          Designed and developed a fully <strong>dynamic Admin Panel and Backend</strong>, enabling administrators to manage <strong>models, line mappings, final stages, production targets,</strong> and <strong>system configurations</strong> without requiring any code modifications. Implemented comprehensive <strong>Add, Edit, Delete, History,</strong> and <strong>Audit</strong> functionalities for complete configuration traceability, so every change to the system is tracked and reversible.
+        </div>
+        <span class="item-tag green">Built</span>
+      </div>
+      <div class="item-img">
+        <img src="80.jpeg" alt="Dynamic Admin Panel and Backend" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Admin Panel &amp; Backend</div>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Dynamic Image Cropping Module for Line Team Profiles</div>
+        <div class="item-desc">
+          Implemented a <strong>dynamic image cropping module</strong> for Line Team profiles, allowing administrators to optimize profile images directly from the admin panel to match dashboard display requirements — removing the need for any external image editing before a photo can be used.
+        </div>
+        <span class="item-tag blue">Implemented</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Dashboard Architecture Optimized — Fully Admin-Driven for Scalability</div>
+        <div class="item-desc">
+          Optimized the dashboard architecture for <strong>scalability, maintainability,</strong> and <strong>future expansion</strong>, making all configurations and operational mappings completely <strong>admin-driven</strong> while minimizing manual intervention — laying the groundwork for onboarding additional floors or models without structural rework.
+        </div>
+        <span class="item-tag green">Optimized</span>
+      </div>
+      <div class="item-img">
+        <img src="81.jpeg" alt="Optimized Dashboard Architecture" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">Scalable Architecture</div>
       </div>
     </div>
   </div>
 
-  <!-- ── 3. Manpower Visibility & Attendance System ── -->
+  <!-- ── 3. Operational Excellence Initiatives ── -->
   <div class="section-card" style="animation-delay:0.11s">
-    <div class="section-title">Manpower Visibility & Attendance System</div>
+    <div class="section-title">Operational Excellence Initiatives</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Attendance Dashboard Integrated with FATP Operational Efficiency Dashboard</div>
+        <div class="item-title">HR Collaboration — Staff Attendance Management System Enhancements</div>
         <div class="item-desc">
-          Worked on integrating the Attendance Dashboard with the FATP Operational Efficiency Dashboard, enabling seamless data flow between the two systems and giving the team better visibility into attendance alongside operational metrics in one place.
-        </div>
-        <span class="item-tag green">Integrated</span>
-      </div>
-      <div class="item-img">
-        <img src="75.png" alt="Attendance Dashboard Integration" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Attendance Dashboard Integration</div>
-      </div>
-    </div>
-
-    <div class="update-item">
-      <div class="item-content">
-        <div class="item-title">Absenteeism/Attrition Study, HR & Unit 1 Coordination, IE & PPC Collaboration</div>
-        <div class="item-desc">
-          <ul>
-            <li>Performed dashboard improvements alongside an in-depth study on the absenteeism and attrition tracking modules, to sharpen how those trends are surfaced.</li>
-            <li>Coordinated with the HR team on Staff Attendance system enhancements, and with Unit 1 on GS integration.</li>
-            <li>Collaborated with the IE team on the HC Matrix and the Glue Consumption issue, and with the PPC team on Alternate Part Consumption tracking — further study is in progress on both fronts.</li>
-          </ul>
+          Collaborated with the <strong>HR team</strong> to gather requirements and implement enhancements for the <strong>Staff Attendance Management System</strong>, supporting improved attendance monitoring and reporting for the workforce.
         </div>
         <span class="item-tag orange">In Progress</span>
       </div>
     </div>
-  </div>
-
-  <!-- ── 4. Strategic Engineering Initiatives ── -->
-  <div class="section-card" style="animation-delay:0.14s">
-    <div class="section-title">Strategic Engineering Initiatives</div>
 
     <div class="update-item">
       <div class="item-content">
-        <div class="item-title">Line Balancing Reference from Yueda Factory (Vietnam) — Manpower & Layout Optimization</div>
+        <div class="item-title">Glue Wastage Study — Root Cause Identification & Reduction Strategy</div>
+        <div class="item-desc">
+          Conducted a detailed study on <strong>Glue Wastage</strong>, identifying key contributing factors and working with cross-functional teams to develop effective control and reduction strategies aimed at bringing wastage down sustainably.
+        </div>
+        <span class="item-tag orange">In Progress</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">Alternate Part Code Consumption (Quectel) — Centralized BOM Intelligence Environment</div>
+        <div class="item-desc">
+          Analyzed the <strong>Alternate Part Code Consumption</strong> issue for the <strong>Quectel project</strong> and initiated development of a centralized <strong>BOM intelligence environment</strong> with automated alternate part classification based on predefined priority logic applied consistently across all BOMs.
+        </div>
+        <span class="item-tag orange">In Progress</span>
+      </div>
+    </div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI-Assisted Procurement Support — Glue Localization Analytics</div>
         <div class="item-desc">
           <ul>
-            <li>Based on the Line Balancing Rate information from Yueda Factory in Vietnam, analysis was carried out across different kinds of manufacturing scenarios.</li>
-            <li>Based on this analysis, an optimized plan for manpower allocation could be provided.</li>
-            <li>This analytics work now serves as a reference point for designing line layout, conveyor design, and line infrastructure for the specific project.</li>
+            <li>Ran glue localization analytics through AI assistance to evaluate feasibility and impact.</li>
+            <li>Supported Procurement and Engineering in exploring the possibility of localizing glue, aimed at solving the logistics issues associated with ODM-supplied glues.</li>
+            <li>Findings provided as a reference to support Procurement's decision-making on this front.</li>
           </ul>
         </div>
         <span class="item-tag blue">Applied</span>
       </div>
       <div class="item-img">
-        <img src="74.jpeg" alt="Yueda Factory Line Balancing Analysis" onerror="this.parentElement.style.background='#cce8e8'">
-        <div class="img-label">Line Balancing Analysis</div>
+        <img src="81.jpeg" alt="AI-Assisted Procurement Support" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">AI Procurement Support</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. AI-Assisted Initiative ── -->
+  <div class="section-card" style="animation-delay:0.14s">
+    <div class="section-title">AI-Assisted Initiative</div>
+
+    <div class="update-item">
+      <div class="item-content">
+        <div class="item-title">AI-Assisted Presentation Development — 6 Hours Down to Nearly 1 Hour</div>
+        <div class="item-desc">
+          <ul>
+            <li>Demonstrated an <strong>AI-assisted Presentation Development</strong> workflow capable of reducing presentation preparation time from approximately <strong>6 hours to nearly 1 hour</strong>.</li>
+            <li>Established a collaborative approach where <strong>AI accelerates content creation and formatting</strong>, while human expertise ensures business relevance, data validation, and presentation quality.</li>
+            <li>Promoted the adoption of <strong>Human + AI collaboration</strong> to improve productivity, consistency, and efficiency in documentation and presentation development across operational teams.</li>
+          </ul>
+        </div>
+        <span class="item-tag blue">Demonstrated</span>
+      </div>
+      <div class="item-img">
+        <img src="82.jpeg" alt="AI-Assisted Presentation Development" onerror="this.parentElement.style.background='#cce8e8'">
+        <div class="img-label">AI Presentation Development</div>
       </div>
     </div>
   </div>
@@ -828,6 +900,10 @@
     <p class="archive-sub">Select a week to view the update report</p>
 
     <div class="week-buttons">
+      <div class="week-btn" onclick="toggleWeek('week29-content', this)">
+        <h2>Week 29</h2>
+        <small>July 2026</small>
+      </div>
       <div class="week-btn" onclick="toggleWeek('week28-content', this)">
         <h2>Week 28</h2>
         <small>July 2026</small>
@@ -857,6 +933,95 @@
         <small>May 2026</small>
       </div>
     </div>
+
+    <!-- ══════════════════ WEEK 29 CONTENT ══════════════════ -->
+    <div id="week29-content">
+
+      <!-- W29 Section 1: Multi-Product Production Dashboards — Vivo & Realme -->
+      <div class="w22-section">
+        <div class="w22-title">Multi-Product Production Dashboards — Vivo & Realme</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Vivo Dashboard Completed & Deployed Across Both Shifts — Realme TWS/Power Bank Development Complete</div>
+            <div class="w22-item-desc">
+              Vivo dashboard completed with all required KPIs — Yield, UPH, Input, Output, WIP, TRC Defects, Hourly UPH, Yield per Line, Attendance, Line Leader details. Deployed live on the production line for both day and night shift. Realme TWS and Power Bank dashboard development completed, to go live once the desktop system is available on the floor.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+          <div class="w22-img">
+            <img src="73.jpeg" alt="Vivo and Realme Production Dashboards" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Vivo / Realme Dashboards</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W29 Section 2: Environment Monitoring — Multi-Floor Sensor Network -->
+      <div class="w22-section">
+        <div class="w22-title">Environment Monitoring — Multi-Floor Sensor Network</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">All 5 Floor Sensors Live — Backend Extended for SMT & REL Lab, Phase 2 Planned</div>
+            <div class="w22-item-desc">
+              All 5 floor sensors — FATP1, FATP2, FATP3, SMT, REL Lab — live on dashboard with real-time readings. Backend (server.js) updated to support SMT & REL Lab — MQTT, DB, and API extended beyond original FATP1–3. Dashboard UI/UX customized per team preference. Phase 1 done — 1 sensor/floor across all 5 locations; Phase 2 (multi-sensor zone monitoring) planned next.
+            </div>
+            <span class="w22-tag green">Phase 1 Live</span>
+          </div>
+          <div class="w22-img">
+            <img src="76.jpeg" alt="Multi-Floor Sensor Network" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">5-Floor Sensor Network</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W29 Section 3: Manpower Visibility & Attendance System -->
+      <div class="w22-section">
+        <div class="w22-title">Manpower Visibility & Attendance System</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Attendance Dashboard Integrated with FATP Operational Efficiency Dashboard</div>
+            <div class="w22-item-desc">
+              Worked on integrating the Attendance Dashboard with the FATP Operational Efficiency Dashboard for seamless data flow and better visibility.
+            </div>
+            <span class="w22-tag green">Integrated</span>
+          </div>
+          <div class="w22-img">
+            <img src="75.jpeg" alt="Attendance Dashboard Integration" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Attendance Dashboard Integration</div>
+          </div>
+        </div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Absenteeism/Attrition Study, HR & Unit 1 Coordination, IE & PPC Collaboration</div>
+            <div class="w22-item-desc">
+              Dashboard improvements and in-depth study on absenteeism and attrition tracking modules. Coordinated with HR on Staff Attendance enhancements, and with Unit 1 on GS integration. Collaborated with IE on HC Matrix & Glue Consumption, and with PPC on Alternate Part Consumption tracking — study in progress.
+            </div>
+            <span class="w22-tag orange">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- W29 Section 4: Strategic Engineering Initiatives -->
+      <div class="w22-section">
+        <div class="w22-title">Strategic Engineering Initiatives</div>
+        <div class="w22-update-item">
+          <div class="w22-item-content">
+            <div class="w22-item-title">Line Balancing Reference from Yueda Factory (Vietnam) — Manpower & Layout Optimization</div>
+            <div class="w22-item-desc">
+              Line Balancing Rate data from Yueda Factory (Vietnam) used to analyze different manufacturing scenarios. Analysis used to provide an optimized manpower plan, and serves as a reference for line layout, conveyor design, and line infra for the project.
+            </div>
+            <span class="w22-tag blue">Applied</span>
+          </div>
+          <div class="w22-img">
+            <img src="74.jpeg" alt="Yueda Factory Line Balancing Analysis" onerror="this.parentElement.style.background='rgba(255,255,255,0.1)'">
+            <div class="img-label">Line Balancing Analysis</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 30px 0 10px; color: rgba(255,255,255,0.55); font-size:13px;">
+        Prepared by OPEX Team · Week 29 · July 2026
+      </div>
+    </div><!-- /week29-content -->
 
     <!-- ══════════════════ WEEK 28 CONTENT ══════════════════ -->
     <div id="week28-content">
@@ -2197,7 +2362,7 @@
   }
   function toggleWeek(id, btn) {
     // Close the others
-    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content', 'week27-content', 'week28-content'];
+    var ids = ['week22-content', 'week23-content', 'week24-content', 'week25-content', 'week26-content', 'week27-content', 'week28-content', 'week29-content'];
     ids.forEach(function(wid) {
       if (wid !== id) document.getElementById(wid).classList.remove('visible');
     });
